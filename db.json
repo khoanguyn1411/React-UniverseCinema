@@ -1,0 +1,16 @@
+{
+  "movie": [
+    {
+      "id": "movie1",
+      "nameVN": "Thợ săn phù thủy",
+      "nameEN": "Witch hunter",
+      "actors": ["Ashley", "Handsome"],
+      "star": 8.5,
+      "thumb": "",
+      "category": ["Hành động", "Phiêu lưu"],
+      "producer": "Universal Pictures",
+      "premiereDate": "15/7/2022",
+      "content": ""
+    }
+  ]
+}
