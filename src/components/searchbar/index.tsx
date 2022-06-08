@@ -2,7 +2,7 @@ import { Icon, icSearch } from "@/assets/icons";
 import { configs } from "@/configs";
 import { updateActivePage } from "@/features";
 import { useAppDispatch } from "@/hooks";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const SearchBar = () => {
   const dispatch = useAppDispatch();

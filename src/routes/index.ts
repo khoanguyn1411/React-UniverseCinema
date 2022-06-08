@@ -13,8 +13,8 @@ export const publicRoutes: ObjectRoutes[] = [
   { path: configs.routes.homePage, component: HomePage },
   { path: configs.routes.bookTickedPage, component: BookTicketPage },
   { path: configs.routes.aboutUs, component: BookTicketPage },
-  { path: "/phim/phim-sap-chieu", component: UpcommingMovies },
-  { path: "/phim/phim-dang-chieu", component: PlayingMovie },
+  { path: configs.routes.movieIncomingPage, component: UpcommingMovies },
+  { path: configs.routes.movieOnplayingPage, component: PlayingMovie },
 ];
 
 // Khi nào đăng nhập mới xem được các trang này

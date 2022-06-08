@@ -1,5 +1,5 @@
 import { icFacebook, icInstagram, icYoutube } from "@/assets/icons";
-import { TSocialMedia } from "@/types/social-media-type";
+import { TSocialMedia } from "@/types";
 
 export const socialMediaConfig: TSocialMedia[] = [
   {

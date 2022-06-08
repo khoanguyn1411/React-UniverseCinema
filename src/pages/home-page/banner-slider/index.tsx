@@ -8,8 +8,7 @@ type TProps = {
 };
 
 export const BannerSlider: React.FC<TProps> = ({ children }) => {
-  const slider = React.useRef(null);
-
+  const slider = React.useRef<Slider>(null);
   const settings = {
     dots: true,
     autoplay: true,
@@ -36,7 +35,7 @@ export const BannerSlider: React.FC<TProps> = ({ children }) => {
         {children}
       </Slider>
       <button
-        className="absolute top-0 bottom-0 left-0 bg-black opacity-50 hover:opacity-100 p-[2rem]"
+        className="absolute top-0 bottom-0 left-0 bg-gradient-to-l from from-transparent to-black opacity-50 transition-all hover:transition-all hover:opacity-100 p-[1.5rem]"
         onClick={() => slider?.current?.slickPrev()}
       >
         <span>
@@ -44,7 +43,7 @@ export const BannerSlider: React.FC<TProps> = ({ children }) => {
         </span>
       </button>
       <button
-        className="absolute top-0 bottom-0 right-0 bg-black opacity-50 hover:opacity-100 p-[2rem]"
+        className="absolute top-0 bottom-0 right-0 bg-gradient-to-r from from-transparent to-black opacity-50 transition-all hover:transition-all hover:opacity-100 p-[1.5rem]"
         onClick={() => slider?.current?.slickNext()}
       >
         <span>

@@ -7,3 +7,12 @@
     after:absolute after:h-[0.25rem] after:w-[40%] after:left-0 after:animate-float-left
 }
 
+.only1line {
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+

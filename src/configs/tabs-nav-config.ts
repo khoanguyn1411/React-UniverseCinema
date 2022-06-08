@@ -16,15 +16,15 @@ export const tabsNavConfig: tabTypes.tabsObject[] = [
   },
   {
     title: "Phim",
-    root: routes.moviePage,
+    root: "/phim",
     children: [
       {
         title: "Phim sắp chiếu",
-        to: "/phim/phim-sap-chieu",
+        to: routes.movieIncomingPage,
       },
       {
         title: "Phim đang chiếu",
-        to: "/phim/phim-dang-chieu",
+        to: routes.movieOnplayingPage,
       },
     ],
   },

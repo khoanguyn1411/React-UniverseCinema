@@ -1,21 +1,13 @@
 import React from "react";
 import classNames from "classnames";
+const classes = classNames;
 
 type Props = {
-  classes: string;
+  className?: string;
   children: React.ReactNode;
 };
 
 export const DefaultWrapper: React.FC<Props> = (props) => {
-  const { classes, children } = props;
-  return (
-    <div
-      className={classNames(
-        "shadow-default rounded-[0.3rem] p-[1.2rem]",
-        classes
-      )}
-    >
-      {children}
-    </div>
-  );
+  const { className, children } = props;
+  return <div className={classes("shadow-default", className)}>{children}</div>;
 };

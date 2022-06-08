@@ -3,6 +3,7 @@
 ===========================
 
 - Code Homepage
+  - Làm useparam cho movie
 
 ## List việc
 

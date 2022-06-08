@@ -58,7 +58,7 @@ export const LeftNavigationBar: React.FC<Props> = ({ isHomePage }) => {
               {!tab.to && <Icon icon={icArrowDown} className="ml-[0.5rem]" />}
             </ul>
             {!tab.to && (
-              <DefaultWrapper classes="p-0 hidden w-max rounded-default mt-[1.4rem] absolute bg-white text-black group-hover:block">
+              <DefaultWrapper className="p-0 hidden w-max rounded-default mt-[1.4rem] absolute bg-white text-black group-hover:block">
                 {tab.children.map((item, index) => (
                   <li
                     className="cursor-pointer px-[1.5rem] py-[0.3rem] font-semibold hover:bg-orange w-full"
