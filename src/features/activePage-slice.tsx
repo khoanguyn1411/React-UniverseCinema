@@ -1,22 +1,25 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { funcs } from "@/constants";
+import { createSlice } from "@reduxjs/toolkit";
 
 interface ActivePageState {
   value: string;
 }
 const initialState: ActivePageState = {
-  // value: func.getUrl().page,
-  value: "Finsd",
+  value: funcs.getUrl().currentPage,
 };
 
 const activePageSlice = createSlice({
   name: "activePage",
   initialState,
   reducers: {
-    changeActivePage(state, action: PayloadAction<string>) {
-      state.value = action.payload;
+    updateActivePage(state) {
+      window.scrollTo(0, 0);
+      state.value = funcs.getUrl().currentPage;
     },
   },
 });
 
-export const { changeActivePage } = activePageSlice.actions;
-export default activePageSlice.reducer;
+const { updateActivePage } = activePageSlice.actions;
+const activePageReducer = activePageSlice.reducer;
+
+export { activePageReducer, updateActivePage };

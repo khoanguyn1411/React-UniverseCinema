@@ -1,16 +1,20 @@
-import { routesPath } from "@/configs";
+import { configs } from "@/configs";
 import { HomePage, BookTicketPage } from "@/pages";
-import { FunctionComponent } from "react";
+import { PlayingMovie, UpcommingMovies } from "@/pages";
+import React from "react";
 type ObjectRoutes = {
   path: string;
-  component: FunctionComponent;
-  layout?: JSX.Element;
+  component: React.FC;
+  layout?: React.FC;
 };
 
 // Chưa đăng nhập vẫn xem được
 export const publicRoutes: ObjectRoutes[] = [
-  { path: routesPath.homePage, component: HomePage },
-  { path: routesPath.booktickedPage, component: BookTicketPage },
+  { path: configs.routes.homePage, component: HomePage },
+  { path: configs.routes.bookTickedPage, component: BookTicketPage },
+  { path: configs.routes.aboutUs, component: BookTicketPage },
+  { path: "/phim/phim-sap-chieu", component: UpcommingMovies },
+  { path: "/phim/phim-dang-chieu", component: PlayingMovie },
 ];
 
 // Khi nào đăng nhập mới xem được các trang này

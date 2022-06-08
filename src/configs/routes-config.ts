@@ -1,4 +1,9 @@
-export const routesPath = {
+export const routesPathConfig = {
   homePage: "/",
-  booktickedPage: "/bookticket",
+  bookTickedPage: "/mua-ve",
+  moviePage: "/phim",
+  cinemaCornerPage: "/goc-dien-anh",
+  eventPage: "/su-kien",
+  supportPage: "/ho-tro",
+  aboutUs: "/ve-chung-toi",
 };

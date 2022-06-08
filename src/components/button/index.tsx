@@ -1,7 +1,7 @@
 import React from "react";
 
 type Props = {
-  children?: JSX.Element | string;
+  children?: React.ReactNode;
 };
 
 export const Button: React.FC<Props> = ({ children }) => {

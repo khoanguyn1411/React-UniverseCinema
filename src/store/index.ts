@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import activePageReducer from "@/features/activePage-slice";
+import { activePageReducer, isFixedNavReducer } from "@/features";
 
 export const store = configureStore({
   reducer: {
     activePage: activePageReducer,
+    isFixedNav: isFixedNavReducer,
   },
 });
 
