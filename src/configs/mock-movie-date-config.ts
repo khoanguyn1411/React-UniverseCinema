@@ -106,4 +106,5 @@ const incoming: TMockDataMovies[] = [
 export const mockDataMoviesConfig = {
   onplaying,
   incoming,
+  allMovies: [...onplaying, ...incoming],
 };

@@ -1,6 +1,11 @@
 import { configs } from "@/configs";
-import { HomePage, BookTicketPage } from "@/pages";
-import { PlayingMovie, UpcommingMovies } from "@/pages";
+import {
+  HomePage,
+  BookTicketPage,
+  DetailMoviePage,
+  PlayingMovie,
+  UpcommingMovies,
+} from "@/pages";
 import React from "react";
 type ObjectRoutes = {
   path: string;
@@ -15,6 +20,10 @@ export const publicRoutes: ObjectRoutes[] = [
   { path: configs.routes.aboutUs, component: BookTicketPage },
   { path: configs.routes.movieIncomingPage, component: UpcommingMovies },
   { path: configs.routes.movieOnplayingPage, component: PlayingMovie },
+  {
+    path: configs.routes.detailMoviePageWithSuffix,
+    component: DetailMoviePage,
+  },
 ];
 
 // Khi nào đăng nhập mới xem được các trang này

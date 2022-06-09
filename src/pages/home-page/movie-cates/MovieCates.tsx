@@ -36,7 +36,7 @@ export const MovieCates: React.FC = () => {
     }
   };
 
-  const handleSwitchPage = (): void => {
+  const handleClickWatchMore = (): void => {
     if (active === onplaying) {
       navigate(configs.routes.movieOnplayingPage);
     } else {
@@ -44,6 +44,7 @@ export const MovieCates: React.FC = () => {
     }
     dispatch(updateActivePage());
   };
+
   return (
     <div className="mb-[5rem]">
       <div className="wrapper flex justify-center mt-[4rem]">
@@ -82,7 +83,7 @@ export const MovieCates: React.FC = () => {
           Xem thêm
         </h1> */}
         <Button
-          onClick={() => handleSwitchPage()}
+          onClick={() => handleClickWatchMore()}
           strokeBlack
           hover
           className="m-auto block border-[2px] font-bold"

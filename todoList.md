@@ -3,7 +3,6 @@
 ===========================
 
 - Code Homepage
-  - Làm useparam cho movie
 
 ## List việc
 
@@ -29,3 +28,6 @@
   - Thêm action back and forward
   - CSS cho left Nav
 - Code SearchBar
+- Code Homepage
+  - Làm useparam cho movie
+  -

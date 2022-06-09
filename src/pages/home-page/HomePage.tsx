@@ -1,7 +1,8 @@
 import { imgsHome } from "@/assets/images";
 import React from "react";
-import { BannerSlider } from "./banner-slider";
-import { MovieCates } from "./movie-cates";
+import { BannerSlider } from "./banner-slider/BannerSlider";
+import { MovieCates } from "./movie-cates/MovieCates";
+import { Promotions } from "./promotions/Promotions";
 
 export const HomePage: React.FC = () => {
   const banners = [imgsHome.banner2, imgsHome.banner3, imgsHome.banner2];
@@ -21,6 +22,7 @@ export const HomePage: React.FC = () => {
         ))}
       </BannerSlider>
       <MovieCates />
+      <Promotions />
     </div>
   );
 };
