@@ -1,3 +1,4 @@
+import { Button, WrapperDefault } from "@/components";
 import { configs } from "@/configs";
 import { funcs } from "@/constants";
 import { updateActivePage } from "@/features";
@@ -5,8 +6,6 @@ import { useAppDispatch } from "@/hooks";
 import { TMockDataMovies } from "@/types";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../button/Button";
-import { DefaultWrapper } from "../wrapper/Wrapper";
 
 type TItemMovie = {
   data: TMockDataMovies;
@@ -23,7 +22,7 @@ export const ItemMovie: React.FC<TItemMovie> = ({ data }) => {
   };
 
   return (
-    <DefaultWrapper className="group transition-all rounded-[0.5rem] p-0 text-white">
+    <WrapperDefault className="group transition-all rounded-[0.5rem] p-0 text-white">
       <div
         style={{ backgroundImage: `url(${data.thumb})` }}
         onClick={handleBookTicket}
@@ -45,6 +44,6 @@ export const ItemMovie: React.FC<TItemMovie> = ({ data }) => {
         </h1>
         <h1 className="text-s14 mt-[0.5rem]">{data.nameEn}</h1>
       </div>
-    </DefaultWrapper>
+    </WrapperDefault>
   );
 };

@@ -1,11 +1,7 @@
-.wrapper{
+.wrapper {
     @apply px-[2rem] max-w-[1200px] w-full m-auto
 }
 
-.underlineNav:hover{
-    @apply after:content-[""] after:bottom-[1rem] after:bg-orange 
-    after:absolute after:h-[0.25rem] after:w-[40%] after:left-0 after:animate-float-left
-}
 
 .only1line {
     -webkit-line-clamp: 1;
@@ -15,4 +11,3 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-

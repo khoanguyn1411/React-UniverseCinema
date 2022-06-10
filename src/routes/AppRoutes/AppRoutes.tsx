@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes, useLocation, Location } from "react-router-dom";
+import { Location, Route, Routes, useLocation } from "react-router-dom";
+import TopBarProgress from "react-topbar-progress-indicator";
 
 import { DefaultLayout } from "@/layouts";
 import { publicRoutes } from "@/routes";
-import TopBarProgress from "react-topbar-progress-indicator";
 
 TopBarProgress.config({
   barColors: {
@@ -19,8 +19,6 @@ export const AppRoutes: React.FC = () => {
   const [progress, setProgress] = useState<Boolean>(false);
   const [prevLoc, setPrevLoc] = useState<Location>(location);
 
-  console.log(location);
-
   useEffect(() => {
     setPrevLoc(location);
     setProgress(true);
@@ -33,25 +31,23 @@ export const AppRoutes: React.FC = () => {
   }, [prevLoc]);
 
   return (
-    <>
-      <Routes>
-        {publicRoutes.map((route, index) => {
-          const Page = route.component;
-          const Layout: any = route.layout || DefaultLayout;
-          return (
-            <Route
-              key={index}
-              path={route.path}
-              element={
-                <Layout>
-                  {progress && <TopBarProgress />}
-                  <Page />
-                </Layout>
-              }
-            />
-          );
-        })}
-      </Routes>
-    </>
+    <Routes>
+      {publicRoutes.map((route, index) => {
+        const Page = route.component;
+        const Layout: any = route.layout || DefaultLayout;
+        return (
+          <Route
+            key={index}
+            path={route.path}
+            element={
+              <Layout>
+                {progress && <TopBarProgress />}
+                <Page />
+              </Layout>
+            }
+          />
+        );
+      })}
+    </Routes>
   );
 };

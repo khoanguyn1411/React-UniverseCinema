@@ -1,10 +1,10 @@
 import { Footer, Navbar, SearchBar } from "@/components";
 import { setIsFixedNav } from "@/features";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import React, { useEffect, useRef } from "react";
+import React, { ReactNode, useEffect, useRef } from "react";
 
 type Props = {
-  children: JSX.Element;
+  children: ReactNode;
 };
 
 export const DefaultLayout: React.FC<Props> = ({ children }) => {

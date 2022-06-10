@@ -1,6 +1,6 @@
-import { tabTypes } from "@/types";
+import { TTabs } from "@/types";
 
-export const linksFooterConfig: tabTypes.tabsObject[] = [
+export const linksFooterConfig: TTabs.tabsObject[] = [
   {
     title: "Giới thiệu",
     children: [

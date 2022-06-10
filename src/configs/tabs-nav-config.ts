@@ -1,9 +1,9 @@
-import { tabTypes } from "@/types";
+import { TTabs } from "@/types";
 import { routesPathConfig } from "./routes-config";
 
 const routes = routesPathConfig;
 
-export const tabsNavConfig: tabTypes.tabsObject[] = [
+export const tabsNavConfig: TTabs.tabsObject[] = [
   {
     title: "Trang chủ",
     to: routes.homePage,
