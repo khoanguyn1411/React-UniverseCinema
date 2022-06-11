@@ -11,3 +11,23 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.only2line {
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bgImg {
+    @apply bg-cover bg-no-repeat bg-center rounded-l-default
+}
+
+.bgImg{
+}
+
+.bgImg > img {
+    @apply opacity-0 min-w-full min-h-[100%]
+}

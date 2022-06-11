@@ -1,5 +1,6 @@
 export * from "./wrapper";
 export * from "./button/Button";
+export * from "./button/ButtonWatchmore";
 export * from "./searchbar/SearchBar";
 export * from "./footer/Footer";
 export * from "./navbar/Navbar";

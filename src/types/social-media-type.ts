@@ -1,7 +1,7 @@
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
-export type TSocialMedia = {
+export interface TSocialMedia {
   title: string;
   icon: IconDefinition;
   to: string;
-};
+}

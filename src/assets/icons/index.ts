@@ -4,6 +4,8 @@ import {
   faSearch,
   faAngleRight,
   faAngleLeft,
+  faEye,
+  faThumbsUp,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faFacebookSquare,
@@ -20,3 +22,5 @@ export const icYoutube = faYoutubeSquare;
 export const icInstagram = faInstagramSquare;
 export const icArrowLeft = faAngleLeft;
 export const icArrowRight = faAngleRight;
+export const icEye = faEye;
+export const icLike = faThumbsUp;

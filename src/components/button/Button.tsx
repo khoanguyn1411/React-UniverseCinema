@@ -1,3 +1,5 @@
+import { Icon } from "@/assets/icons";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import classNames from "classnames";
 import React from "react";
 const classes = classNames;
@@ -11,6 +13,7 @@ type TButton = {
   hover?: Boolean;
   strokeWhite?: Boolean;
   strokeBlack?: Boolean;
+  icon?: IconDefinition;
 };
 
 export const Button: React.FC<TButton> = ({
@@ -22,6 +25,7 @@ export const Button: React.FC<TButton> = ({
   hover = false,
   strokeWhite = false,
   strokeBlack = false,
+  icon,
 }) => {
   if (!orange && !strokeWhite) {
     black = true;
@@ -30,8 +34,8 @@ export const Button: React.FC<TButton> = ({
   return (
     <button
       className={classes(
-        "px-[3rem] py-[1rem] min-w-max cursor-pointer rounded-[0.6rem] transition-all w-[20%] font-semibold",
         className,
+        "px-[3rem] py-[1rem] min-w-max cursor-pointer rounded-[0.6rem] transition-all w-[20%] font-semibold",
         {
           "bg-orange text-white": orange,
           "bg-black text-white": black,
@@ -48,6 +52,11 @@ export const Button: React.FC<TButton> = ({
       )}
       onClick={onClick}
     >
+      {icon && (
+        <span className="mr-[0.5rem]">
+          <Icon icon={icon} />
+        </span>
+      )}
       {children}
     </button>
   );

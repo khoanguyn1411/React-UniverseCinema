@@ -1,4 +1,4 @@
-import { Button } from "@/components";
+import { Button, ButtonWatchmore } from "@/components";
 import { ItemMovie } from "@/components";
 import { configs } from "@/configs";
 import { updateActivePage } from "@/features";
@@ -77,20 +77,7 @@ export const MovieCates: React.FC = () => {
           <ItemMovie key={index} data={movie} />
         ))}
       </div>
-
-      <div className="mt-[4rem] m-auto">
-        {/* <h1 className="w-fit m-auto text-s18 cursor-pointer select-none hover:text-orange transition-all font-bold">
-          Xem thêm
-        </h1> */}
-        <Button
-          onClick={() => handleClickWatchMore()}
-          strokeBlack
-          hover
-          className="m-auto block border-[2px] font-bold"
-        >
-          Xem thêm
-        </Button>
-      </div>
+      <ButtonWatchmore onClick={handleClickWatchMore} />
     </div>
   );
 };

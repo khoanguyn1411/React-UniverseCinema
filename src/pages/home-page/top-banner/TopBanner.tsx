@@ -1,10 +1,11 @@
-import { imgsHome } from "@/assets/images";
+import { getBannerHomeList, imgsHome } from "@/assets/images";
 import { FullSlider } from "@/components";
 import React from "react";
+import { Settings } from "react-slick";
 
 export const TopBanner: React.FC = () => {
-  const banners = [imgsHome.banner2, imgsHome.banner3, imgsHome.banner2];
-  const settings = {
+  const banners = [...getBannerHomeList(), imgsHome.banner3];
+  const settings: Settings = {
     dots: true,
     autoplay: true,
     autoplaySpeed: 4000,
@@ -13,7 +14,6 @@ export const TopBanner: React.FC = () => {
     slidesToScroll: 1,
     initialSlide: 0,
     speed: 500,
-    arrows: false,
     adaptiveHeight: true,
   };
   return (

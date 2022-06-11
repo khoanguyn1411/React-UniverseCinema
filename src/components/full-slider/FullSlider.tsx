@@ -1,86 +1,30 @@
 import { icArrowLeft, icArrowRight, Icon } from "@/assets/icons";
 import React from "react";
 import Slider, { Settings } from "react-slick";
-import styled from "styled-components";
+import { WrapperModule } from "./WrapperModule";
 
 type TProps = {
   children: React.ReactNode;
   settingConfig: Settings;
+  className?: string;
+  positionDots?: number;
 };
 
-const WrapperModule = styled.section`
-  @keyframes loading {
-    from {
-      width: 0%;
-    }
-
-    to {
-      width: 100%;
-    }
-  }
-
-  .ft-slick__dots--custom {
-    height: 0.8rem;
-    width: 1rem;
-    background-color: white;
-    border-radius: 4px;
-    bottom: 3.5rem;
-    opacity: 0.7;
-    position: relative;
-    cursor: pointer;
-    transition: width 0.3s ease-in-out;
-  }
-
-  .slick-slide * {
-    display: block !important;
-  }
-
-  .slick-dots li {
-    width: 1rem;
-    margin: 0 0.5rem;
-    transition: width 0.3s ease-in-out;
-    bottom: 3rem;
-    cursor: default;
-  }
-
-  .slick-dots .slick-active {
-    width: 4rem;
-    transition: width 0.3s ease-in-out;
-  }
-
-  .slick-dots .slick-active .ft-slick__dots--custom {
-    width: 4rem;
-    opacity: 1;
-
-    // .loading {
-    //     height: 8px;
-    //     animation: loading 4s ease-in;
-    //     background: orange;
-    //     display: inline-block;
-    //     position: absolute;
-    //     top: 0;
-    //     left: 0;
-    //     border-radius: 4px;
-    // }
-  }
-`;
-
-export const FullSlider: React.FC<TProps> = ({ children, settingConfig }) => {
+export const FullSlider: React.FC<TProps> = ({
+  children,
+  settingConfig,
+  className,
+  positionDots = 1,
+}) => {
   const slider = React.useRef<Slider>(null);
   const settings: Settings = {
     ...settingConfig,
-    appendDots: (dots: React.ReactNode[]) => <ul>{dots}</ul>,
-    customPaging: (i: number) => (
-      <div className="slick-dots">
-        <div className="ft-slick__dots--custom">
-          <div className="loading" />
-        </div>
-      </div>
-    ),
+    dots: true,
+    arrows: false,
   };
   return (
-    <WrapperModule className="relative bg-black">
-      <Slider ref={slider} {...settings}>
+    <WrapperModule positionDots={positionDots} className="relative bg-black">
+      <Slider className={className} ref={slider} {...settings}>
         {children}
       </Slider>
       <button
