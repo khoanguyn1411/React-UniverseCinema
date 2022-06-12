@@ -5,17 +5,17 @@ const routes = routesPathConfig;
 
 export const tabsNavConfig: TTabs.tabsObject[] = [
   {
-    title: "Trang chủ",
+    title: "Home",
     to: routes.homePage,
     root: routes.homePage,
   },
   {
-    title: "Mua vé",
+    title: "TV show",
     to: routes.bookTickedPage,
     root: routes.bookTickedPage,
   },
   {
-    title: "Phim",
+    title: "Quốc gia",
     root: "/phim",
     children: [
       {
@@ -29,7 +29,7 @@ export const tabsNavConfig: TTabs.tabsObject[] = [
     ],
   },
   {
-    title: "Góc điện ảnh",
+    title: "Diễn viên",
     to: routes.cinemaCornerPage,
     root: routes.cinemaCornerPage,
   },

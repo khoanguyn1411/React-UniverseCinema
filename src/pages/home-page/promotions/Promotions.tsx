@@ -36,7 +36,6 @@ export const Promotions: React.FC = () => {
     centerPadding: "60px",
     adaptiveHeight: true,
   };
-  console.log(promotionsList[0]);
   return (
     <WrapperModule className="bg-black py-[3rem] mb-[3rem] pb-[7rem]">
       <div className="wrapper">
