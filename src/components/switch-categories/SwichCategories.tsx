@@ -21,7 +21,7 @@ export const SwichCategories: React.FC<TProps> = ({
     }
   };
   return (
-    <div className="flex w-fit m-auto border-[2px] border-black rounded-[0.6rem]">
+    <div className="flex w-fit m-auto shadow-md border-[2px] border-black rounded-[0.6rem]">
       {categories.map((cate, index) => (
         <Button
           {...getBackgroundButton(cate)}

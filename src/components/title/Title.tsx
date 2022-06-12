@@ -17,14 +17,16 @@ export const Title: React.FC<TProps> = ({
 }) => {
   return (
     <div
-      className={classes(className, `w-fit py-[1rem] pt-[${top}]`, {
-        "text-white": white,
-      })}
+      className={classes(
+        className,
+        ` flex items-center py-[1rem] pt-[${top}]`,
+        {
+          "text-white": white,
+        }
+      )}
     >
-      <div className="m-auto w-fit">
-        <h1 className="w-fit font-bold text-[2.3rem]">{children}</h1>
-        <div className="h-[0.4rem] bg-orange w-full" />
-      </div>
+      <div className="bg-orange w-[1.5rem] block h-[3rem] mr-[2rem]" />
+      <h1 className=" font-bold text-[2.3rem] ">{children}</h1>
     </div>
   );
 };

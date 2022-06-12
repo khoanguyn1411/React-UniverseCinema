@@ -10,7 +10,7 @@ type TProps = {
   movie: TMovie;
   className?: string;
 };
-export const ItemMovie: React.FC<TProps> = ({ movie, className }) => {
+export const ItemMovieXL: React.FC<TProps> = ({ movie, className }) => {
   const pathImg = `${configs.api.IMAGE_URL_SMALL}/${movie.poster_path}`;
   return (
     <div
@@ -28,7 +28,7 @@ export const ItemMovie: React.FC<TProps> = ({ movie, className }) => {
         <img
           src={pathImg}
           alt={movie.name || movie.original_title}
-          className="h-[25rem] w-[20rem]"
+          className="h-[35rem] w-[20rem]"
         />
       </ImageContainer>
       <div className="mt-[1rem] px-[0.3rem]">

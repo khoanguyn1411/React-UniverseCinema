@@ -1,5 +1,5 @@
 import { getBannerHomeList, imgsHome } from "@/assets/images";
-import { FullSlider } from "@/components";
+import { FullSlider, ImageContainer } from "@/components";
 import React from "react";
 import { Settings } from "react-slick";
 
@@ -21,10 +21,8 @@ export const TopBanner: React.FC = () => {
       <FullSlider settingConfig={settings}>
         {banners.map((banner, index) => (
           <div className="w-full m-auto block" key={index}>
-            <div
-              style={{
-                backgroundImage: `url(${banner})`,
-              }}
+            <ImageContainer
+              url={banner}
               className="m-auto w-full max-w-[170rem] bgImg "
             >
               <img
@@ -32,7 +30,7 @@ export const TopBanner: React.FC = () => {
                 src={banner}
                 className="h-[45rem]"
               />
-            </div>
+            </ImageContainer>
           </div>
         ))}
       </FullSlider>

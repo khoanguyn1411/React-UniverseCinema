@@ -1,7 +1,9 @@
 export interface TMovie {
   backdrop_path: string;
-  first_air_date: Date;
+  first_air_date: string;
   genre_ids: number[];
+  original_title: string;
+  release_date: string;
   id: number;
   name: string;
   origin_country: string[];

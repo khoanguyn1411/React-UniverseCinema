@@ -12,10 +12,14 @@ export const PopularMovies = () => {
   };
 
   return (
-    <ItemScroller
-      title="Popular films"
-      categories={categories}
-      fetchAPI={fetchAPI}
-    />
+    <div className="mt-[3rem]">
+      <ItemScroller
+        title="Popular films"
+        smallItem
+        categories={categories}
+        slideDisplay={7}
+        fetchAPI={fetchAPI}
+      />
+    </div>
   );
 };

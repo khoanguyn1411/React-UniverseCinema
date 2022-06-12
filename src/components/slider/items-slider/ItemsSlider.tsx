@@ -8,6 +8,7 @@ type TProps = {
   settingConfig: Settings;
   className?: string;
   positionDots?: number;
+  slideDisplay: number;
 };
 
 export const ItemsSlider: React.FC<TProps> = ({
@@ -15,10 +16,13 @@ export const ItemsSlider: React.FC<TProps> = ({
   settingConfig,
   className,
   positionDots = 1,
+  slideDisplay,
 }) => {
   const slider = React.useRef<Slider>(null);
   const settings: Settings = {
     ...settingConfig,
+    slidesToShow: slideDisplay,
+    slidesToScroll: slideDisplay,
     arrows: false,
   };
   const [isShowLeftArrow, setIsShowLeftArrow] = useState<Boolean>(false);
@@ -27,7 +31,7 @@ export const ItemsSlider: React.FC<TProps> = ({
   const handleCheckLastItems = (currentSlide: number) => {
     if (currentSlide === 0) {
       setIsShowLeftArrow(false);
-    } else if (currentSlide === 13) {
+    } else if (currentSlide === 20 - slideDisplay) {
       setIsShowRightArrow(false);
     } else {
       setIsShowLeftArrow(true);

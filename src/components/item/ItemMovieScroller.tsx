@@ -1,5 +1,11 @@
 import React from "react";
-import { ItemMovie, ItemsSlider, SwichCategories, Title } from "@/components";
+import {
+  ItemMovie,
+  ItemsSlider,
+  SwichCategories,
+  Title,
+  ItemMovieXL,
+} from "@/components";
 import { TMovie } from "@/types";
 import { useEffect, useState } from "react";
 import { Settings } from "react-slick";
@@ -8,12 +14,18 @@ type TProps = {
   categories?: string[];
   fetchAPI: (type: string | null) => Promise<Response>;
   title: string;
+  smallItem?: Boolean;
+  largeItem?: Boolean;
+  slideDisplay: number;
 };
 
 export const ItemScroller: React.FC<TProps> = ({
   categories,
   fetchAPI,
   title,
+  smallItem,
+  largeItem,
+  slideDisplay,
 }) => {
   const settings: Settings = {
     dots: false,
@@ -68,14 +80,24 @@ export const ItemScroller: React.FC<TProps> = ({
             </div>
           )}
         </div>
-        <ItemsSlider settingConfig={settings}>
-          {movieList.map((movie, index) => (
-            <ItemMovie
-              className={getClassname(index)}
-              key={index}
-              movie={movie}
-            />
-          ))}
+        <ItemsSlider slideDisplay={slideDisplay} settingConfig={settings}>
+          {smallItem &&
+            movieList.map((movie, index) => (
+              <ItemMovie
+                className={getClassname(index)}
+                key={index}
+                movie={movie}
+              />
+            ))}
+
+          {largeItem &&
+            movieList.map((movie, index) => (
+              <ItemMovieXL
+                className={getClassname(index)}
+                key={index}
+                movie={movie}
+              />
+            ))}
         </ItemsSlider>
       </div>
     </div>
