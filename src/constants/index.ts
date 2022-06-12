@@ -5,6 +5,25 @@ type URLType = {
   finalUrl: string;
 };
 
+function removeAccent(str: string): string {
+  str = str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  str = str.replace(/\s/g, "-");
+  str = str.toLowerCase();
+  str = encodeURIComponent(str);
+  return str;
+}
+
+function formatCurrency(price: number): string {
+  const formattedPrice = price
+    .toLocaleString("it-IT", {
+      style: "currency",
+      currency: "VND",
+    })
+    .replace("VND", "₫")
+    .replace(/\s+/g, "");
+  return formattedPrice;
+}
+
 function splitMulti(str: string, tokens: string[]): string[] {
   var tempChar = tokens[0];
   for (let i = 1; i < tokens.length; i++) {
@@ -42,4 +61,6 @@ function getUrl(): URLType {
 
 export const funcs = {
   getUrl,
+  removeAccent,
+  formatCurrency,
 };

@@ -1,11 +1,11 @@
-export type tabsChild = {
+export interface tabsChild {
   title: string;
   to?: string;
-};
+}
 
-export type tabsObject = {
+export interface tabsObject {
   title: string;
   to?: string;
   root?: string;
   children?: tabsChild[];
-};
+}

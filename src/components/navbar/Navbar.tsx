@@ -2,8 +2,8 @@ import { configs } from "@/configs";
 import { useAppSelector } from "@/hooks";
 import classNames from "classnames";
 import React from "react";
-import { LeftNavigationBar } from "./left-navigation-bar";
-import { UserBar } from "./user-bar";
+import { LeftNavigationBar } from "./left-navigation-bar/LeftNavigationBar";
+import { UserBar } from "./user-bar/UserBar";
 
 export const Navbar: React.FC = () => {
   const activePage = useAppSelector((state) => state.activePage.value);

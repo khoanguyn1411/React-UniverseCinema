@@ -7,7 +7,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export const DefaultWrapper: React.FC<Props> = (props) => {
+export const WrapperDefault: React.FC<Props> = (props) => {
   const { className, children } = props;
   return <div className={classes("shadow-default", className)}>{children}</div>;
 };

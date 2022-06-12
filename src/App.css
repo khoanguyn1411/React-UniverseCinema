@@ -1,11 +1,7 @@
-.wrapper{
+.wrapper {
     @apply px-[2rem] max-w-[1200px] w-full m-auto
 }
 
-.underlineNav:hover{
-    @apply after:content-[""] after:bottom-[1rem] after:bg-orange 
-    after:absolute after:h-[0.25rem] after:w-[40%] after:left-0 after:animate-float-left
-}
 
 .only1line {
     -webkit-line-clamp: 1;
@@ -16,3 +12,22 @@
     text-overflow: ellipsis;
 }
 
+.only2line {
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bgImg {
+    @apply bg-cover bg-no-repeat bg-center rounded-l-default
+}
+
+.bgImg{
+}
+
+.bgImg > img {
+    @apply opacity-0 min-w-full min-h-[100%]
+}

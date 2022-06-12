@@ -1,21 +1,19 @@
 import { configs } from "@/configs";
-import { HomePage, BookTicketPage } from "@/pages";
-import { PlayingMovie, UpcommingMovies } from "@/pages";
+import { HomePage } from "@/pages";
 import React from "react";
-type ObjectRoutes = {
+
+type TRoutes = {
   path: string;
   component: React.FC;
   layout?: React.FC;
 };
 
 // Chưa đăng nhập vẫn xem được
-export const publicRoutes: ObjectRoutes[] = [
+export const publicRoutes: TRoutes[] = [
   { path: configs.routes.homePage, component: HomePage },
-  { path: configs.routes.bookTickedPage, component: BookTicketPage },
-  { path: configs.routes.aboutUs, component: BookTicketPage },
-  { path: configs.routes.movieIncomingPage, component: UpcommingMovies },
-  { path: configs.routes.movieOnplayingPage, component: PlayingMovie },
 ];
 
 // Khi nào đăng nhập mới xem được các trang này
-export const privateRoutes: ObjectRoutes[] = [];
+export const privateRoutes: TRoutes[] = [];
+
+export * from "./AppRoutes/AppRoutes";

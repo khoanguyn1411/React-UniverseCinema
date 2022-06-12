@@ -1,31 +1,14 @@
 import "@/App.css";
+import { AppRoutes } from "@/routes";
 import { store } from "@/store";
 import { Provider } from "react-redux";
-import { DefaultLayout } from "./layouts";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { publicRoutes } from "./routes";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
     <BrowserRouter>
       <Provider store={store}>
-        <Routes>
-          {publicRoutes.map((route, index) => {
-            const Page = route.component;
-            const Layout: any = route.layout || DefaultLayout;
-            return (
-              <Route
-                key={index}
-                path={route.path}
-                element={
-                  <Layout>
-                    <Page />
-                  </Layout>
-                }
-              />
-            );
-          })}
-        </Routes>
+        <AppRoutes />
       </Provider>
     </BrowserRouter>
   );

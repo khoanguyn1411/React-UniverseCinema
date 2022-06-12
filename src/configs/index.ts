@@ -2,7 +2,9 @@ import { routesPathConfig } from "./routes-config";
 import { tabsNavConfig } from "./tabs-nav-config";
 import { linksFooterConfig } from "./links-footer-config";
 import { socialMediaConfig } from "./social-media-config";
-import { mockDataMoviesConfig } from "./mock-movie-date-config";
+import { mockDataMoviesConfig } from "./mock-movie-data-config";
+import { mockDataBlogsConfig } from "./mock-blog-data-config";
+import { apiConfig } from "./api-config";
 
 export const configs = {
   routes: routesPathConfig,
@@ -10,4 +12,6 @@ export const configs = {
   linksFooter: linksFooterConfig,
   socialMedia: socialMediaConfig,
   mockDataMovie: mockDataMoviesConfig,
+  mockDataBlog: mockDataBlogsConfig,
+  api: apiConfig,
 };

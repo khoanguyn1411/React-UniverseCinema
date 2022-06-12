@@ -13,6 +13,7 @@ const activePageSlice = createSlice({
   initialState,
   reducers: {
     updateActivePage(state) {
+      console.log();
       window.scrollTo(0, 0);
       state.value = funcs.getUrl().currentPage;
     },
