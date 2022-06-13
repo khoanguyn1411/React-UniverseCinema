@@ -1,7 +1,9 @@
 export const routesPathConfig = {
   homePage: "/",
-  movie: "movie",
-  tvShow: "tvshow",
-  people: "people",
-  aboutUs: "aboutus",
+  movie: "/movie",
+  movieDetailWithSuffix: "/movie-detail/:movie",
+  movieDetail: "/movie-detail",
+  tvShow: "/tvshow",
+  people: "/people",
+  aboutUs: "/aboutus",
 };

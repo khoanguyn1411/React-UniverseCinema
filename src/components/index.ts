@@ -10,5 +10,4 @@ export * from "./slider/items-slider/ItemsSlider";
 export * from "./switch-categories/SwichCategories";
 export * from "./item/ItemMovie";
 export * from "./item/ItemMovieScroller";
-export * from "./item/ItemMoiveXL";
 export * from "./image-container/ImageContainer";

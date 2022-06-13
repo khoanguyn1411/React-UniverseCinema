@@ -4,7 +4,7 @@ import {
   ItemsSlider,
   SwichCategories,
   Title,
-  ItemMovieXL,
+  Button,
 } from "@/components";
 import { TMovie } from "@/types";
 import { useEffect, useState } from "react";
@@ -62,16 +62,22 @@ export const ItemScroller: React.FC<TProps> = ({
 
   const getClassname = (index: number) => {
     if (index === 0) return "ml-0";
-    else if (index === movieList.length - 1) return "mr-0";
   };
-
+  const getSize = () => {
+    if (largeItem) {
+      return "large";
+    } else if (smallItem) {
+      return "small";
+    }
+  };
   return (
     <div>
-      <div className="max-w-[200rem] w-full m-auto ">
+      <div className="max-w-[200rem] w-full m-auto">
         <div className="flex items-center wrapper justify-between mt-[1.5rem]">
-          <Title>{title}</Title>
+          <Title className="flex-1">{title}</Title>
+
           {categories && categories.length > 0 && (
-            <div>
+            <div className="flex-1 flex justify-end">
               <SwichCategories
                 categories={categories}
                 active={active}
@@ -81,23 +87,14 @@ export const ItemScroller: React.FC<TProps> = ({
           )}
         </div>
         <ItemsSlider slideDisplay={slideDisplay} settingConfig={settings}>
-          {smallItem &&
-            movieList.map((movie, index) => (
-              <ItemMovie
-                className={getClassname(index)}
-                key={index}
-                movie={movie}
-              />
-            ))}
-
-          {largeItem &&
-            movieList.map((movie, index) => (
-              <ItemMovieXL
-                className={getClassname(index)}
-                key={index}
-                movie={movie}
-              />
-            ))}
+          {movieList.map((movie, index) => (
+            <ItemMovie
+              className={getClassname(index)}
+              key={index}
+              movie={movie}
+              size={getSize()}
+            />
+          ))}
         </ItemsSlider>
       </div>
     </div>

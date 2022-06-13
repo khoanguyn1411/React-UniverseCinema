@@ -26,6 +26,7 @@ module.exports = {
     extend: {
       boxShadow: {
         default: " 1px 1px 5px rgb(0 0 0 / 40%);",
+        "default-img": " 1px 1px 5px #fff",
       },
       keyframes: {
         "float-left": {
@@ -44,12 +45,17 @@ module.exports = {
           from: { transform: "scale(0)" },
           to: { transform: "scale(1)" },
         },
+        fade: {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
       },
       animation: {
         "float-left": "float-left  0.3s 1 forwards;",
         "float-left-reverse": "float-left-reverse  0.3s 1 forwards;",
         "float-top": "float-top 5s 1 forwards;",
         scale: "scale 0.1s 1 forwards;",
+        fade: "fade 0.5s 1 forwards",
       },
     },
   },

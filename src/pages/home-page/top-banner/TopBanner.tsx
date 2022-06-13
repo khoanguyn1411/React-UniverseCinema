@@ -1,10 +1,10 @@
-import { getBannerHomeList, imgsHome } from "@/assets/images";
+import { getBannerHomeList, imgsHome, imgsMovie } from "@/assets/images";
 import { FullSlider, ImageContainer } from "@/components";
 import React from "react";
 import { Settings } from "react-slick";
 
 export const TopBanner: React.FC = () => {
-  const banners = [...getBannerHomeList(), imgsHome.banner3];
+  const banners = [...getBannerHomeList(), imgsMovie.movieTest2];
   const settings: Settings = {
     dots: true,
     autoplay: true,
