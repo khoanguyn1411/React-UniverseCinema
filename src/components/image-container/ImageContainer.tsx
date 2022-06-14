@@ -1,10 +1,12 @@
 import React, { MouseEventHandler } from "react";
 import classNames from "classnames";
+import { imgNoAvatar } from "@/assets/images";
 type TProps = {
   children: JSX.Element;
   url: string;
   className?: string;
   onclick?: MouseEventHandler<HTMLElement>;
+  type?: string;
 };
 
 export const ImageContainer: React.FC<TProps> = ({
@@ -12,13 +14,14 @@ export const ImageContainer: React.FC<TProps> = ({
   className,
   children,
   onclick,
+  type,
 }) => {
-  const errowImg =
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-nOAglpmejsvQmil3kr19lwURHplsMvhv5A&usqp=CAU";
-
   const getUrl = () => {
     if (url?.includes(null)) {
-      return `url(${errowImg})`;
+      if (type === "people") {
+        return;
+      }
+      return `url(${imgNoAvatar})`;
     } else {
       return `url(${url})`;
     }

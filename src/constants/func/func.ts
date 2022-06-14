@@ -18,9 +18,9 @@ function formatCurrency(price: number): string {
   const formattedPrice = price
     .toLocaleString("it-IT", {
       style: "currency",
-      currency: "VND",
+      currency: "USD",
     })
-    .replace("VND", "₫")
+    .replace("USD", "$")
     .replace(/\s+/g, "");
   return formattedPrice;
 }

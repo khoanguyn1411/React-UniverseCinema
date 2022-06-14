@@ -3,6 +3,26 @@ export interface IGenres {
   name: string;
 }
 
+export interface ISpokenLanguage {
+  english_name: string;
+  iso_639_1: number;
+  name: string;
+}
+
+export interface IProductionCompanies {
+  id: number;
+  logo_path: string;
+  name: string;
+  origin_country: string;
+}
+
+export interface INetwork {
+  id: number;
+  logo_path: string;
+  name: string;
+  origin_country: string;
+}
+
 export interface IMovie {
   backdrop_path: string;
   first_air_date: string;
@@ -23,4 +43,11 @@ export interface IMovie {
   tagline: string;
   episode_run_time: number;
   runtime: number;
+  status: string;
+  budget: number;
+  revenue: number;
+  spoken_languages: ISpokenLanguage[];
+  production_companies: IProductionCompanies[];
+  networks: INetwork[];
+  homepage: string;
 }

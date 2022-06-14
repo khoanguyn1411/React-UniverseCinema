@@ -1,7 +1,7 @@
 import { apiURL } from "@/api";
 import { ItemScroller } from "@/components";
 
-export const PopularMovies = () => {
+export const Popular = () => {
   const TV_SHOWS = "TV shows";
   const MOVIES = "Movies";
   const categories = [TV_SHOWS, MOVIES];
@@ -14,7 +14,7 @@ export const PopularMovies = () => {
   return (
     <div className="mt-[3rem]">
       <ItemScroller
-        title="Popular films"
+        title="Popular"
         smallItem
         categories={categories}
         slideDisplay={7}

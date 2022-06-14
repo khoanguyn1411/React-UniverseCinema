@@ -25,7 +25,7 @@ export const Title: React.FC<TProps> = ({
         }
       )}
     >
-      <div className="bg-orange w-[1.5rem] block h-[3rem] mr-[2rem]" />
+      <div className="bg-orange w-[1.5rem] block h-[3rem] mr-[1.5rem]" />
       <h1 className=" font-bold text-[2.3rem] ">{children}</h1>
     </div>
   );

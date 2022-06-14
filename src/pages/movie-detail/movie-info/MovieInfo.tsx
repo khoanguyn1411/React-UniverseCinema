@@ -35,6 +35,7 @@ export const MovieInfo: FunctionComponent<TProps> = ({ movie }) => {
           <img
             src={configs.api.IMAGE_URL_LARGE + movie.backdrop_path}
             alt={`bd_${movie.name || movie.original_title}`}
+            className="h-full"
           />
         </ImageContainer>
 

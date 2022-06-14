@@ -10,11 +10,13 @@ import {
   faBookmark,
   faHeart,
   faStar,
+  faLink,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faFacebookSquare,
   faYoutubeSquare,
   faInstagramSquare,
+  faTwitterSquare,
 } from "@fortawesome/free-brands-svg-icons";
 
 export { Icon };
@@ -32,3 +34,5 @@ export const icList = faList;
 export const icHeart = faHeart;
 export const icWatchlist = faBookmark;
 export const icStar = faStar;
+export const icTwitter = faTwitterSquare;
+export const icLink = faLink;

@@ -31,12 +31,19 @@
     text-overflow: ellipsis;
 }
 
+.line-9 {
+    -webkit-line-clamp: 9;
+    line-clamp: 9;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .bgImg {
     @apply bg-cover bg-no-repeat bg-center rounded-l-default
 }
 
-.bgImg{
-}
 
 .bgImg > img {
     @apply opacity-0 min-w-full min-h-[100%]

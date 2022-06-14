@@ -14,7 +14,9 @@ type TProps = {
 };
 
 export const ItemMovie: React.FC<TProps> = ({ movie, className, size }) => {
-  const pathImg = `${configs.api.IMAGE_URL_SMALL}/${movie.poster_path}`;
+  const pathImg = `${configs.api.IMAGE_URL_SMALL}/${
+    movie.poster_path || movie.backdrop_path
+  }`;
   const dispacth = useAppDispatch();
   const navigate = useNavigate();
   const handleSwitchToDetailMovie = () => {
@@ -43,9 +45,7 @@ export const ItemMovie: React.FC<TProps> = ({ movie, className, size }) => {
       <ImageContainer
         onclick={handleSwitchToDetailMovie}
         url={pathImg}
-        className={classNames(
-          `bgImg rounded-[1rem] shadow-default cursor-pointer`
-        )}
+        className={classNames(`rounded-[1rem] shadow-default cursor-pointer`)}
       >
         <img
           src={pathImg}

@@ -4,6 +4,7 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { MovieCredit } from "./movie-credits/MovieCredit";
 import { MovieInfo } from "./movie-info/MovieInfo";
+import { MovieOtherInfo } from "./movie-other-info/MovieOtherInfo";
 
 export const MovieDetail: FunctionComponent = () => {
   const location = useLocation();
@@ -53,10 +54,12 @@ export const MovieDetail: FunctionComponent = () => {
       <>
         <MovieInfo movie={movie} />
         <div className="wrapper flex">
-          <div className="w-[75%]">
+          <div className="w-[75%] pr-[4rem]">
             <MovieCredit movie={movie} type={type} />
           </div>
-          <div className="w-[25%]"></div>
+          <div className="w-[25%]">
+            <MovieOtherInfo movie={movie} type={type} />
+          </div>
         </div>
       </>
     )

@@ -80,7 +80,7 @@ export const Footer = () => {
               <h1 className="font-bold text-s18 mb-[1rem]">
                 Kết nối với chúng tôi
               </h1>
-              {socialMedias.map((media, index) => (
+              {socialMedias.persoanl.map((media, index) => (
                 <span
                   key={index}
                   onClick={() => {

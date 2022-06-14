@@ -27,10 +27,10 @@ export const TopBanner: React.FC = () => {
       <div>
         <FullSlider settingConfig={settings}>
           {banners.map((banner, index) => (
-            <div className="w-full m-auto block relative" key={index}>
+            <div className="w-full m-auto relative" key={index}>
               <ImageContainer
                 url={configs.api.IMAGE_URL_LARGE + banner.backdrop_path}
-                className="m-auto w-full max-w-[170rem] opacity-50"
+                className="m-auto w-full max-w-[170rem] opacity-30"
               >
                 <img
                   alt={`bannerHome${index}`}
@@ -38,10 +38,11 @@ export const TopBanner: React.FC = () => {
                   className="h-[50rem]"
                 />
               </ImageContainer>
-              <div className="absolute h-[80%] bottom-[5rem] left-0 right-0 wrapper flex flex-col justify-end">
+
+              <div className="absolute py-[4rem] bottom-0 flex w-[70%] top-0 left-0 right-0 wrapper h-full">
                 <ImageContainer
                   url={configs.api.IMAGE_URL_SMALL + banner.poster_path}
-                  className=" mb-[2rem] rounded-[1rem] shadow-lg h-[60%] w-fit"
+                  className="h-full w-fit rounded-[1rem]"
                 >
                   <img
                     className="h-full"
@@ -49,11 +50,12 @@ export const TopBanner: React.FC = () => {
                     src={configs.api.IMAGE_URL_SMALL + banner.poster_path}
                   />
                 </ImageContainer>
-                <div className=" flex justify-end flex-col">
+
+                <div className=" flex flex-col flex-1 justify-center pl-[3rem]">
                   <h1 className="text-[2.5rem] font-bold text-white mb-[1rem]">
                     {banner.name || banner.original_title}
                   </h1>
-                  <h1 className="text-s16 text-white text-justify line-4">
+                  <h1 className="text-s16 text-white text-justify line-9">
                     {banner.overview}
                   </h1>
                 </div>
