@@ -28,10 +28,10 @@ export const ItemsSlider: React.FC<TProps> = ({
   const [isShowLeftArrow, setIsShowLeftArrow] = useState<Boolean>(false);
   const [isShowRightArrow, setIsShowRightArrow] = useState<Boolean>(true);
 
-  const handleCheckLastItems = (currentSlide: number) => {
-    if (currentSlide === 0) {
+  const handleCheckLastItems = (prev: number, curr: number) => {
+    if (curr === 0) {
       setIsShowLeftArrow(false);
-    } else if (currentSlide === 20 - slideDisplay) {
+    } else if (curr === 20 - slideDisplay) {
       setIsShowRightArrow(false);
     } else {
       setIsShowLeftArrow(true);
@@ -45,7 +45,7 @@ export const ItemsSlider: React.FC<TProps> = ({
         <Slider
           className={className}
           ref={slider}
-          afterChange={handleCheckLastItems}
+          beforeChange={handleCheckLastItems}
           {...settings}
         >
           {children}

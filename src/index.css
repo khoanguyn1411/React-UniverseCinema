@@ -3,6 +3,14 @@
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap');
 
+:root{
+    --black-color: #090909;
+    --yellow-color: #FF9900;
+    --green-color: #21d07a;
+    --red-color: red;
+    --white-color: #fff;
+}
+
 html{
     line-height: 1.5;
     font-size: 62.5%;

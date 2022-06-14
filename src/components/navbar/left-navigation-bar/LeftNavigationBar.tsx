@@ -17,7 +17,9 @@ export const LeftNavigationBar: React.FC<TProps> = ({ isHomePage }) => {
   const activePage = useAppSelector((state) => state.activePage.value);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const handleChangePage = (tab: TTabs.tabsObject | TTabs.tabsChild): void => {
+  const handleChangePage = (
+    tab: TTabs.ITabsObject | TTabs.ITabsChild
+  ): void => {
     if (tab.to) {
       navigate(tab.to);
       dispatch(updateActivePage());
@@ -58,7 +60,7 @@ export const LeftNavigationBar: React.FC<TProps> = ({ isHomePage }) => {
               {!tab.to && <Icon icon={icArrowDown} className="ml-[0.5rem]" />}
             </ul>
             {!tab.to && (
-              <WrapperDefault className="p-0 hidden w-max rounded-default mt-[1.4rem] absolute bg-white text-black group-hover:block">
+              <WrapperDefault className="p-0 hidden w-max rounded-default mt-[1.4rem] z-50 absolute bg-white text-black group-hover:block">
                 {tab.children.map((item, index) => (
                   <div
                     className="cursor-pointer px-[1.5rem] py-[0.3rem] font-semibold hover:bg-orange w-full"

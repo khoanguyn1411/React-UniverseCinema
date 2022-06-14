@@ -41,7 +41,7 @@ export const WrapperModule = styled(InitComponent)`
     transition: width 0.3s ease-in-out;
   }
 
-  .slick-slide * {
+  .slick-slide > div > div {
     display: block !important;
   }
 

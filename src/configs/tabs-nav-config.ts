@@ -3,7 +3,7 @@ import { routesPathConfig } from "./routes-config";
 
 const routes = routesPathConfig;
 
-export const tabsNavConfig: TTabs.tabsObject[] = [
+export const tabsNavConfig: TTabs.ITabsObject[] = [
   {
     title: "Home",
     to: routes.homePage,

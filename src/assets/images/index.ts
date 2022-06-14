@@ -28,6 +28,6 @@ export const getBannerHomeList = () => {
   return Object.keys(imgsHome).map((key) => imgsHome[key]);
 };
 
-export const getMovieTestList = () => {
+export const geIMovieTestList = () => {
   return Object.keys(imgsMovie).map((key) => imgsMovie[key]);
 };

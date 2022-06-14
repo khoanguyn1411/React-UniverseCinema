@@ -1,14 +1,14 @@
 import { configs } from "@/configs";
 import { updateActivePage } from "@/features";
 import { useAppDispatch } from "@/hooks";
-import { TMovie } from "@/types";
+import { IMovie } from "@/types";
 import classNames from "classnames";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { ImageContainer } from "@/components";
 
 type TProps = {
-  movie: TMovie;
+  movie: IMovie;
   className?: string;
   size?: string;
 };
@@ -20,7 +20,8 @@ export const ItemMovie: React.FC<TProps> = ({ movie, className, size }) => {
   const handleSwitchToDetailMovie = () => {
     navigate(
       `${configs.routes.movieDetail}/${movie.id}-${
-        movie.name || movie.original_title
+        (movie.name && encodeURI(movie.name)) ||
+        (movie.original_title && encodeURI(movie.original_title))
       }`
     );
     dispacth(updateActivePage());
@@ -28,7 +29,7 @@ export const ItemMovie: React.FC<TProps> = ({ movie, className, size }) => {
   const getHeight = () => {
     if (size === "small") {
       return "h-[25rem] w-[20rem]";
-    } else if (size === "small") {
+    } else if (size === "large") {
       return "h-[35rem] w-[20rem]";
     }
   };

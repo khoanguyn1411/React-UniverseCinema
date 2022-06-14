@@ -1,6 +1,6 @@
 import { TTabs } from "@/types";
 
-export const linksFooterConfig: TTabs.tabsObject[] = [
+export const linksFooterConfig: TTabs.ITabsObject[] = [
   {
     title: "Giới thiệu",
     children: [

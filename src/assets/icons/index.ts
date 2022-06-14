@@ -6,6 +6,10 @@ import {
   faAngleLeft,
   faEye,
   faThumbsUp,
+  faList,
+  faBookmark,
+  faHeart,
+  faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faFacebookSquare,
@@ -24,3 +28,7 @@ export const icArrowLeft = faAngleLeft;
 export const icArrowRight = faAngleRight;
 export const icEye = faEye;
 export const icLike = faThumbsUp;
+export const icList = faList;
+export const icHeart = faHeart;
+export const icWatchlist = faBookmark;
+export const icStar = faStar;

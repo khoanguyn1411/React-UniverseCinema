@@ -11,3 +11,4 @@ export * from "./switch-categories/SwichCategories";
 export * from "./item/ItemMovie";
 export * from "./item/ItemMovieScroller";
 export * from "./image-container/ImageContainer";
+export * from "./user-score/UserScore";

@@ -7,8 +7,8 @@ export const PopularMovies = () => {
   const categories = [TV_SHOWS, MOVIES];
 
   const fetchAPI = (type: string): Promise<Response> => {
-    if (type === MOVIES) return fetch(apiURL.homeService.POPULAR_MOVIE_API);
-    else return fetch(apiURL.homeService.POPULAR_TV_API);
+    if (type === MOVIES) return fetch(apiURL.displayService.POPULAR_MOVIE_API);
+    else return fetch(apiURL.displayService.POPULAR_TV_API);
   };
 
   return (

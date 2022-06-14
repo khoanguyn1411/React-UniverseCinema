@@ -15,6 +15,8 @@ type TButton = {
   strokeBlack?: Boolean;
   transparent?: Boolean;
   icon?: IconDefinition;
+  iconOnly?: Boolean;
+  rounded?: Boolean;
 };
 
 export const Button: React.FC<TButton> = ({
@@ -27,7 +29,9 @@ export const Button: React.FC<TButton> = ({
   strokeWhite = false,
   strokeBlack = false,
   transparent = false,
+  iconOnly = false,
   icon,
+  rounded = false,
 }) => {
   if (!orange && !strokeWhite && !strokeBlack && !transparent) {
     black = true;
@@ -37,8 +41,9 @@ export const Button: React.FC<TButton> = ({
     <button
       className={classes(
         className,
-        "px-[3rem] py-[1rem] min-w-max cursor-pointer  border-[0.15rem] rounded-[0.6rem] transition-all w-[20%] font-semibold",
+        "min-w-max cursor-pointer border-[0.15rem] rounded-[0.6rem] transition-all font-semibold",
         {
+          "px-[3rem] py-[1rem] w-[20%]": !rounded,
           "bg-orange text-white border-orange": orange,
           "bg-black text-white border-black": black,
           "bg-transparent text-black border-transparent": transparent,
@@ -49,12 +54,14 @@ export const Button: React.FC<TButton> = ({
           "hover:bg-orange hover:text-white hover:border-orange hover:transition-all":
             strokeBlack && hover,
           "hover:bg-black hover:transition-all": orange && hover,
+          "hover:bg-orange hover:transition-all hover:border-orange":
+            black && hover,
         }
       )}
       onClick={onClick}
     >
       {icon && (
-        <span className="mr-[0.5rem]">
+        <span className={!iconOnly ? "mr-[0.5rem]" : undefined}>
           <Icon icon={icon} />
         </span>
       )}

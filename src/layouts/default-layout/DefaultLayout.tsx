@@ -38,11 +38,9 @@ export const DefaultLayout: React.FC<Props> = ({ children }) => {
       <div ref={refSearchBar}>
         <SearchBar />
       </div>
-      <div className="h-[5rem] relative">
+      <div className="h-[5rem] relative z-[60]">
         <div
-          className={
-            isFixedNav ? "fixed top-0 w-full z-10" : "absolute w-full z-10"
-          }
+          className={isFixedNav ? "fixed top-0 w-full z-50" : "absolute w-full"}
         >
           <Navbar />
         </div>

@@ -1,4 +1,9 @@
-export interface TMovie {
+export interface IGenres {
+  id: number;
+  name: string;
+}
+
+export interface IMovie {
   backdrop_path: string;
   first_air_date: string;
   genre_ids: number[];
@@ -11,7 +16,11 @@ export interface TMovie {
   original_name: string;
   overview: string;
   popularity: number;
+  genres: IGenres[];
   poster_path: string;
   vote_average: number;
   vote_count: number;
+  tagline: string;
+  episode_run_time: number;
+  runtime: number;
 }

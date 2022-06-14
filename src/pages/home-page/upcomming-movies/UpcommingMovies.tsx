@@ -3,7 +3,7 @@ import { ItemScroller } from "@/components";
 
 export const UpcommingMovies = () => {
   const fetchAPI = (): Promise<Response> => {
-    return fetch(apiURL.homeService.UPCOMMING_API);
+    return fetch(apiURL.displayService.UPCOMMING_API);
   };
 
   return (

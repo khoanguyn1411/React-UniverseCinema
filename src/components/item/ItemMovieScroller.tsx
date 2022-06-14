@@ -1,13 +1,6 @@
-import React from "react";
-import {
-  ItemMovie,
-  ItemsSlider,
-  SwichCategories,
-  Title,
-  Button,
-} from "@/components";
-import { TMovie } from "@/types";
-import { useEffect, useState } from "react";
+import { ItemMovie, ItemsSlider, SwichCategories, Title } from "@/components";
+import { IMovie } from "@/types";
+import React, { useEffect, useState } from "react";
 import { Settings } from "react-slick";
 
 type TProps = {
@@ -39,7 +32,7 @@ export const ItemScroller: React.FC<TProps> = ({
   };
 
   const [loading, setLoading] = useState<Boolean>(true);
-  const [movieList, setMovieList] = useState<TMovie[]>([]);
+  const [movieList, setMovieList] = useState<IMovie[]>([]);
 
   const [active, setActive] = useState<string>(
     (categories && categories[0]) || null

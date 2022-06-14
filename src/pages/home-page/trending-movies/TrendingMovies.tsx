@@ -7,8 +7,8 @@ export const TrendingMovies = () => {
   const categories = [TODAY, THIS_WEEK];
 
   const fetchAPI = (type: string): Promise<Response> => {
-    if (type === TODAY) return fetch(apiURL.homeService.TRENDING_DAY_API);
-    else return fetch(apiURL.homeService.TRENDING_WEEK_API);
+    if (type === TODAY) return fetch(apiURL.displayService.TRENDING_DAY_API);
+    else return fetch(apiURL.displayService.TRENDING_WEEK_API);
   };
 
   return (

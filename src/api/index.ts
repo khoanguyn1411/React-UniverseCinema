@@ -1,7 +1,7 @@
-import * as HomeService from "./displayHomeService";
+import * as DisplayService from "./displayService";
 import * as SearchService from "./searchService";
 
 export const apiURL = {
-  homeService: HomeService,
+  displayService: DisplayService,
   searchService: SearchService,
 };
