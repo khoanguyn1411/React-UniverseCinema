@@ -15,8 +15,10 @@ const WrapperModule = styled.div`
   .swiper-slide {
     height: auto !important;
     padding-bottom: 10px;
+    padding-top: 5px;
     padding-left: 3px;
     padding-right: 3px;
+    width: 15rem;
   }
 `;
 
@@ -24,7 +26,7 @@ export const SwiperApp: FunctionComponent<TProps> = ({ children, length }) => {
   return (
     <WrapperModule>
       <div className="relative">
-        <Swiper spaceBetween={20} slidesPerGroup={2} slidesPerView={4}>
+        <Swiper spaceBetween={10} slidesPerGroup={2} slidesPerView={"auto"}>
           {children}
           {length > 15 && (
             <SwiperSlide className="flex justify-center items-center">

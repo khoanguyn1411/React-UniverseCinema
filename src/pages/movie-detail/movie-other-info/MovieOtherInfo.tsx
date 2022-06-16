@@ -5,11 +5,7 @@ import { configs } from "@/configs";
 import { funcs } from "@/constants";
 import { IMovie } from "@/types";
 import { FunctionComponent, ReactNode } from "react";
-
-type TProps = {
-  movie: IMovie;
-  type: string;
-};
+import { TProps } from "..";
 
 type TPropsStatus = {
   title: string;
@@ -24,8 +20,10 @@ const Status: FunctionComponent<TPropsStatus> = ({ title, children }) => {
   );
 };
 
-export const MovieOtherInfo: FunctionComponent<TProps> = ({ movie, type }) => {
-  console.log(movie);
+export const MovieOtherInfo: FunctionComponent<TProps.withType> = ({
+  movie,
+  type,
+}) => {
   const handleNavigateToHomepage = () => {
     window.open(movie.homepage, "_blank");
   };
@@ -87,7 +85,7 @@ export const MovieOtherInfo: FunctionComponent<TProps> = ({ movie, type }) => {
           onClick={handleNavigateToHomepage}
           icon={icLink}
           hover
-          className="font-bold w-full"
+          className="font-bold w-full px-[1rem] min-w-min"
         >
           Visit Homepage
         </Button>

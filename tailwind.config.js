@@ -45,6 +45,10 @@ module.exports = {
           from: { transform: "scale(0)" },
           to: { transform: "scale(1)" },
         },
+        scaleReverse: {
+          from: { transform: "scale(0)" },
+          to: { transform: "scale(1)" },
+        },
         fade: {
           from: { opacity: "0" },
           to: { opacity: "1" },
@@ -54,7 +58,8 @@ module.exports = {
         "float-left": "float-left  0.3s 1 forwards;",
         "float-left-reverse": "float-left-reverse  0.3s 1 forwards;",
         "float-top": "float-top 5s 1 forwards;",
-        scale: "scale 0.1s 1 forwards;",
+        scale: "scale 0.5s 1 forwards;",
+        scaleReverse: "scaleReverse 0.4s 1 forwards;",
         fade: "fade 0.5s 1 forwards",
       },
     },

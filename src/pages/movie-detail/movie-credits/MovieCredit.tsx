@@ -1,16 +1,15 @@
 import { ItemActor, SwiperApp, Title } from "@/components";
 import { funcs, values } from "@/constants";
 import { useCallAPI } from "@/hooks/useCallAPI";
-import { IActors, IMovie } from "@/types";
+import { IActors } from "@/types";
 import { FunctionComponent } from "react";
 import { SwiperSlide } from "swiper/react";
+import { TProps } from "..";
 
-type TProps = {
-  movie: IMovie;
-  type: string;
-};
-
-export const MovieCredit: FunctionComponent<TProps> = ({ movie, type }) => {
+export const MovieCredit: FunctionComponent<TProps.withType> = ({
+  movie,
+  type,
+}) => {
   const credits: any = useCallAPI(
     funcs.getAPI(
       `/${type === values.MEDIA_TYPE.MOVIE ? "movie" : "tv"}/${
@@ -19,16 +18,21 @@ export const MovieCredit: FunctionComponent<TProps> = ({ movie, type }) => {
       "&language=en-US"
     )
   );
-  const actors: IActors[] = credits?.cast.slice(0, 15);
+  const casts: IActors[] = credits?.cast.slice(0, 15);
   return (
-    actors && (
+    casts && (
       <div className="mt-[2rem]">
-        <Title>Actors</Title>
+        <div className="flex justify-between items-baseline ">
+          <Title>Casts</Title>
+          <h1 className="font-bold text-s16 w-fit cursor-pointer  underline italic hover:text-orange hover:transition-all transition-all">
+            View all casts and crews
+          </h1>
+        </div>
         <div className="mt-[1.2rem]">
-          <SwiperApp length={actors.length}>
-            {actors.map((actor) => (
-              <SwiperSlide key={actor.id}>
-                <ItemActor actor={actor} />
+          <SwiperApp length={casts.length}>
+            {casts.map((cast) => (
+              <SwiperSlide key={cast.id}>
+                <ItemActor actor={cast} />
               </SwiperSlide>
             ))}
           </SwiperApp>
@@ -37,3 +41,4 @@ export const MovieCredit: FunctionComponent<TProps> = ({ movie, type }) => {
     )
   );
 };
+// w-fit text-s18 font-bold cursor-pointer mt-[1rem] hover:text-orange hover:transition-all transition-all

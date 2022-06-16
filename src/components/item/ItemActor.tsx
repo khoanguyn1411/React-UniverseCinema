@@ -10,7 +10,6 @@ type TProps = {
 
 export const ItemActor: FunctionComponent<TProps> = ({ actor }) => {
   let urlImg: string;
-  console.log(actor);
   if (actor.profile_path === null) {
     urlImg = imgNoAvatar;
   } else {
@@ -18,7 +17,7 @@ export const ItemActor: FunctionComponent<TProps> = ({ actor }) => {
   }
   return (
     <div className="shadow-default rounded-[1rem] h-full cursor-pointer">
-      <ImageContainer url={urlImg} className="rounded-t-[1rem]">
+      <ImageContainer url={urlImg} className="rounded-t-[1rem] h-[15rem]">
         <img alt={actor.name} src={urlImg} />
       </ImageContainer>
       <div className="p-[1rem]">

@@ -25,6 +25,11 @@ function formatCurrency(price: number): string {
   return formattedPrice;
 }
 
+function getYear(date: string): number {
+  const yearMovie = new Date(date);
+  return yearMovie.getFullYear();
+}
+
 function splitMulti(str: string, tokens: string[]): string[] {
   var tempChar = tokens[0];
   for (let i = 1; i < tokens.length; i++) {
@@ -53,6 +58,20 @@ function checkPath(page: string): string {
   return root;
 }
 
+function formatDate(date: string): string {
+  const dateInit = new Date(date);
+  const year = new Intl.DateTimeFormat("en", { year: "numeric" }).format(
+    dateInit
+  );
+  const month = new Intl.DateTimeFormat("en", { month: "2-digit" }).format(
+    dateInit
+  );
+  const day = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(
+    dateInit
+  );
+  return `${day}/${month}/${year}`;
+}
+
 function getUrl(): URLType {
   const href = window.location.href;
   const charSplit = ["/", "?"];
@@ -69,4 +88,6 @@ export const funcs = {
   formatCurrency,
   splitMulti,
   getAPI,
+  getYear,
+  formatDate,
 };

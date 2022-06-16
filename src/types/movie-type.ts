@@ -23,6 +23,17 @@ export interface INetwork {
   origin_country: string;
 }
 
+export interface ISeason {
+  air_date: string;
+  episode_count: number;
+  id: number;
+  name: string;
+  networks: INetwork[];
+  overview: string;
+  poster_path: string;
+  season_number: number;
+}
+
 export interface IMovie {
   backdrop_path: string;
   first_air_date: string;
@@ -50,4 +61,5 @@ export interface IMovie {
   production_companies: IProductionCompanies[];
   networks: INetwork[];
   homepage: string;
+  seasons: ISeason[];
 }

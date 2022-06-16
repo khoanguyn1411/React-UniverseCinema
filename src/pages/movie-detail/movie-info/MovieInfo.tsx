@@ -1,16 +1,10 @@
 import { Button, ImageContainer, UserScore } from "@/components";
 import { configs } from "@/configs";
-import { IMovie } from "@/types";
+import { funcs } from "@/constants";
 import { FunctionComponent } from "react";
+import { TProps } from "..";
 
-type TProps = {
-  movie: IMovie;
-};
-
-export const MovieInfo: FunctionComponent<TProps> = ({ movie }) => {
-  const yearMovie = new Date(
-    movie?.first_air_date || movie?.release_date || null
-  );
+export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
   const formatRunTime = (minuteVar: number): string => {
     let hour = Math.floor(minuteVar / 60);
     const minute = minuteVar % 60;
@@ -64,7 +58,10 @@ export const MovieInfo: FunctionComponent<TProps> = ({ movie }) => {
                 <h1 className="text-[3rem] text-orange">
                   {movie.name || movie.original_title}
                   <span className="text-[3rem] font-normal">
-                    {yearMovie && ` (${yearMovie.getFullYear()})`}
+                    {(movie?.first_air_date || movie?.release_date) &&
+                      ` (${funcs.getYear(
+                        movie?.first_air_date || movie?.release_date || null
+                      )})`}
                   </span>
                 </h1>
                 <h1 className="font-normal italic">{movie.tagline}</h1>

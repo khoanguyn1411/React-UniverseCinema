@@ -22,6 +22,15 @@
     text-overflow: ellipsis;
 }
 
+.line-3 {
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .line-4 {
     -webkit-line-clamp: 4;
     line-clamp: 4;
