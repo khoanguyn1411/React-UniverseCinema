@@ -1,4 +1,4 @@
-import { Footer, Navbar, SearchBar } from "@/components";
+import { Footer, Navbar } from "@/components";
 import { setIsFixedNav } from "@/features";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import React, { ReactNode, useEffect, useRef } from "react";
@@ -8,23 +8,18 @@ type Props = {
 };
 
 export const DefaultLayout: React.FC<Props> = ({ children }) => {
-  const refSearchBar = useRef<HTMLDivElement>();
   const isFixedNav = useAppSelector((state) => state.isFixedNav.value);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const searchBarElement = refSearchBar.current;
-    const searchBarHeight = searchBarElement.offsetHeight;
     const handleSetFixedNavbar = () => {
       const scrollPosition =
         window.scrollY || document.documentElement.scrollTop;
 
-      if (searchBarElement) {
-        if (scrollPosition > searchBarHeight) {
-          dispatch(setIsFixedNav(true));
-        } else {
-          dispatch(setIsFixedNav(false));
-        }
+      if (scrollPosition > 0) {
+        dispatch(setIsFixedNav(true));
+      } else {
+        dispatch(setIsFixedNav(false));
       }
     };
     document.addEventListener("scroll", handleSetFixedNavbar);
@@ -35,15 +30,8 @@ export const DefaultLayout: React.FC<Props> = ({ children }) => {
   }, []);
   return (
     <div>
-      <div ref={refSearchBar}>
-        <SearchBar />
-      </div>
-      <div className="h-[5rem] relative z-[60]">
-        <div
-          className={isFixedNav ? "fixed top-0 w-full z-50" : "absolute w-full"}
-        >
-          <Navbar />
-        </div>
+      <div className="fixed top-0 w-full z-50">
+        <Navbar />
       </div>
       <div className="min-h-[78vh]">{children}</div>
       <Footer />

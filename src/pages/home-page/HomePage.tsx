@@ -5,13 +5,15 @@ import { Introduction } from "./introduction/Introduction";
 import { Popular } from "./popular/Popular";
 import { Trending } from "./trending/Trending";
 import { UpcommingMovies } from "./upcomming-movies/UpcommingMovies";
+import { TopRate } from "./top-rate/TopRated";
 
 export const HomePage: React.FC = () => {
   return (
-    <div className="mt-[-4.8rem] w-full">
+    <div className="w-full">
       <TopBanner />
       <Popular />
       <Trending />
+      <TopRate />
       <UpcommingMovies />
       <Introduction />
     </div>

@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React from "react";
-import { Button } from "../button/Button";
+import { Button } from "@/components";
 
 type TProps = {
   categories: string[];

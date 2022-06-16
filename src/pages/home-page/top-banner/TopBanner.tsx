@@ -35,11 +35,11 @@ export const TopBanner: React.FC = () => {
                 <img
                   alt={`bannerHome${index}`}
                   src={configs.api.IMAGE_URL_LARGE + banner.backdrop_path}
-                  className="h-[50rem]"
+                  className="h-[100vh] max-h-[70rem]"
                 />
               </ImageContainer>
 
-              <div className="absolute py-[4rem] bottom-0 flex w-[70%] top-0 left-0 right-0 wrapper h-full">
+              <div className="absolute py-[6.5rem] bottom-0 flex w-[100%] top-0 left-0 right-0 wrapper h-full">
                 <ImageContainer
                   url={configs.api.IMAGE_URL_SMALL + banner.poster_path}
                   className="h-full w-fit rounded-[1rem]"

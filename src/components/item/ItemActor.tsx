@@ -1,8 +1,8 @@
-import React, { FunctionComponent } from "react";
-import { IActors } from "@/types";
-import { ImageContainer } from "../image-container/ImageContainer";
-import { configs } from "@/configs";
 import { imgNoAvatar } from "@/assets/images";
+import { ImageContainer } from "@/components";
+import { configs } from "@/configs";
+import { IActors } from "@/types";
+import { FunctionComponent } from "react";
 
 type TProps = {
   actor: IActors;

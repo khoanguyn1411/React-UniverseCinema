@@ -1,20 +1,18 @@
+import { Button } from "@/components";
 import { FunctionComponent, ReactNode } from "react";
 import styled from "styled-components";
-import { SwiperOptions } from "swiper";
-import "swiper/css";
-import "swiper/css/navigation";
-import { Swiper, SwiperProps } from "swiper/react";
-import { SwiperSlide } from "swiper/react";
-import { Button } from "../button/Button";
 import SwiperCore, {
   Keyboard,
-  Scrollbar,
   Navigation,
   Pagination,
+  Scrollbar,
+  SwiperOptions,
 } from "swiper";
-
+import "swiper/css";
+import "swiper/css/navigation";
 import "swiper/css";
 import "swiper/css/scrollbar";
+import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
 
 type TProps = {
   children: ReactNode;

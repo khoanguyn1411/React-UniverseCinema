@@ -1,10 +1,23 @@
-import { configs } from "@/configs";
 import { funcs } from "@/constants";
 
 export const POPULAR_MOVIE_API = funcs.getAPI(
   "/movie/popular?",
   "&language=en-US&page=1"
 );
+
+export const TOP_RATED_MOVIE_API = funcs.getAPI(
+  "/movie/top_rated?",
+  "&language=en-US&page=1"
+);
+
+export const TOP_RATED_TV_API = funcs.getAPI(
+  "/tv/top_rated?",
+  "&language=en-US&page=1"
+);
+
+export const LATEST_MOVIE_API = funcs.getAPI("/movie/latest?", "");
+
+export const LATEST_TV_API = funcs.getAPI("/tv/latest?", "");
 
 export const UPCOMMING_API = funcs.getAPI(
   "/movie/upcoming?",

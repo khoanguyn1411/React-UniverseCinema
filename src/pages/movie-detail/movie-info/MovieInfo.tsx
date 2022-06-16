@@ -41,7 +41,7 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
           }}
         />
 
-        <div className="wrapper h-full w-full py-[4rem] flex relative z-20">
+        <div className="wrapper min-h-[100vh] py-[2rem] max-h-[90rem] w-full flex items-center relative z-20">
           <ImageContainer
             url={configs.api.IMAGE_URL_LARGE + movie.poster_path}
             className="h-[46rem] w-[32rem] bg-orange rounded-[1rem]"
@@ -54,7 +54,7 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
           <div className="flex-[2.5] text-white font-bold pl-[4rem] flex flex-col justify-center">
             {/* Main content */}
             <div className="flex justify-between">
-              <div className="min-h-[25rem]">
+              <div className="min-h-[25rem] flex-1">
                 <h1 className="text-[3rem] text-orange">
                   {movie.name || movie.original_title}
                   <span className="text-[3rem] font-normal">
@@ -65,6 +65,22 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
                   </span>
                 </h1>
                 <h1 className="font-normal italic">{movie.tagline}</h1>
+
+                <div className="w-full mt-[1rem]">
+                  {movie.genres?.map((item, index) => (
+                    <Button
+                      strokeWhite
+                      key={index}
+                      hover
+                      className={`py-[0.5rem] px-[1rem] mt-[0.8rem] w-fit rounded-[10rem] ${
+                        index !== movie.genres.length && "mr-[1rem]"
+                      }`}
+                    >
+                      {item.name}
+                    </Button>
+                  ))}
+                </div>
+
                 <h1 className="mt-[2rem]">
                   {(movie.release_date && (
                     <>
@@ -82,7 +98,7 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
                     <span>{"(" + movie.origin_country + ")"}</span>
                   )}
                 </h1>
-                <div className="">
+                {/* <div className="">
                   <span className="font-normal">Genres: </span>
                   {movie.genres?.map((item, index) => (
                     <span
@@ -95,7 +111,7 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
                       )}
                     </span>
                   ))}
-                </div>
+                </div> */}
 
                 {(movie.episode_run_time || movie.runtime) && (
                   <div>

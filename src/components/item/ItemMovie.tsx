@@ -1,11 +1,12 @@
+import { ImageContainer } from "@/components";
 import { configs } from "@/configs";
+import { funcs } from "@/constants";
 import { updateActivePage } from "@/features";
 import { useAppDispatch } from "@/hooks";
 import { IMovie } from "@/types";
 import classNames from "classnames";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { ImageContainer } from "@/components";
 
 type TProps = {
   movie: IMovie;
@@ -61,7 +62,7 @@ export const ItemMovie: React.FC<TProps> = ({ movie, className, size }) => {
           {movie.name || movie.original_title}
         </h1>
         <h1 className="text-s14 line-1">
-          {movie.first_air_date || movie.release_date}
+          {funcs.formatDate(movie.first_air_date || movie.release_date)}
         </h1>
       </div>
     </div>

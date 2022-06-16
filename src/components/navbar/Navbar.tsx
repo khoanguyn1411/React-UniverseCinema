@@ -8,7 +8,9 @@ import { UserBar } from "./user-bar/UserBar";
 export const Navbar: React.FC = () => {
   const activePage = useAppSelector((state) => state.activePage.value);
   const isFixedNav = useAppSelector((state) => state.isFixedNav.value);
-  const isHomePage: Boolean = activePage === configs.routes.homePage;
+  const isHomePage: Boolean =
+    activePage === configs.routes.homePage ||
+    activePage === configs.routes.movieDetail;
   return (
     <div
       className={classNames("w-full h-[5rem] flex justify-center select-none", {

@@ -1,4 +1,4 @@
-import { Button, ImageContainer, Modal } from "@/components";
+import { ImageContainer, Modal } from "@/components";
 import { configs } from "@/configs";
 import { funcs } from "@/constants";
 import { ISeason } from "@/types";

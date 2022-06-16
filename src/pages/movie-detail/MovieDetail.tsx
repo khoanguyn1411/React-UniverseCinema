@@ -68,7 +68,7 @@ export const MovieDetail: FunctionComponent = () => {
 
   return (
     movie && (
-      <>
+      <div>
         <MovieInfo movie={movie} />
         <div className="wrapper flex">
           <div className="w-[75%] pr-[4rem] flex-1">
@@ -81,7 +81,7 @@ export const MovieDetail: FunctionComponent = () => {
             <MovieOtherInfo {...props} />
           </div>
         </div>
-      </>
+      </div>
     )
   );
 };
