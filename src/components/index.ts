@@ -16,3 +16,5 @@ export * from "./image-container/ImageContainer";
 export * from "./user-score/UserScore";
 export * from "./swiper/SwiperApp";
 export * from "./modal/Modal";
+export * from "./seperate/Seperate";
+export * from "./no-result/NoResult";

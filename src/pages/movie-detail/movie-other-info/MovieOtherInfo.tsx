@@ -1,9 +1,7 @@
 import { icLink } from "@/assets/icons";
-import { imgNoAvatar } from "@/assets/images";
 import { Button } from "@/components";
 import { configs } from "@/configs";
 import { funcs } from "@/constants";
-import { IMovie } from "@/types";
 import { FunctionComponent, ReactNode } from "react";
 import { TProps } from "..";
 
@@ -20,10 +18,7 @@ const Status: FunctionComponent<TPropsStatus> = ({ title, children }) => {
   );
 };
 
-export const MovieOtherInfo: FunctionComponent<TProps.withType> = ({
-  movie,
-  type,
-}) => {
+export const MovieOtherInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
   const handleNavigateToHomepage = () => {
     window.open(movie.homepage, "_blank");
   };
@@ -73,7 +68,7 @@ export const MovieOtherInfo: FunctionComponent<TProps.withType> = ({
         </Status>
       )}
 
-      {movie.vote_count && (
+      {!!movie.vote_count && (
         <Status title={"Vote count"}>
           <h1>{movie.vote_count}</h1>
         </Status>

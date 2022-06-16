@@ -41,6 +41,10 @@ export const WrapperModule = styled(InitComponent)`
     transition: width 0.3s ease-in-out;
   }
 
+  .slick-dots li button:before {
+    display: none;
+  }
+
   .slick-slide > div > div {
     display: block !important;
   }

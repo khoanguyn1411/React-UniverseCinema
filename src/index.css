@@ -23,6 +23,27 @@ html{
     font-size: 1.5rem;
 }
 
+::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: var(--yellow-color);
+    border-radius: 0.5rem;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--black-color);
+  }
+  
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #f8a427;
+  }
+
 
 
 @import 'normalize.css'

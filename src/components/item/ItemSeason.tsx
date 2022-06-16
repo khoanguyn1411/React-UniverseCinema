@@ -32,7 +32,7 @@ export const ItemSeason: FunctionComponent<TProps> = ({
     <>
       <div
         key={season.id}
-        className="flex mb-[1.5rem] shadow-default rounded-[1rem]"
+        className="flex mb-[2.5rem] shadow-default rounded-[1rem]"
       >
         <ImageContainer
           url={pathImg}

@@ -5,7 +5,9 @@ import { useLocation } from "react-router-dom";
 import { MovieCredit } from "./movie-credits/MovieCredit";
 import { MovieInfo } from "./movie-info/MovieInfo";
 import { MovieOtherInfo } from "./movie-other-info/MovieOtherInfo";
+import { MovieRecommendation } from "./movie-recomendation/MovieRecommendation";
 import { MovieSeasons } from "./movie-seasons/MovieSeasons";
+import { MovieTrailers } from "./movie-trailers/MovieTrailers";
 
 export const MovieDetail: FunctionComponent = () => {
   const location = useLocation();
@@ -17,9 +19,14 @@ export const MovieDetail: FunctionComponent = () => {
   if (arrChar.length > 2) {
     const spliceArr = arrChar.slice(2, arrChar.length);
     name = decodeURI(spliceArr.join("/"));
-    name = decodeURI(funcs.splitMulti(name, ["-"])[1]);
+    // name = decodeURI(funcs.splitMulti(name, ["-"])[1]).toLowerCase();
+    name = funcs
+      .splitMulti(name, ["-"])
+      .slice(1, funcs.splitMulti(name, ["-"]).length)
+      .join("-")
+      .toLowerCase();
   } else {
-    name = decodeURI(funcs.splitMulti(arrChar[2], ["-"])[1]);
+    name = decodeURI(funcs.splitMulti(arrChar[2], ["-"])[1]).toLowerCase();
   }
 
   const [movie, setMovie] = useState<IMovie>(null);
@@ -32,9 +39,13 @@ export const MovieDetail: FunctionComponent = () => {
         let result: any;
         let res = await fetch(url);
         result = await res.json();
+        // console.log(name);
+        // console.log(result.name);
+        // console.log(result.original_title);
         if (
           result.success === false ||
-          (result.name !== name && result.original_title !== name)
+          (result.name?.toLowerCase() !== name &&
+            result.original_title?.toLowerCase() !== name)
         ) {
           url = funcs.getAPI(`/tv/${id}?`, "&language=en-US");
           res = await fetch(url);
@@ -48,7 +59,12 @@ export const MovieDetail: FunctionComponent = () => {
     };
     fetchAPI();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [location.pathname]);
+
+  const props = {
+    movie,
+    type,
+  };
 
   return (
     movie && (
@@ -56,11 +72,13 @@ export const MovieDetail: FunctionComponent = () => {
         <MovieInfo movie={movie} />
         <div className="wrapper flex">
           <div className="w-[75%] pr-[4rem] flex-1">
-            <MovieCredit movie={movie} type={type} />
-            <MovieSeasons movie={movie} type={type} />
+            <MovieCredit {...props} />
+            <MovieSeasons movie={movie} />
+            <MovieTrailers {...props} />
+            <MovieRecommendation {...props} />
           </div>
           <div className="w-[25%]">
-            <MovieOtherInfo movie={movie} type={type} />
+            <MovieOtherInfo {...props} />
           </div>
         </div>
       </>

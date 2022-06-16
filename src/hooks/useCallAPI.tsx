@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const useCallAPI = (api: string) => {
+export const useCallAPI = (api: string, dependency?: any) => {
   const [result, setResult] = useState(null);
   useEffect(() => {
     const fetchAPI = async () => {
@@ -14,7 +14,7 @@ export const useCallAPI = (api: string) => {
     };
     fetchAPI();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dependency]);
 
   return result;
 };
