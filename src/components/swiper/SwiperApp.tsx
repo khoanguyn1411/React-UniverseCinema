@@ -1,5 +1,11 @@
 import { Button } from "@/components";
-import { FunctionComponent, ReactNode } from "react";
+import {
+  FunctionComponent,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import styled from "styled-components";
 import SwiperCore, {
   Keyboard,
@@ -16,8 +22,9 @@ import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
 type TProps = {
   children: ReactNode;
   noViewmore?: Boolean;
-  settings?: SwiperOptions | SwiperProps;
+  settings?: SwiperProps;
   data: any[];
+  onAppSwiper?: any;
 };
 
 const WrapperModule = styled.div`
@@ -48,8 +55,15 @@ export const SwiperApp: FunctionComponent<TProps> = ({
   noViewmore = true,
   settings,
   data,
+  onAppSwiper,
 }) => {
   SwiperCore.use([Scrollbar, Navigation, Keyboard, Pagination]);
+
+  const [swiper, setSwiper] = useState<SwiperCore>();
+  useEffect(() => {
+    swiper?.slideTo(0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   return (
     <WrapperModule>
@@ -57,6 +71,10 @@ export const SwiperApp: FunctionComponent<TProps> = ({
         <Swiper
           spaceBetween={10}
           slidesPerGroup={2}
+          onSwiper={(swiper) => {
+            setSwiper(swiper);
+            onAppSwiper(swiper);
+          }}
           slidesPerView={"auto"}
           {...settings}
         >

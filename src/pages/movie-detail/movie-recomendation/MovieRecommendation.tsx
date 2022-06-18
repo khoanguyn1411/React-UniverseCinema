@@ -33,13 +33,6 @@ export const MovieRecommendation: FunctionComponent<TProps.withType> = ({
         prevEl: refPre?.current,
         nextEl: refNext?.current,
       },
-      onSwiper(swiper) {
-        if (swiper.isBeginning) {
-          refPre.current.classList.add("opacity-30");
-        } else {
-          refPre.current.classList.remove("opacity-30");
-        }
-      },
       onScrollbarDragMove(swiper) {
         if (swiper.isBeginning) {
           refPre.current.classList.add("opacity-30");
@@ -74,6 +67,14 @@ export const MovieRecommendation: FunctionComponent<TProps.withType> = ({
   }, [result]);
 
   const recomendationList: IMovie[] = result?.results;
+  const handleSwiperApp = (swiper) => {
+    if (swiper.isBeginning) {
+      refPre.current.classList.add("opacity-30");
+    } else {
+      refPre.current.classList.remove("opacity-30");
+    }
+  };
+
   return (
     <div className="mb-[2rem]">
       <div className="justify-between mt-[2rem] flex items-center">
@@ -103,6 +104,7 @@ export const MovieRecommendation: FunctionComponent<TProps.withType> = ({
             data={recomendationList}
             settings={settingsSwiper}
             noViewmore
+            onAppSwiper={handleSwiperApp}
           >
             {recomendationList.map((item) => (
               <SwiperSlide key={type + item.id}>

@@ -35,13 +35,6 @@ export const MovieCredit: FunctionComponent<TProps.withType> = ({
         prevEl: refPre?.current,
         nextEl: refNext?.current,
       },
-      onSwiper(swiper) {
-        if (swiper.isBeginning) {
-          refPre.current.classList.add("opacity-30");
-        } else {
-          refPre.current.classList.remove("opacity-30");
-        }
-      },
       onScrollbarDragMove(swiper) {
         if (swiper.isBeginning) {
           refPre.current.classList.add("opacity-30");
@@ -76,6 +69,14 @@ export const MovieCredit: FunctionComponent<TProps.withType> = ({
     });
   }, [credits]);
 
+  const handleSwiperApp = (swiper) => {
+    if (swiper.isBeginning) {
+      refPre.current.classList.add("opacity-30");
+    } else {
+      refPre.current.classList.remove("opacity-30");
+    }
+  };
+
   const casts: IActors[] = credits?.cast.slice(0, 15);
   return (
     <>
@@ -83,13 +84,15 @@ export const MovieCredit: FunctionComponent<TProps.withType> = ({
         <Title>Casts</Title>
         {casts && casts.length > 0 && (
           <div>
-            <Button
-              strokeBlack
-              hover
-              className="font-bold text-s16 w-fit py-[0.2rem] px-[1rem] cursor-pointer"
-            >
-              View all
-            </Button>
+            {casts.length > 15 && (
+              <Button
+                strokeBlack
+                hover
+                className="font-bold text-s16 w-fit py-[0.2rem] px-[1rem] cursor-pointer"
+              >
+                View all
+              </Button>
+            )}
             <Button
               iconOnly
               icon={icArrowLeft}
@@ -110,7 +113,11 @@ export const MovieCredit: FunctionComponent<TProps.withType> = ({
       {casts && casts.length > 0 ? (
         <div>
           <div className="mt-[1.2rem]">
-            <SwiperApp data={casts} settings={settingsSwiper}>
+            <SwiperApp
+              data={casts}
+              settings={settingsSwiper}
+              onAppSwiper={handleSwiperApp}
+            >
               {casts.map((cast) => (
                 <SwiperSlide key={cast.id}>
                   <ItemActor actor={cast} />
