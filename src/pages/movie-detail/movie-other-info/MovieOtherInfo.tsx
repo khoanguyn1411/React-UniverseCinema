@@ -23,7 +23,7 @@ export const MovieOtherInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
     window.open(movie.homepage, "_blank");
   };
   return (
-    <div className="mt-[3.5rem]">
+    <div className="mt-[2.5rem]">
       <Status title="Status">
         <h1>{movie.status}</h1>
       </Status>

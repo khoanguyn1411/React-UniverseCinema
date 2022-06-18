@@ -12,8 +12,8 @@ export const HomePage: React.FC = () => {
     <div className="w-full">
       <TopBanner />
       <Popular />
-      <Trending />
       <TopRate />
+      <Trending />
       <UpcommingMovies />
       <Introduction />
     </div>

@@ -1,16 +1,21 @@
-import { ItemMovie, NoResult, SwiperApp, Title } from "@/components";
+import { Button, ItemMovie, NoResult, SwiperApp, Title } from "@/components";
 import { funcs, values } from "@/constants";
 import { useCallAPI } from "@/hooks";
 import { IMovie } from "@/types";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { TProps } from "..";
 
+import { icArrowLeft, icArrowRight } from "@/assets/icons";
+import { Navigation } from "swiper";
 import { SwiperProps, SwiperSlide } from "swiper/react";
 
 export const MovieRecommendation: FunctionComponent<TProps.withType> = ({
   type,
   movie,
 }) => {
+  const refNext = useRef(null);
+  const refPre = useRef(null);
+
   const result = useCallAPI(
     funcs.getAPI(
       `/${type}/${movie.id}/recommendations?`,
@@ -19,35 +24,100 @@ export const MovieRecommendation: FunctionComponent<TProps.withType> = ({
     movie
   );
 
-  const settingsSwiper: SwiperProps = {
-    direction: "horizontal",
-    slidesPerView: "auto",
-    scrollbar: {
-      draggable: true,
-    },
-  };
+  const [settingsSwiper, setSettingsSwiper] = useState<SwiperProps>(null);
+
+  useEffect(() => {
+    setSettingsSwiper({
+      modules: [Navigation],
+      navigation: {
+        prevEl: refPre?.current,
+        nextEl: refNext?.current,
+      },
+      onSwiper(swiper) {
+        if (swiper.isBeginning) {
+          refPre.current.classList.add("opacity-30");
+        } else {
+          refPre.current.classList.remove("opacity-30");
+        }
+      },
+      onScrollbarDragMove(swiper) {
+        if (swiper.isBeginning) {
+          refPre.current.classList.add("opacity-30");
+        } else {
+          refPre.current.classList.remove("opacity-30");
+        }
+
+        if (swiper.isEnd) {
+          refNext.current.classList.add("opacity-30");
+        } else {
+          refNext.current.classList.remove("opacity-30");
+        }
+      },
+      onSlideChange(swiper) {
+        if (swiper.isBeginning) {
+          refPre.current.classList.add("opacity-30");
+        } else {
+          refPre.current.classList.remove("opacity-30");
+        }
+
+        if (swiper.isEnd) {
+          refNext.current.classList.add("opacity-30");
+        } else {
+          refNext.current.classList.remove("opacity-30");
+        }
+      },
+      direction: "horizontal",
+      scrollbar: {
+        draggable: true,
+      },
+    });
+  }, [result]);
 
   const recomendationList: IMovie[] = result?.results;
   return (
     <div className="mb-[2rem]">
-      <Title className="mt-[2rem]">Recommendation</Title>
-
-      <div className="relative">
+      <div className="justify-between mt-[2rem] flex items-center">
+        <Title>Recommendation</Title>
+        {recomendationList && recomendationList.length > 0 && (
+          <div>
+            <Button
+              iconOnly
+              icon={icArrowLeft}
+              rounded
+              ref={refPre}
+              className="h-[3rem] w-[3rem]"
+            />
+            <Button
+              iconOnly
+              rounded
+              icon={icArrowRight}
+              ref={refNext}
+              className="h-[3rem] w-[3rem] ml-5"
+            />
+          </div>
+        )}
+      </div>
+      <div className="relative mt-4">
         {recomendationList && recomendationList.length > 0 ? (
           <SwiperApp
+            data={recomendationList}
             settings={settingsSwiper}
             noViewmore
-            length={recomendationList.length}
           >
             {recomendationList.map((item) => (
               <SwiperSlide key={type + item.id}>
-                <ItemMovie movie={item} className="mx-0" />
+                <ItemMovie
+                  size="small"
+                  isSwiper
+                  movie={item}
+                  className="mx-0"
+                />
               </SwiperSlide>
             ))}
           </SwiperApp>
         ) : (
-          <NoResult>
-            There is no Recommendation for this{" "}
+          <NoResult className="mt-[1rem]">
+            There is no recommendation for this{" "}
             {type === values.MEDIA_TYPE.MOVIE ? "movie." : "TV show."}
           </NoResult>
         )}

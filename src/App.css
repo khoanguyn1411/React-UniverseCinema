@@ -9,8 +9,17 @@
     -webkit-box-orient: vertical;
     display: -webkit-box;
     overflow: hidden;
-    text-overflow: ellipsis;
     white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.line-1-wrap {
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .line-2 {

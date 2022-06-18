@@ -113,7 +113,7 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
                   ))}
                 </div> */}
 
-                {(movie.episode_run_time || movie.runtime) && (
+                {(!!movie.episode_run_time || !!movie.runtime) && (
                   <div>
                     <span className="font-normal">Running time: </span>
                     <span>

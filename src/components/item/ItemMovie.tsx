@@ -12,9 +12,15 @@ type TProps = {
   movie: IMovie;
   className?: string;
   size?: string;
+  isSwiper?: Boolean;
 };
 
-export const ItemMovie: React.FC<TProps> = ({ movie, className, size }) => {
+export const ItemMovie: React.FC<TProps> = ({
+  movie,
+  className,
+  size,
+  isSwiper = false,
+}) => {
   const pathImg = `${configs.api.IMAGE_URL_SMALL}/${
     movie.poster_path || movie.backdrop_path
   }`;
@@ -31,7 +37,7 @@ export const ItemMovie: React.FC<TProps> = ({ movie, className, size }) => {
   };
   const getHeight = () => {
     if (size === "small") {
-      return "h-[25rem] w-[20rem]";
+      return "h-[23rem] w-[20rem]";
     } else if (size === "large") {
       return "h-[35rem] w-[20rem]";
     }
@@ -57,13 +63,17 @@ export const ItemMovie: React.FC<TProps> = ({ movie, className, size }) => {
       <div className="mt-[1rem] px-[0.3rem]">
         <h1
           onClick={handleSwitchToDetailMovie}
-          className="font-bold line-1 cursor-pointer hover:text-orange transition-all hover:transition-all"
+          className={`font-bold ${
+            isSwiper ? "line-1-wrap" : "line-1"
+          } cursor-pointer hover:text-orange transition-all hover:transition-all`}
         >
           {movie.name || movie.original_title}
         </h1>
-        <h1 className="text-s14 line-1">
-          {funcs.formatDate(movie.first_air_date || movie.release_date)}
-        </h1>
+        {(movie.first_air_date || movie.release_date) && (
+          <h1 className={`text-s14 ${isSwiper ? "line-1-wrap" : "line-1"}`}>
+            {funcs.formatDate(movie.first_air_date || movie.release_date)}
+          </h1>
+        )}
       </div>
     </div>
   );

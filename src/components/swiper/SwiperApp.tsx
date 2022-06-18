@@ -10,15 +10,14 @@ import SwiperCore, {
 } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
-import "swiper/css";
 import "swiper/css/scrollbar";
 import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
 
 type TProps = {
   children: ReactNode;
-  length: number;
   noViewmore?: Boolean;
   settings?: SwiperOptions | SwiperProps;
+  data: any[];
 };
 
 const WrapperModule = styled.div`
@@ -46,9 +45,9 @@ const WrapperModule = styled.div`
 
 export const SwiperApp: FunctionComponent<TProps> = ({
   children,
-  length,
   noViewmore = true,
   settings,
+  data,
 }) => {
   SwiperCore.use([Scrollbar, Navigation, Keyboard, Pagination]);
 
@@ -62,7 +61,7 @@ export const SwiperApp: FunctionComponent<TProps> = ({
           {...settings}
         >
           {children}
-          {length > 15 && !noViewmore && (
+          {data.length > 15 && !noViewmore && (
             <SwiperSlide className="flex justify-center items-center">
               <Button hover>View more</Button>
             </SwiperSlide>
