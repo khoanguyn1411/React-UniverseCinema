@@ -1,18 +1,11 @@
 import { Button } from "@/components";
-import {
-  FunctionComponent,
-  ReactNode,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { FunctionComponent, ReactNode, useEffect, useState } from "react";
 import styled from "styled-components";
 import SwiperCore, {
   Keyboard,
   Navigation,
   Pagination,
   Scrollbar,
-  SwiperOptions,
 } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -24,7 +17,7 @@ type TProps = {
   noViewmore?: Boolean;
   settings?: SwiperProps;
   data: any[];
-  onAppSwiper?: any;
+  onAppSwiper?: (value: SwiperCore) => void;
 };
 
 const WrapperModule = styled.div`
@@ -73,7 +66,7 @@ export const SwiperApp: FunctionComponent<TProps> = ({
           slidesPerGroup={2}
           onSwiper={(swiper) => {
             setSwiper(swiper);
-            onAppSwiper(swiper);
+            onAppSwiper && onAppSwiper(swiper);
           }}
           slidesPerView={"auto"}
           {...settings}

@@ -11,7 +11,7 @@ import { funcs } from "@/constants";
 import { useCallAPI } from "@/hooks/useCallAPI";
 import { IActors } from "@/types";
 import { FunctionComponent, useEffect, useRef, useState } from "react";
-import { Navigation } from "swiper";
+import SwiperCore, { Navigation } from "swiper";
 import { SwiperProps, SwiperSlide } from "swiper/react";
 import { TProps } from "..";
 
@@ -69,7 +69,7 @@ export const MovieCredit: FunctionComponent<TProps.withType> = ({
     });
   }, [credits]);
 
-  const handleSwiperApp = (swiper) => {
+  const handleSwiperApp = (swiper: SwiperCore) => {
     if (swiper.isBeginning) {
       refPre.current.classList.add("opacity-30");
     } else {
@@ -133,4 +133,3 @@ export const MovieCredit: FunctionComponent<TProps.withType> = ({
     </>
   );
 };
-// w-fit text-s18 font-bold cursor-pointer mt-[1rem] hover:text-orange hover:transition-all transition-all

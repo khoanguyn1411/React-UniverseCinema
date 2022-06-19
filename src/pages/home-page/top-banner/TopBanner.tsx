@@ -2,9 +2,9 @@ import { apiURL } from "@/api";
 import { FullSlider, ImageContainer } from "@/components";
 import { configs } from "@/configs";
 import { useCallAPI } from "@/hooks";
+import { IMovie } from "@/types";
 import React from "react";
 import { Settings } from "react-slick";
-import { IMovie } from "@/types";
 
 export const TopBanner: React.FC = () => {
   const banners: IMovie[] = useCallAPI(
@@ -55,7 +55,7 @@ export const TopBanner: React.FC = () => {
                   <h1 className="text-[2.5rem] font-bold text-white mb-[1rem]">
                     {banner.name || banner.original_title}
                   </h1>
-                  <h1 className="text-s16 text-white text-justify line-9">
+                  <h1 className="text-s16 text-white line-9">
                     {banner.overview}
                   </h1>
                 </div>

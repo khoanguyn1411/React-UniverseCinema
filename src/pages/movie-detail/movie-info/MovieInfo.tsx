@@ -5,9 +5,20 @@ import { FunctionComponent } from "react";
 import { TProps } from "..";
 
 export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
-  const formatRunTime = (minuteVar: number): string => {
-    let hour = Math.floor(minuteVar / 60);
-    const minute = minuteVar % 60;
+  const formatRunTime = (minuteVar: number | number[]): string => {
+    let initMinute: number;
+    if (Array.isArray(minuteVar)) {
+      if (minuteVar.length === 0) {
+        initMinute = 0;
+      } else {
+        initMinute = minuteVar[0];
+      }
+    } else {
+      initMinute = minuteVar;
+    }
+
+    let hour = Math.floor(initMinute / 60);
+    const minute = initMinute % 60;
     if (hour === 0) {
       return minute + "m";
     } else {
@@ -98,20 +109,6 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
                     <span>{"(" + movie.origin_country + ")"}</span>
                   )}
                 </h1>
-                {/* <div className="">
-                  <span className="font-normal">Genres: </span>
-                  {movie.genres?.map((item, index) => (
-                    <span
-                      key={index}
-                      className="cursor-pointer hover:text-orange hover:transition-all transition-all"
-                    >
-                      {item.name}
-                      {index !== movie.genres?.length - 1 && (
-                        <span className="text-white">, </span>
-                      )}
-                    </span>
-                  ))}
-                </div> */}
 
                 {(!!movie.episode_run_time || !!movie.runtime) && (
                   <div>
@@ -145,7 +142,7 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
                     iconOnly
                     onClick={() => button.onClick(movie)}
                     rounded
-                    className="rounded-[100%] w-[5rem] h-[5rem]"
+                    className="w-[5rem] h-[5rem]"
                   />
                 ))}
               </div>
@@ -153,9 +150,7 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
 
             <div className="mt-[2rem]">
               <h1 className="text-s20 text-orange">Overview</h1>
-              <h1 className="font-normal mt-[0.5rem] text-justify">
-                {movie.overview}
-              </h1>
+              <h1 className="font-normal mt-[0.5rem]">{movie.overview}</h1>
             </div>
           </div>
         </div>

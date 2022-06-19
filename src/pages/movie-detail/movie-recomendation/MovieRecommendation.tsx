@@ -6,7 +6,7 @@ import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { TProps } from "..";
 
 import { icArrowLeft, icArrowRight } from "@/assets/icons";
-import { Navigation } from "swiper";
+import SwiperCore, { Navigation } from "swiper";
 import { SwiperProps, SwiperSlide } from "swiper/react";
 
 export const MovieRecommendation: FunctionComponent<TProps.withType> = ({
@@ -67,7 +67,7 @@ export const MovieRecommendation: FunctionComponent<TProps.withType> = ({
   }, [result]);
 
   const recomendationList: IMovie[] = result?.results;
-  const handleSwiperApp = (swiper) => {
+  const handleSwiperApp = (swiper: SwiperCore) => {
     if (swiper.isBeginning) {
       refPre.current.classList.add("opacity-30");
     } else {
