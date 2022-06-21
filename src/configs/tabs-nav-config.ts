@@ -15,7 +15,7 @@ export const tabsNavConfig: TTabs.ITabsObject[] = [
     children: [
       {
         title: "All movies",
-        to: `${routes.movie}`,
+        to: routes.movie + routes.all,
       },
       {
         title: "Now playing",

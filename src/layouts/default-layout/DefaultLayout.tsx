@@ -1,15 +1,16 @@
 import { Footer, Navbar } from "@/components";
+import { configs } from "@/configs";
 import { setIsFixedNav } from "@/features";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import React, { ReactNode, useEffect, useRef } from "react";
+import React, { ReactNode, useEffect } from "react";
 
 type Props = {
   children: ReactNode;
 };
 
 export const DefaultLayout: React.FC<Props> = ({ children }) => {
-  const isFixedNav = useAppSelector((state) => state.isFixedNav.value);
   const dispatch = useAppDispatch();
+  const activePage = useAppSelector((state) => state.activePage.value);
 
   useEffect(() => {
     const handleSetFixedNavbar = () => {
@@ -33,7 +34,16 @@ export const DefaultLayout: React.FC<Props> = ({ children }) => {
       <div className="fixed top-0 w-full z-50">
         <Navbar />
       </div>
-      <div className="min-h-[78vh]">{children}</div>
+      <div
+        className={`min-h-[78vh] ${
+          activePage === configs.routes.homePage ||
+          activePage === configs.routes.movieDetailWithSuffix
+            ? ""
+            : "mt-20"
+        }`}
+      >
+        {children}
+      </div>
       <Footer />
     </div>
   );

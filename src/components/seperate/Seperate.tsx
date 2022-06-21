@@ -1,5 +1,9 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 
-export const Seperate = () => {
-  return <div className="w-full h-[0.05rem] bg-grey mt-[2rem]"></div>;
+type TProps = {
+  marginTop?: number;
+};
+
+export const Seperate: FunctionComponent<TProps> = ({ marginTop = "2" }) => {
+  return <div className={`w-full h-[0.05rem] bg-grey mt-[${marginTop}]`}></div>;
 };

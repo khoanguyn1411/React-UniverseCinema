@@ -1,6 +1,12 @@
 export const routesPathConfig = {
   homePage: "/",
+  movieWithSuffix: "/movie/:filter",
   movie: "/movie",
+  all: "/all",
+  popular: "/popular",
+  nowplaying: "/nowplaying",
+  upcoming: "/upcoming",
+  toprated: "/toprated",
   movieDetailWithSuffix: "/movie-detail/:movie/*",
   // movieDetailWithSuffix: "/:category/:movie/*",
   movieDetail: "/movie-detail",
