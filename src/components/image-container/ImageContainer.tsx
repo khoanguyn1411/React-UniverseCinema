@@ -1,6 +1,6 @@
-import React, { MouseEventHandler } from "react";
-import classNames from "classnames";
 import { imgNoAvatar } from "@/assets/images";
+import classNames from "classnames";
+import React, { MouseEventHandler } from "react";
 type TProps = {
   children: JSX.Element;
   url: string;
@@ -12,18 +12,24 @@ type TProps = {
 export const ImageContainer: React.FC<TProps> = ({
   url,
   className,
-  children,
   onclick,
   type,
+  children,
 }) => {
   const getUrl = () => {
     if (url?.includes(null)) {
       if (type === "people") {
         return;
       }
-      return `url(${imgNoAvatar})`;
+      return {
+        path: `url(${imgNoAvatar})`,
+        boolean: false,
+      };
     } else {
-      return `url(${url})`;
+      return {
+        path: `url(${url})`,
+        boolean: true,
+      };
     }
   };
   return (
@@ -31,10 +37,14 @@ export const ImageContainer: React.FC<TProps> = ({
       className={classNames(className, "bgImg")}
       onClick={onclick}
       style={{
-        backgroundImage: getUrl(),
+        backgroundImage: getUrl().path,
       }}
     >
-      {children}
+      {getUrl().boolean ? (
+        children
+      ) : (
+        <img src={imgNoAvatar} alt={"No poster img"} />
+      )}
     </div>
   );
 };

@@ -10,37 +10,44 @@ import { ItemFilter } from "./item-filter/ItemFilter";
 
 export const Movie: FunctionComponent = () => {
   const { filter } = useParams();
+
   const filterInfo = (function () {
     switch (filter) {
       case configs.routes.all.replace("/", ""):
         return {
           title: "All movies",
           routeAPI: "/discover/movie",
+          root: configs.routes.all,
         };
       case configs.routes.upcoming.replace("/", ""):
         return {
           title: "Upcoming movies",
           routeAPI: "upcoming",
+          root: configs.routes.upcoming,
         };
       case configs.routes.popular.replace("/", ""):
         return {
           title: "Popular movies",
           routeAPI: "popular",
+          root: configs.routes.popular,
         };
       case configs.routes.toprated.replace("/", ""):
         return {
           title: "Top rated movies",
           routeAPI: "top_rated",
+          root: configs.routes.toprated,
         };
       case configs.routes.nowplaying.replace("/", ""):
         return {
           title: "Now playing movies",
           routeAPI: "now_playing",
+          root: configs.routes.nowplaying,
         };
       default:
         return {
           title: "All movies",
           routeAPI: "/discover/movie?",
+          root: configs.routes.all,
         };
     }
   })();
@@ -127,6 +134,9 @@ export const Movie: FunctionComponent = () => {
     },
   ];
 
+  const [filterGenres, setFilterGenres] = useState<IGenres[]>([]);
+  const handleSetFilterGenres = () => {};
+
   return (
     <div className="wrapper flex flex-col">
       <div className="mt-[2rem] text-center text-[3rem] uppercase">
@@ -137,6 +147,7 @@ export const Movie: FunctionComponent = () => {
           <ItemFilter title="Sort by">
             <Select active={activeSort} setActive={setActiveSort} list={list} />
           </ItemFilter>
+
           <ItemFilter title="Filters">
             <h1>User score</h1>
             <RangeSlider
@@ -165,16 +176,25 @@ export const Movie: FunctionComponent = () => {
             <div className="mt-[1rem]">
               {genres &&
                 genres.length > 0 &&
-                genres.map((item) => (
-                  <Button
-                    hover
-                    strokeBlack
-                    className="mb-[1rem] mr-[0.5rem] py-[0.2rem] px-[1rem]"
-                    key={item.id}
-                  >
-                    {item.name}
-                  </Button>
-                ))}
+                genres.map((item) => {
+                  const getStyle = () => {
+                    if (filterGenres.includes(item)) {
+                      return { orange: true };
+                    } else {
+                      return { strokeBlack: true, hover: true };
+                    }
+                  };
+                  return (
+                    <Button
+                      {...getStyle()}
+                      className="mb-[1rem] mr-[0.5rem] py-[0.2rem] px-[1rem]"
+                      key={item.id}
+                      onClick={handleSetFilterGenres}
+                    >
+                      {item.name}
+                    </Button>
+                  );
+                })}
             </div>
 
             <Button hover className="w-full mt-[1.5rem]">
@@ -183,7 +203,7 @@ export const Movie: FunctionComponent = () => {
           </ItemFilter>
         </div>
         <div className="col-span-3 mb-[5rem]">
-          {<ItemContainer filter={filterInfo.routeAPI} />}
+          {<ItemContainer filterInfo={filterInfo} />}
         </div>
       </div>
     </div>

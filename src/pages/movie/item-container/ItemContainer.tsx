@@ -1,22 +1,42 @@
-import { ItemMovie } from "@/components";
+import { AppPagination, ItemMovie } from "@/components";
 import { funcs } from "@/constants";
 import { useCallAPI } from "@/hooks";
 import { IMovie } from "@/types";
-import React, { FunctionComponent, useState } from "react";
-import PaginateDemo from "../paginateDemo/PaginateDemo";
+import { FunctionComponent, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
+interface IFilterInfo {
+  title: string;
+  routeAPI: string;
+  root: string;
+}
 type TProps = {
-  filter: string;
+  filterInfo: IFilterInfo;
 };
 
-export const ItemContainer: FunctionComponent<TProps> = ({ filter }) => {
-  const [activePage, setActivePage] = useState<number>(1);
-  const result = useCallAPI(
-    filter === "/discover/movie"
-      ? funcs.getAPI(`/discover/movie?`, `&language=en-US&page=${activePage}`)
-      : funcs.getAPI(`/movie/${filter}?`, `&language=en-US&page=${activePage}`),
-    [filter, activePage]
+export const ItemContainer: FunctionComponent<TProps> = ({ filterInfo }) => {
+  const { filter, page } = useParams();
+  const [activePage, setActivePage] = useState<number>(
+    page ? Number.parseInt(page) : 1
   );
+  const result = useCallAPI(
+    filterInfo.routeAPI === "/discover/movie"
+      ? funcs.getAPI(`/discover/movie?`, `&language=en-US&page=${activePage}`)
+      : funcs.getAPI(
+          `/movie/${filterInfo.routeAPI}?`,
+          `&language=en-US&page=${activePage}`
+        ),
+    [filterInfo, activePage]
+  );
+
+  console.log(
+    funcs.getAPI("/movie/popular?", "&with_genres=35&language=en-US&page=1")
+  );
+
+  useEffect(() => {
+    setActivePage(page ? Number.parseInt(page) : 1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filter]);
 
   const movies: IMovie[] = result?.results;
 
@@ -31,10 +51,11 @@ export const ItemContainer: FunctionComponent<TProps> = ({ filter }) => {
       </div>
 
       <div className="flex justify-center mt-[5rem]">
-        <PaginateDemo
+        <AppPagination
           pageNumber={500}
           activePage={activePage}
           setActivePage={setActivePage}
+          filterInfo={filterInfo}
         />
       </div>
     </div>

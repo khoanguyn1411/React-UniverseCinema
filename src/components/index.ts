@@ -14,3 +14,4 @@ export * from "./seperate/Seperate";
 export * from "./no-result/NoResult";
 export * from "./select/Select";
 export * from "./range-slider/RangeSlider";
+export * from "./pagination/AppPagination";

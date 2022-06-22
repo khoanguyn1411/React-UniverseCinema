@@ -49,7 +49,7 @@ export const UserScore: FunctionComponent<TProps> = ({ score }) => {
         }}
         value={score * 10}
       >
-        <h1 className="text-[2.2rem]">{score.toFixed(1)}</h1>
+        <h1 className="text-[2.2rem]">{score ? score.toFixed(1) : 0}</h1>
       </CircularProgressbarWithChildren>
     </div>
   );

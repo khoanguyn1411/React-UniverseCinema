@@ -12,7 +12,12 @@ type TRoutes = {
 export const publicRoutes: TRoutes[] = [
   { path: configs.routes.homePage, component: HomePage },
   { path: configs.routes.movieDetailWithSuffix, component: MovieDetail },
-  { path: configs.routes.movieWithSuffix, component: Movie },
+
+  {
+    path: configs.routes.movieWithSuffix,
+    component: Movie,
+  },
+  { path: configs.routes.movieWithSuffixAndPage, component: Movie },
 ];
 
 // Khi nào đăng nhập mới xem được các trang này

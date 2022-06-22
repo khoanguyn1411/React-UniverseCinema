@@ -27,7 +27,7 @@ const WrapperModule = styled.div`
   }
 
   .MuiSlider-track {
-    background-color: var(--black-color);
+    background-color: var(--yellow-color);
     color: black !important;
   }
   .MuiSlider-valueLabel {
