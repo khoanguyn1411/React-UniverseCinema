@@ -37,7 +37,7 @@ export const DefaultLayout: React.FC<Props> = ({ children }) => {
       <div
         className={`min-h-[78vh] ${
           activePage === configs.routes.homePage ||
-          activePage === configs.routes.movieDetailWithSuffix
+          activePage === configs.routes.movieDetail
             ? ""
             : "mt-20"
         }`}

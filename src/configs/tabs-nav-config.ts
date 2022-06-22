@@ -19,15 +19,19 @@ export const tabsNavConfig: TTabs.ITabsObject[] = [
       },
       {
         title: "Now playing",
-        to: `${routes.movie}/nowplaying`,
+        to: routes.movie + routes.nowplaying,
       },
       {
-        title: "Up coming",
-        to: `${routes.movie}/upcoming`,
+        title: "Popular",
+        to: routes.movie + routes.popular,
+      },
+      {
+        title: "Upcoming",
+        to: routes.movie + routes.upcoming,
       },
       {
         title: "Top rated",
-        to: `${routes.movie}/toprated`,
+        to: routes.movie + routes.toprated,
       },
     ],
   },

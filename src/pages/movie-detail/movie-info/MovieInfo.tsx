@@ -1,4 +1,4 @@
-import { Button, ImageContainer, UserScore } from "@/components";
+import { Button, ImageContainer, NoResult, UserScore } from "@/components";
 import { configs } from "@/configs";
 import { funcs } from "@/constants";
 import { FunctionComponent } from "react";
@@ -150,7 +150,11 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
 
             <div className="mt-[2rem]">
               <h1 className="text-s20 text-orange">Overview</h1>
-              <h1 className="font-normal mt-[0.5rem]">{movie.overview}</h1>
+              {movie.overview ? (
+                <h1 className="font-normal mt-[0.5rem]">{movie.overview}</h1>
+              ) : (
+                <NoResult>There is no overview</NoResult>
+              )}
             </div>
           </div>
         </div>

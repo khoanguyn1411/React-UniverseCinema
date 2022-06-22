@@ -21,7 +21,7 @@ export const MovieRecommendation: FunctionComponent<TProps.withType> = ({
       `/${type}/${movie.id}/recommendations?`,
       "&language=en-US&page=1"
     ),
-    movie
+    [movie]
   );
 
   const [settingsSwiper, setSettingsSwiper] = useState<SwiperProps>(null);

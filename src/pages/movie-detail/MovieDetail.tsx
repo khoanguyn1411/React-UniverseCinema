@@ -17,8 +17,8 @@ export const MovieDetail: FunctionComponent = () => {
 
   let name: string;
   if (arrChar.length > 2) {
-    const spliceArr = arrChar.slice(2, arrChar.length);
-    name = decodeURI(spliceArr.join("/"));
+    const sliceArr = arrChar.slice(2, arrChar.length);
+    name = decodeURI(sliceArr.join("/"));
     // name = decodeURI(funcs.splitMulti(name, ["-"])[1]).toLowerCase();
     name = funcs
       .splitMulti(name, ["-"])

@@ -6,6 +6,11 @@ type TProps = {
   range: number[];
   setRange: React.Dispatch<React.SetStateAction<number[]>>;
   minDistance: number;
+  marks?: any;
+  lableShow: string;
+  minMax: number[];
+  step: number;
+  lableShowSuffix?: string;
 };
 
 const WrapperModule = styled.div`
@@ -42,48 +47,14 @@ export const RangeSlider: FunctionComponent<TProps> = ({
   range,
   setRange,
   minDistance,
+  marks,
+  lableShow,
+  minMax,
+  step,
+  lableShowSuffix = "",
 }) => {
-  const marks = [
-    {
-      value: 0,
-      label: "0",
-    },
-    {
-      value: 1,
-    },
-    {
-      value: 2,
-    },
-    {
-      value: 3,
-    },
-    {
-      value: 4,
-    },
-    {
-      value: 5,
-      label: "5",
-    },
-    {
-      value: 6,
-    },
-    {
-      value: 7,
-    },
-    {
-      value: 8,
-    },
-    {
-      value: 9,
-    },
-    {
-      value: 10,
-      label: "10",
-    },
-  ];
-
   function valueLabelFormat(value: number) {
-    return `Rated: ${value}`;
+    return `${lableShow}: ${value}${lableShowSuffix}`;
   }
   const handleChange = (
     event: Event,
@@ -104,13 +75,13 @@ export const RangeSlider: FunctionComponent<TProps> = ({
     <WrapperModule>
       <div className="p-[1rem]">
         <Slider
-          min={0}
-          max={10}
-          getAriaLabel={() => "Minimum distance"}
+          min={minMax[0]}
+          max={minMax[1]}
           value={range}
           onChange={handleChange}
           valueLabelDisplay="auto"
           marks={marks}
+          step={step}
           valueLabelFormat={valueLabelFormat}
         />
       </div>

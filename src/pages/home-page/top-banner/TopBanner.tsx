@@ -9,7 +9,7 @@ import { Settings } from "react-slick";
 export const TopBanner: React.FC = () => {
   const banners: IMovie[] = useCallAPI(
     apiURL.displayService.BANNERS_API
-  )?.results.splice(0, 5);
+  )?.results.slice(0, 5);
   const settings: Settings = {
     dots: true,
     autoplay: true,
@@ -35,7 +35,7 @@ export const TopBanner: React.FC = () => {
                 <img
                   alt={`bannerHome${index}`}
                   src={configs.api.IMAGE_URL_LARGE + banner.backdrop_path}
-                  className="h-[80vh] max-h-[70rem]"
+                  className="h-[85vh] max-h-[70rem]"
                 />
               </ImageContainer>
 

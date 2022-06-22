@@ -9,10 +9,9 @@ export const MovieTrailers: FunctionComponent<TProps.withType> = ({
   movie,
   type,
 }) => {
-  const result = useCallAPI(
-    funcs.getAPI(`/${type}/${movie.id}/videos?`, ""),
-    movie
-  );
+  const result = useCallAPI(funcs.getAPI(`/${type}/${movie.id}/videos?`, ""), [
+    movie,
+  ]);
   const pathYoutube = "https://www.youtube.com/embed/";
   const trailerList: ITrailer[] = result?.results;
   const [isOpenModal, setIsOpenModal] = useState<Boolean>(false);

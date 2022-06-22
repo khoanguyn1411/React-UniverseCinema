@@ -13,6 +13,7 @@ type TProps = {
   className?: string;
   size?: string;
   isSwiper?: Boolean;
+  noLineLimit?: Boolean;
 };
 
 export const ItemMovie: React.FC<TProps> = ({
@@ -20,6 +21,7 @@ export const ItemMovie: React.FC<TProps> = ({
   className,
   size,
   isSwiper = false,
+  noLineLimit = false,
 }) => {
   const pathImg = `${configs.api.IMAGE_URL_SMALL}/${
     movie.poster_path || movie.backdrop_path
@@ -64,7 +66,7 @@ export const ItemMovie: React.FC<TProps> = ({
         <h1
           onClick={handleSwitchToDetailMovie}
           className={`font-bold ${
-            isSwiper ? "line-1-wrap" : "line-1"
+            !noLineLimit && (isSwiper ? "line-1-wrap" : "line-1")
           } cursor-pointer hover:text-orange transition-all hover:transition-all`}
         >
           {movie.name || movie.original_title}

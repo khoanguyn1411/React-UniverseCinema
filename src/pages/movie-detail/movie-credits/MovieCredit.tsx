@@ -26,7 +26,7 @@ export const MovieCredit: FunctionComponent<TProps.withType> = ({
 
   const credits: any = useCallAPI(
     funcs.getAPI(`/${type}/${movie.id}/credits?`, "&language=en-US"),
-    movie
+    [movie]
   );
   useEffect(() => {
     setSettingsSwiper({
