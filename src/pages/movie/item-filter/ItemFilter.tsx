@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactNode, useState } from "react";
 import { icArrowDown, Icon } from "@/assets/icons";
-import { Seperate } from "@/components";
+import { Separate } from "@/components";
 
 type TProps = {
   children: ReactNode;
@@ -20,7 +20,7 @@ export const ItemFilter: FunctionComponent<TProps> = ({ children, title }) => {
       </div>
       {isShowContent && (
         <div>
-          <Seperate marginTop={"1"} />
+          <Separate marginTop={"1"} />
           <div>{children}</div>
         </div>
       )}

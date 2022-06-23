@@ -20,8 +20,8 @@ type TProps = {
 };
 
 const WrapperModule = styled.div`
-  .css-yx0nvq-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
-    background-color: orange;
+  .css-syf9wd-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+    background-color: var(--yellow-color) !important;
   }
   .MuiButtonBase-root {
     font-size: 1.5rem;

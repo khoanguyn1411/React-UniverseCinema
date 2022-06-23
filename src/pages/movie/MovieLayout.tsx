@@ -1,4 +1,10 @@
-import { Button, RangeSlider, Select, Seperate } from "@/components";
+import {
+  AppDatePicker,
+  Button,
+  RangeSlider,
+  Select,
+  Separate,
+} from "@/components";
 import { configs } from "@/configs";
 import { funcs } from "@/constants";
 import { useCallAPI } from "@/hooks";
@@ -139,6 +145,9 @@ export const Movie: FunctionComponent = () => {
   ];
 
   const [filterGenresList, setFilterGenresList] = useState<number[]>([]);
+  const [fromDate, setFromDate] = useState<Date | null>(null);
+  const [toDate, setToDate] = useState<Date | null>(null);
+
   const handleSetFilterGenresList = (item: number) => {
     setFilterGenresList((prev) => {
       if (prev.includes(item)) {
@@ -153,12 +162,16 @@ export const Movie: FunctionComponent = () => {
     rangeScore,
     rangeTime,
     filterGenresList,
+    fromDate,
+    toDate,
   });
   const handleSetFilterCondition = () => {
     setFilterCondition({
       rangeScore,
       rangeTime,
       filterGenresList,
+      fromDate,
+      toDate,
     });
   };
   const handleClearFilter = () => {
@@ -169,8 +182,12 @@ export const Movie: FunctionComponent = () => {
       rangeScore: [0, 10],
       rangeTime: [0, 360],
       filterGenresList: [],
+      fromDate: null,
+      toDate: null,
     });
   };
+
+  console.log(fromDate?.getDate());
 
   return (
     <div className="wrapper flex flex-col">
@@ -197,28 +214,47 @@ export const Movie: FunctionComponent = () => {
                 setRange={setRangeScore}
                 minDistance={1}
                 marks={marksScore}
-                lableShow="Rated"
+                labelShow="Rated"
                 minMax={[0, 10]}
                 step={1}
               />
             </div>
 
-            <Seperate marginTop="0" />
+            <Separate marginTop="0" />
             <div className="p-[1rem]">
               <h1 className="mt-[1rem]">Run time</h1>
               <RangeSlider
                 range={rangeTime}
                 setRange={setRangeTime}
                 minDistance={10}
-                lableShow="Time"
+                labelShow="Time"
                 step={10}
                 minMax={[0, 360]}
-                lableShowSuffix=" minute"
+                labelShowSuffix=" minute"
                 marks={marksTime}
               />
             </div>
 
-            <Seperate marginTop="0" />
+            <Separate marginTop="0" />
+
+            <div className="p-[1rem]">
+              <h1 className="mt-[1rem]">From date</h1>
+
+              <AppDatePicker
+                className="mt-[1rem]"
+                value={fromDate}
+                setValue={setFromDate}
+              />
+              <h1 className="mt-[1rem]">To date</h1>
+
+              <AppDatePicker
+                className="mt-[1rem] mb-[1rem]"
+                value={toDate}
+                setValue={setToDate}
+              />
+            </div>
+
+            <Separate marginTop="0" />
 
             <div className="p-[1rem]">
               <h1 className="mt-[1rem]">Genres</h1>

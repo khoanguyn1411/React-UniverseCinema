@@ -7,10 +7,10 @@ type TProps = {
   setRange: React.Dispatch<React.SetStateAction<number[]>>;
   minDistance: number;
   marks?: any;
-  lableShow: string;
+  labelShow: string;
   minMax: number[];
   step: number;
-  lableShowSuffix?: string;
+  labelShowSuffix?: string;
 };
 
 const WrapperModule = styled.div`
@@ -48,13 +48,13 @@ export const RangeSlider: FunctionComponent<TProps> = ({
   setRange,
   minDistance,
   marks,
-  lableShow,
+  labelShow,
   minMax,
   step,
-  lableShowSuffix = "",
+  labelShowSuffix = "",
 }) => {
   function valueLabelFormat(value: number) {
-    return `${lableShow}: ${value}${lableShowSuffix}`;
+    return `${labelShow}: ${value}${labelShowSuffix}`;
   }
   const handleChange = (
     event: Event,

@@ -5,7 +5,7 @@ type TProps = {
   className?: string;
 };
 
-export const Seperate: FunctionComponent<TProps> = ({
+export const Separate: FunctionComponent<TProps> = ({
   marginTop = "2",
   className = "",
 }) => {

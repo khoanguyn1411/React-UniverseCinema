@@ -1,4 +1,4 @@
-import { Modal, NoResult, Seperate, Title } from "@/components";
+import { Modal, NoResult, Separate, Title } from "@/components";
 import { funcs } from "@/constants";
 import { useCallAPI } from "@/hooks";
 import { ITrailer } from "@/types";
@@ -66,7 +66,7 @@ export const MovieTrailers: FunctionComponent<TProps.withType> = ({
       ) : (
         <NoResult>There is no trailer available yet.</NoResult>
       )}
-      <Seperate />
+      <Separate />
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { ItemSeason, Seperate, Title } from "@/components";
+import { ItemSeason, Separate, Title } from "@/components";
 import { FunctionComponent, useState } from "react";
 import { TProps } from "..";
 
@@ -30,7 +30,7 @@ export const MovieSeasons: FunctionComponent<TProps.noType> = ({ movie }) => {
             {!isExpanded ? "View all seasons" : "Collapse"}
           </h1>
         )}
-        <Seperate />
+        <Separate />
       </div>
     )
   );

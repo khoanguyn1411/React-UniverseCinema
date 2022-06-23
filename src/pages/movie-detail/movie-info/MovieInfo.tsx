@@ -35,10 +35,16 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
       <div className="relative bg-black">
         <ImageContainer
           className="absolute w-full h-full"
-          url={configs.api.IMAGE_URL_LARGE + movie.backdrop_path}
+          url={
+            configs.api.IMAGE_URL_LARGE +
+            (movie.backdrop_path || movie.poster_path)
+          }
         >
           <img
-            src={configs.api.IMAGE_URL_LARGE + movie.backdrop_path}
+            src={
+              configs.api.IMAGE_URL_LARGE +
+              (movie.backdrop_path || movie.poster_path)
+            }
             alt={`bd_${movie.name || movie.original_title}`}
             className="h-full"
           />
@@ -54,11 +60,17 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
 
         <div className="wrapper min-h-[100vh] py-[2rem] max-h-[90rem] w-full flex items-center relative z-20">
           <ImageContainer
-            url={configs.api.IMAGE_URL_LARGE + movie.poster_path}
+            url={
+              configs.api.IMAGE_URL_LARGE +
+              (movie.poster_path || movie.backdrop_path)
+            }
             className="h-[46rem] w-[32rem] bg-orange rounded-[1rem]"
           >
             <img
-              src={configs.api.IMAGE_URL_LARGE + movie.poster_path}
+              src={
+                configs.api.IMAGE_URL_LARGE +
+                (movie.poster_path || movie.backdrop_path)
+              }
               alt={`${movie.name || movie.original_title}`}
             />
           </ImageContainer>
@@ -96,7 +108,7 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
                   {(movie.release_date && (
                     <>
                       <span className="font-normal">Release date:</span>
-                      <span> {movie.release_date} </span>
+                      <span> {funcs.formatDate(movie.release_date)} </span>
                     </>
                   )) ||
                     (movie.first_air_date && (

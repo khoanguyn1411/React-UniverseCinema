@@ -3,7 +3,7 @@ import {
   Button,
   ItemActor,
   NoResult,
-  Seperate,
+  Separate,
   SwiperApp,
   Title,
 } from "@/components";
@@ -125,11 +125,11 @@ export const MovieCredit: FunctionComponent<TProps.withType> = ({
               ))}
             </SwiperApp>
           </div>
-          <Seperate />
         </div>
       ) : (
         <NoResult>We could not find any actors.</NoResult>
       )}
+      <Separate />
     </>
   );
 };
