@@ -114,7 +114,7 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
                     (movie.first_air_date && (
                       <>
                         <span className="font-normal">First air date:</span>
-                        <span> {movie.first_air_date} </span>
+                        <span> {funcs.formatDate(movie.first_air_date)} </span>
                       </>
                     ))}
                   {movie.origin_country && (

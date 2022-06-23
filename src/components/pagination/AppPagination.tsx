@@ -20,7 +20,7 @@ type TProps = {
 };
 
 const WrapperModule = styled.div`
-  .css-syf9wd-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+  .Mui-selected {
     background-color: var(--yellow-color) !important;
   }
   .MuiButtonBase-root {
