@@ -3,55 +3,58 @@ import { configs } from "@/configs";
 import { funcs } from "@/constants";
 import { useCallAPI } from "@/hooks";
 import { IGenres } from "@/types";
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ItemContainer } from "./item-container/ItemContainer";
 import { ItemFilter } from "./item-filter/ItemFilter";
+import { IFilterCondition } from "./type";
 
 export const Movie: FunctionComponent = () => {
   const { filter } = useParams();
 
-  const filterInfo = (function () {
-    switch (filter) {
-      case configs.routes.all.replace("/", ""):
-        return {
-          title: "All movies",
-          routeAPI: "/discover/movie",
-          root: configs.routes.all,
-        };
-      case configs.routes.upcoming.replace("/", ""):
-        return {
-          title: "Upcoming movies",
-          routeAPI: "upcoming",
-          root: configs.routes.upcoming,
-        };
-      case configs.routes.popular.replace("/", ""):
-        return {
-          title: "Popular movies",
-          routeAPI: "popular",
-          root: configs.routes.popular,
-        };
-      case configs.routes.toprated.replace("/", ""):
-        return {
-          title: "Top rated movies",
-          routeAPI: "top_rated",
-          root: configs.routes.toprated,
-        };
-      case configs.routes.nowplaying.replace("/", ""):
-        return {
-          title: "Now playing movies",
-          routeAPI: "now_playing",
-          root: configs.routes.nowplaying,
-        };
-      default:
-        return {
-          title: "All movies",
-          routeAPI: "/discover/movie?",
-          root: configs.routes.all,
-        };
-    }
-  })();
-
+  const filterInfo = useMemo(
+    function () {
+      switch (filter) {
+        case configs.routes.all.replace("/", ""):
+          return {
+            title: "All movies",
+            routeAPI: "/discover/movie",
+            root: configs.routes.all,
+          };
+        case configs.routes.upcoming.replace("/", ""):
+          return {
+            title: "Upcoming movies",
+            routeAPI: "upcoming",
+            root: configs.routes.upcoming,
+          };
+        case configs.routes.popular.replace("/", ""):
+          return {
+            title: "Popular movies",
+            routeAPI: "popular",
+            root: configs.routes.popular,
+          };
+        case configs.routes.toprated.replace("/", ""):
+          return {
+            title: "Top rated movies",
+            routeAPI: "top_rated",
+            root: configs.routes.toprated,
+          };
+        case configs.routes.nowplaying.replace("/", ""):
+          return {
+            title: "Now playing movies",
+            routeAPI: "now_playing",
+            root: configs.routes.nowplaying,
+          };
+        default:
+          return {
+            title: "All movies",
+            routeAPI: "/discover/movie?",
+            root: configs.routes.all,
+          };
+      }
+    },
+    [filter]
+  );
   const genres: IGenres[] = useCallAPI(
     funcs.getAPI("/genre/movie/list?", "")
   )?.genres;
@@ -67,6 +70,7 @@ export const Movie: FunctionComponent = () => {
   const [activeSort, setActiveSort] = useState<number | string>(list[0]);
   const [rangeScore, setRangeScore] = useState<number[]>([0, 10]);
   const [rangeTime, setRangeTime] = useState<number[]>([0, 360]);
+
   const marksScore = [
     {
       value: 0,
@@ -134,8 +138,29 @@ export const Movie: FunctionComponent = () => {
     },
   ];
 
-  const [filterGenres, setFilterGenres] = useState<IGenres[]>([]);
-  const handleSetFilterGenres = () => {};
+  const [filterGenresList, setFilterGenresList] = useState<number[]>([]);
+  const handleSetFilterGenresList = (item: number) => {
+    setFilterGenresList((prev) => {
+      if (prev.includes(item)) {
+        return prev.filter((initItem) => item !== initItem);
+      } else {
+        return [...prev, item];
+      }
+    });
+  };
+
+  const [filterCondition, setFilterCondition] = useState<IFilterCondition>({
+    rangeScore,
+    rangeTime,
+    filterGenresList,
+  });
+  const handleSetFilterCondition = () => {
+    setFilterCondition({
+      rangeScore,
+      rangeTime,
+      filterGenresList,
+    });
+  };
 
   return (
     <div className="wrapper flex flex-col">
@@ -178,7 +203,7 @@ export const Movie: FunctionComponent = () => {
                 genres.length > 0 &&
                 genres.map((item) => {
                   const getStyle = () => {
-                    if (filterGenres.includes(item)) {
+                    if (filterGenresList.includes(item.id)) {
                       return { orange: true };
                     } else {
                       return { strokeBlack: true, hover: true };
@@ -189,7 +214,7 @@ export const Movie: FunctionComponent = () => {
                       {...getStyle()}
                       className="mb-[1rem] mr-[0.5rem] py-[0.2rem] px-[1rem]"
                       key={item.id}
-                      onClick={handleSetFilterGenres}
+                      onClick={() => handleSetFilterGenresList(item.id)}
                     >
                       {item.name}
                     </Button>
@@ -197,13 +222,22 @@ export const Movie: FunctionComponent = () => {
                 })}
             </div>
 
-            <Button hover className="w-full mt-[1.5rem]">
+            <Button
+              hover
+              className="w-full mt-[1.5rem]"
+              onClick={handleSetFilterCondition}
+            >
               Search
             </Button>
           </ItemFilter>
         </div>
         <div className="col-span-3 mb-[5rem]">
-          {<ItemContainer filterInfo={filterInfo} />}
+          {
+            <ItemContainer
+              filterCondition={filterCondition}
+              filterInfo={filterInfo}
+            />
+          }
         </div>
       </div>
     </div>

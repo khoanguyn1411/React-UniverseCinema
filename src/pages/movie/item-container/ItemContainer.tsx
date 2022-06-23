@@ -4,17 +4,25 @@ import { useCallAPI } from "@/hooks";
 import { IMovie } from "@/types";
 import { FunctionComponent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { IFilterCondition } from "../type";
+import { memo } from "react";
 
 interface IFilterInfo {
   title: string;
   routeAPI: string;
   root: string;
 }
+
 type TProps = {
   filterInfo: IFilterInfo;
+  filterCondition: IFilterCondition;
 };
 
-export const ItemContainer: FunctionComponent<TProps> = ({ filterInfo }) => {
+const ItemContainerInit: FunctionComponent<TProps> = ({
+  filterInfo,
+  filterCondition,
+}) => {
+  console.log(filterCondition);
   const { filter, page } = useParams();
   const [activePage, setActivePage] = useState<number>(
     page ? Number.parseInt(page) : 1
@@ -29,9 +37,9 @@ export const ItemContainer: FunctionComponent<TProps> = ({ filterInfo }) => {
     [filterInfo, activePage]
   );
 
-  console.log(
-    funcs.getAPI("/movie/popular?", "&with_genres=35&language=en-US&page=1")
-  );
+  // console.log(
+  //   funcs.getAPI("/movie/popular?", "&with_genres=35&language=en-US&page=1")
+  // );
 
   useEffect(() => {
     setActivePage(page ? Number.parseInt(page) : 1);
@@ -61,3 +69,5 @@ export const ItemContainer: FunctionComponent<TProps> = ({ filterInfo }) => {
     </div>
   );
 };
+
+export const ItemContainer = memo(ItemContainerInit);
