@@ -1,4 +1,4 @@
-import { Button, RangeSlider, Select } from "@/components";
+import { Button, RangeSlider, Select, Seperate } from "@/components";
 import { configs } from "@/configs";
 import { funcs } from "@/constants";
 import { useCallAPI } from "@/hooks";
@@ -161,6 +161,16 @@ export const Movie: FunctionComponent = () => {
       filterGenresList,
     });
   };
+  const handleClearFilter = () => {
+    setRangeScore([0, 10]);
+    setRangeTime([0, 360]);
+    setFilterGenresList([]);
+    setFilterCondition({
+      rangeScore: [0, 10],
+      rangeTime: [0, 360],
+      filterGenresList: [],
+    });
+  };
 
   return (
     <div className="wrapper flex flex-col">
@@ -170,65 +180,91 @@ export const Movie: FunctionComponent = () => {
       <div className="grid grid-cols-4 mt-[2rem]">
         <div className="col-span-1 flex flex-col">
           <ItemFilter title="Sort by">
-            <Select active={activeSort} setActive={setActiveSort} list={list} />
+            <div className="p-[1rem]">
+              <Select
+                active={activeSort}
+                setActive={setActiveSort}
+                list={list}
+              />
+            </div>
           </ItemFilter>
 
           <ItemFilter title="Filters">
-            <h1>User score</h1>
-            <RangeSlider
-              range={rangeScore}
-              setRange={setRangeScore}
-              minDistance={1}
-              marks={marksScore}
-              lableShow="Rated"
-              minMax={[0, 10]}
-              step={1}
-            />
-
-            <h1>Run time</h1>
-            <RangeSlider
-              range={rangeTime}
-              setRange={setRangeTime}
-              minDistance={10}
-              lableShow="Time"
-              step={10}
-              minMax={[0, 360]}
-              lableShowSuffix=" minute"
-              marks={marksTime}
-            />
-
-            <h1>Genres</h1>
-            <div className="mt-[1rem]">
-              {genres &&
-                genres.length > 0 &&
-                genres.map((item) => {
-                  const getStyle = () => {
-                    if (filterGenresList.includes(item.id)) {
-                      return { orange: true };
-                    } else {
-                      return { strokeBlack: true, hover: true };
-                    }
-                  };
-                  return (
-                    <Button
-                      {...getStyle()}
-                      className="mb-[1rem] mr-[0.5rem] py-[0.2rem] px-[1rem]"
-                      key={item.id}
-                      onClick={() => handleSetFilterGenresList(item.id)}
-                    >
-                      {item.name}
-                    </Button>
-                  );
-                })}
+            <div className="p-[1rem]">
+              <h1>User score</h1>
+              <RangeSlider
+                range={rangeScore}
+                setRange={setRangeScore}
+                minDistance={1}
+                marks={marksScore}
+                lableShow="Rated"
+                minMax={[0, 10]}
+                step={1}
+              />
             </div>
 
-            <Button
-              hover
-              className="w-full mt-[1.5rem]"
-              onClick={handleSetFilterCondition}
-            >
-              Search
-            </Button>
+            <Seperate marginTop="0" />
+            <div className="p-[1rem]">
+              <h1 className="mt-[1rem]">Run time</h1>
+              <RangeSlider
+                range={rangeTime}
+                setRange={setRangeTime}
+                minDistance={10}
+                lableShow="Time"
+                step={10}
+                minMax={[0, 360]}
+                lableShowSuffix=" minute"
+                marks={marksTime}
+              />
+            </div>
+
+            <Seperate marginTop="0" />
+
+            <div className="p-[1rem]">
+              <h1 className="mt-[1rem]">Genres</h1>
+              <div className="mt-[1rem]">
+                {genres &&
+                  genres.length > 0 &&
+                  genres.map((item) => {
+                    const getStyle = () => {
+                      if (filterGenresList.includes(item.id)) {
+                        return { orange: true };
+                      } else {
+                        return { strokeBlack: true, hover: true };
+                      }
+                    };
+                    return (
+                      <Button
+                        {...getStyle()}
+                        className="mb-[1rem] mr-[0.5rem] py-[0.2rem] px-[1rem]"
+                        key={item.id}
+                        onClick={() => handleSetFilterGenresList(item.id)}
+                      >
+                        {item.name}
+                      </Button>
+                    );
+                  })}
+              </div>
+            </div>
+
+            <div className="px-[1rem] pb-[1rem]">
+              <Button
+                hover
+                strokeBlack
+                className="mb-[1rem] w-full"
+                onClick={handleClearFilter}
+              >
+                Clear filter
+              </Button>
+
+              <Button
+                hover
+                className="w-full"
+                onClick={handleSetFilterCondition}
+              >
+                Search
+              </Button>
+            </div>
           </ItemFilter>
         </div>
         <div className="col-span-3 mb-[5rem]">

@@ -1,4 +1,4 @@
-import { AppPagination, ItemMovie } from "@/components";
+import { AppPagination, ItemMovie, NoResult } from "@/components";
 import { funcs } from "@/constants";
 import { useCallAPI } from "@/hooks";
 import { IMovie } from "@/types";
@@ -22,24 +22,67 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
   filterInfo,
   filterCondition,
 }) => {
-  console.log(filterCondition);
   const { filter, page } = useParams();
   const [activePage, setActivePage] = useState<number>(
     page ? Number.parseInt(page) : 1
   );
+  const [totalPage, setTotalPage] = useState<number>(500);
+
+  const getGenres = () => {
+    const listGenres = filterCondition.filterGenresList;
+    if (listGenres.length === 0) return "";
+    if (listGenres.length === 1) {
+      return `with_genres=${listGenres[0]}`;
+    } else {
+      const arrConditions = listGenres
+        .map((item, index) => {
+          if (index !== listGenres.length - 1) return item + ",";
+          else return item;
+        })
+        .join("");
+
+      return `with_genres=${arrConditions}`;
+    }
+  };
+
+  const getScore = () => {
+    const minScore = filterCondition.rangeScore[0];
+    const maxScore = filterCondition.rangeScore[1];
+    return `vote_average.gte=${minScore}&vote_average.lte=${maxScore}`;
+  };
+
+  const getRuntime = () => {
+    const minTime = filterCondition.rangeTime[0];
+    const maxTime = filterCondition.rangeTime[1];
+    return `with_runtime.gte=${minTime}&with_runtime.lte=${maxTime}`;
+  };
+
   const result = useCallAPI(
     filterInfo.routeAPI === "/discover/movie"
-      ? funcs.getAPI(`/discover/movie?`, `&language=en-US&page=${activePage}`)
+      ? funcs.getAPI(
+          `/discover/movie?`,
+          `&${getGenres()}&language=en-US&page=${activePage}&${getScore()}&${getRuntime()}`
+        )
       : funcs.getAPI(
           `/movie/${filterInfo.routeAPI}?`,
-          `&language=en-US&page=${activePage}`
+          `&${getGenres()}&language=en-US&page=${activePage}&${getScore()}&${getRuntime()}`
         ),
-    [filterInfo, activePage]
+    [filterInfo, activePage, filterCondition]
   );
 
-  // console.log(
-  //   funcs.getAPI("/movie/popular?", "&with_genres=35&language=en-US&page=1")
-  // );
+  useEffect(() => {
+    setActivePage(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filterCondition]);
+
+  useEffect(() => {
+    if (result?.total_pages < 500) {
+      console.log(result?.total_pages);
+      setTotalPage(result?.total_pages);
+    } else {
+      setTotalPage(500);
+    }
+  }, [result?.total_pages]);
 
   useEffect(() => {
     setActivePage(page ? Number.parseInt(page) : 1);
@@ -49,8 +92,8 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
   const movies: IMovie[] = result?.results;
 
   return (
-    <div>
-      <div className="grid grid-cols-5 ml-[2rem] gap-4 gap-y-8">
+    <div className="ml-[2rem]">
+      <div className="grid grid-cols-5 gap-4 gap-y-8 ">
         {movies &&
           movies.length > 0 &&
           movies.map((item, index) => (
@@ -58,14 +101,20 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
           ))}
       </div>
 
-      <div className="flex justify-center mt-[5rem]">
-        <AppPagination
-          pageNumber={500}
-          activePage={activePage}
-          setActivePage={setActivePage}
-          filterInfo={filterInfo}
-        />
-      </div>
+      {result?.total_pages === 0 && (
+        <NoResult>We could not find any results</NoResult>
+      )}
+
+      {result?.total_pages > 1 && (
+        <div className="flex justify-center mt-[5rem]">
+          <AppPagination
+            pageNumber={totalPage}
+            activePage={activePage}
+            setActivePage={setActivePage}
+            filterInfo={filterInfo}
+          />
+        </div>
+      )}
     </div>
   );
 };

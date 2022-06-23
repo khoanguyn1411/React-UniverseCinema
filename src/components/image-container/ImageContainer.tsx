@@ -43,7 +43,7 @@ export const ImageContainer: React.FC<TProps> = ({
       {getUrl().boolean ? (
         children
       ) : (
-        <img src={imgNoAvatar} alt={"No poster img"} />
+        <img src={imgNoAvatar} alt={"No poster img"} className="h-full" />
       )}
     </div>
   );

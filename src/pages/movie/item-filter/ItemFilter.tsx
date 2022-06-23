@@ -20,8 +20,8 @@ export const ItemFilter: FunctionComponent<TProps> = ({ children, title }) => {
       </div>
       {isShowContent && (
         <div>
-          <Seperate marginTop={1} />
-          <div className="p-[1rem]">{children}</div>
+          <Seperate marginTop={"1"} />
+          <div>{children}</div>
         </div>
       )}
     </div>
