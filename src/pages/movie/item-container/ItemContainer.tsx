@@ -24,7 +24,7 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
   filterCondition,
   sortBy,
 }) => {
-  const { filter, page } = useParams();
+  const { category, filter, page } = useParams();
   const [activePage, setActivePage] = useState<number>(
     page ? Number.parseInt(page) : 1
   );
@@ -71,23 +71,41 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
     return `&release_date.lte=${funcs.formatDateWithoutSep(date)}`;
   };
 
+  // "Popularity Descending",
+  // "Popularity Ascending",
+  // "Rating Descending",
+  // "Rating Ascending",
+  // "Title (A-Z)",
+  // "Title (Z-A)",
+
+  const getSortBy = () => {
+    switch (sortBy) {
+      case "Popularity Descending":
+        return "popularity.desc";
+      case "Popularity Ascending":
+        return "popularity.asc";
+      case "Rating Descending":
+        return "vote_average.desc";
+      case "Rating Ascending":
+        return "vote_average.asc";
+      case "Title (A-Z)":
+        return "original_title.asc";
+      case "Title (Z-A)":
+        return "original_title.desc";
+    }
+  };
+
   const result = useCallAPI(
-    filterInfo.routeAPI === "/discover/movie"
+    filterInfo.routeAPI === `/discover/${category}`
       ? funcs.getAPI(
-          `/discover/movie?`,
-          `&${getGenres()}&language=en-US&page=${activePage}${getReleaseDateFrom()}${getReleaseDateTo()}&${getScore()}&${getRuntime()}`
+          `/discover/${category}?`,
+          `&${getGenres()}&language=en-US&sort_by=${getSortBy()}&page=${activePage}${getReleaseDateFrom()}${getReleaseDateTo()}&${getScore()}&${getRuntime()}`
         )
       : funcs.getAPI(
-          `/movie/${filterInfo.routeAPI}?`,
-          `&${getGenres()}&language=en-US&page=${activePage}${getReleaseDateFrom()}${getReleaseDateTo()}&${getScore()}&${getRuntime()}`
+          `/${category}/${filterInfo.routeAPI}?`,
+          `&${getGenres()}&language=en-US&sort_by=${getSortBy()}&page=${activePage}${getReleaseDateFrom()}${getReleaseDateTo()}&${getScore()}&${getRuntime()}`
         ),
-    [filterInfo, activePage, filterCondition]
-  );
-  console.log(
-    funcs.getAPI(
-      `/discover/movie?`,
-      `&${getGenres()}&language=en-US&page=${activePage}${getReleaseDateFrom()}${getReleaseDateTo()}&${getScore()}&${getRuntime()}`
-    )
+    [filterInfo, activePage, filterCondition, sortBy]
   );
 
   useEffect(() => {
@@ -97,7 +115,6 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
 
   useEffect(() => {
     if (result?.total_pages < 500) {
-      console.log(result?.total_pages);
       setTotalPage(result?.total_pages);
     } else {
       setTotalPage(500);

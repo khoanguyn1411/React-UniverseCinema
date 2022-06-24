@@ -6,7 +6,7 @@ import {
   Separate,
 } from "@/components";
 import { configs } from "@/configs";
-import { funcs } from "@/constants";
+import { funcs, values } from "@/constants";
 import { useCallAPI } from "@/hooks";
 import { IGenres } from "@/types";
 import { FunctionComponent, useMemo, useState } from "react";
@@ -16,53 +16,56 @@ import { ItemFilter } from "./item-filter/ItemFilter";
 import { IFilterCondition } from "./type";
 
 export const Movie: FunctionComponent = () => {
-  const { filter } = useParams();
+  const { category, filter } = useParams();
 
   const filterInfo = useMemo(
     function () {
-      switch (filter) {
-        case configs.routes.all.replace("/", ""):
-          return {
-            title: "All movies",
-            routeAPI: "/discover/movie",
-            root: configs.routes.all,
-          };
-        case configs.routes.upcoming.replace("/", ""):
-          return {
-            title: "Upcoming movies",
-            routeAPI: "upcoming",
-            root: configs.routes.upcoming,
-          };
-        case configs.routes.popular.replace("/", ""):
-          return {
-            title: "Popular movies",
-            routeAPI: "popular",
-            root: configs.routes.popular,
-          };
-        case configs.routes.toprated.replace("/", ""):
-          return {
-            title: "Top rated movies",
-            routeAPI: "top_rated",
-            root: configs.routes.toprated,
-          };
-        case configs.routes.nowplaying.replace("/", ""):
-          return {
-            title: "Now playing movies",
-            routeAPI: "now_playing",
-            root: configs.routes.nowplaying,
-          };
-        default:
-          return {
-            title: "All movies",
-            routeAPI: "/discover/movie?",
-            root: configs.routes.all,
-          };
+      if (category === values.MEDIA_TYPE.MOVIE) {
+        switch (filter) {
+          case configs.routes.all.replace("/", ""):
+            return {
+              title: "All movies",
+              routeAPI: "/discover/movie",
+              root: configs.routes.all,
+            };
+          case configs.routes.upcoming.replace("/", ""):
+            return {
+              title: "Upcoming movies",
+              routeAPI: "upcoming",
+              root: configs.routes.upcoming,
+            };
+          case configs.routes.popular.replace("/", ""):
+            return {
+              title: "Popular movies",
+              routeAPI: "popular",
+              root: configs.routes.popular,
+            };
+          case configs.routes.toprated.replace("/", ""):
+            return {
+              title: "Top rated movies",
+              routeAPI: "top_rated",
+              root: configs.routes.toprated,
+            };
+          case configs.routes.nowplaying.replace("/", ""):
+            return {
+              title: "Now playing movies",
+              routeAPI: "now_playing",
+              root: configs.routes.nowplaying,
+            };
+          default:
+            return {
+              title: "All movies",
+              routeAPI: "/discover/movie?",
+              root: configs.routes.all,
+            };
+        }
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [filter]
   );
   const genres: IGenres[] = useCallAPI(
-    funcs.getAPI("/genre/movie/list?", "")
+    funcs.getAPI(`/genre/${category}/list?`, "")
   )?.genres;
   const list = [
     "Popularity Descending",
