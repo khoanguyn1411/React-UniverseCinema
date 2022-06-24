@@ -21,7 +21,7 @@ export const Select: FunctionComponent<TProps> = ({
     const elementList = listRef?.current;
     const elementDisplay = displayRef?.current;
     if (elementList && elementDisplay) {
-      const handleCloseListDiv = (event) => {
+      const handleCloseListDiv = (event: Event) => {
         if (
           !elementList.contains(event.target) &&
           !elementDisplay.contains(event.target)

@@ -110,13 +110,6 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
     [filterInfo, activePage, filterCondition, sortBy, category]
   );
 
-  console.log(
-    funcs.getAPI(
-      `/${category}/${filterInfo.routeAPI}?`,
-      `&${getGenres()}&language=en-US&sort_by=${getSortBy()}&page=${activePage}${getReleaseDateFrom()}${getReleaseDateTo()}&${getScore()}&${getRuntime()}`
-    )
-  );
-
   useEffect(() => {
     setActivePage(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
