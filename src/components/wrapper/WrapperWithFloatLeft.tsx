@@ -18,6 +18,6 @@ export const WrapperModule = styled.section`
     height: 0.25rem;
     width: 40%;
     left: 0%;
-    animation: float-left 0.3s 1 forwards;
+    animation: float-left ease 0.3s 1 forwards;
   }
 `;

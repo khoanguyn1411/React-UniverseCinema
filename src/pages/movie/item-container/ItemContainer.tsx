@@ -16,11 +16,13 @@ interface IFilterInfo {
 type TProps = {
   filterInfo: IFilterInfo;
   filterCondition: IFilterCondition;
+  sortBy: string | number;
 };
 
 const ItemContainerInit: FunctionComponent<TProps> = ({
   filterInfo,
   filterCondition,
+  sortBy,
 }) => {
   const { filter, page } = useParams();
   const [activePage, setActivePage] = useState<number>(
@@ -57,17 +59,35 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
     return `with_runtime.gte=${minTime}&with_runtime.lte=${maxTime}`;
   };
 
+  const getReleaseDateFrom = () => {
+    const date = filterCondition.fromDate;
+    if (!date) return "";
+    return `&release_date.gte=${funcs.formatDateWithoutSep(date)}`;
+  };
+
+  const getReleaseDateTo = () => {
+    const date = filterCondition.toDate;
+    if (!date) return "";
+    return `&release_date.lte=${funcs.formatDateWithoutSep(date)}`;
+  };
+
   const result = useCallAPI(
     filterInfo.routeAPI === "/discover/movie"
       ? funcs.getAPI(
           `/discover/movie?`,
-          `&${getGenres()}&language=en-US&page=${activePage}&${getScore()}&${getRuntime()}`
+          `&${getGenres()}&language=en-US&page=${activePage}${getReleaseDateFrom()}${getReleaseDateTo()}&${getScore()}&${getRuntime()}`
         )
       : funcs.getAPI(
           `/movie/${filterInfo.routeAPI}?`,
-          `&${getGenres()}&language=en-US&page=${activePage}&${getScore()}&${getRuntime()}`
+          `&${getGenres()}&language=en-US&page=${activePage}${getReleaseDateFrom()}${getReleaseDateTo()}&${getScore()}&${getRuntime()}`
         ),
     [filterInfo, activePage, filterCondition]
+  );
+  console.log(
+    funcs.getAPI(
+      `/discover/movie?`,
+      `&${getGenres()}&language=en-US&page=${activePage}${getReleaseDateFrom()}${getReleaseDateTo()}&${getScore()}&${getRuntime()}`
+    )
   );
 
   useEffect(() => {

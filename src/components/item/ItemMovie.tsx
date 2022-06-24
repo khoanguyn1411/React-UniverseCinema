@@ -23,9 +23,7 @@ export const ItemMovie: React.FC<TProps> = ({
   isSwiper = false,
   noLineLimit = false,
 }) => {
-  const pathImg = `${configs.api.IMAGE_URL_SMALL}/${
-    movie.poster_path || movie.backdrop_path
-  }`;
+  const pathImg = `${configs.api.IMAGE_URL_SMALL}/${movie.poster_path}`;
   const dispacth = useAppDispatch();
   const navigate = useNavigate();
   const handleSwitchToDetailMovie = () => {

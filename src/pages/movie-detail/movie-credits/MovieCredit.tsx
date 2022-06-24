@@ -77,7 +77,7 @@ export const MovieCredit: FunctionComponent<TProps.withType> = ({
     }
   };
 
-  const casts: IActors[] = credits?.cast.slice(0, 15);
+  const casts: IActors[] = credits?.cast?.slice(0, 15);
   return (
     <>
       <div className="flex justify-between items-center mt-[2rem] ">

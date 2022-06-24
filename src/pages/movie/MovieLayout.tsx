@@ -178,6 +178,8 @@ export const Movie: FunctionComponent = () => {
     setRangeScore([0, 10]);
     setRangeTime([0, 360]);
     setFilterGenresList([]);
+    setFromDate(null);
+    setToDate(null);
     setFilterCondition({
       rangeScore: [0, 10],
       rangeTime: [0, 360],
@@ -186,8 +188,6 @@ export const Movie: FunctionComponent = () => {
       toDate: null,
     });
   };
-
-  console.log(fromDate?.getDate());
 
   return (
     <div className="wrapper flex flex-col">
@@ -308,6 +308,7 @@ export const Movie: FunctionComponent = () => {
             <ItemContainer
               filterCondition={filterCondition}
               filterInfo={filterInfo}
+              sortBy={activeSort}
             />
           }
         </div>

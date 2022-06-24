@@ -11,7 +11,7 @@ import { MovieTrailers } from "./movie-trailers/MovieTrailers";
 
 export const MovieDetail: FunctionComponent = () => {
   const location = useLocation();
-  const arrChar = funcs.splitMulti(location.pathname, ["/"]);
+  const arrChar = funcs.splitMulti(location.pathname + location.search, ["/"]);
 
   const id = funcs.splitMulti(arrChar[2], ["-"])[0];
 
@@ -20,6 +20,7 @@ export const MovieDetail: FunctionComponent = () => {
     const sliceArr = arrChar.slice(2, arrChar.length);
     name = decodeURI(sliceArr.join("/"));
     // name = decodeURI(funcs.splitMulti(name, ["-"])[1]).toLowerCase();
+
     name = funcs
       .splitMulti(name, ["-"])
       .slice(1, funcs.splitMulti(name, ["-"]).length)
@@ -39,7 +40,6 @@ export const MovieDetail: FunctionComponent = () => {
         let result: any;
         let res = await fetch(url);
         result = await res.json();
-        // console.log(name);
         // console.log(result.name);
         // console.log(result.original_title);
         if (

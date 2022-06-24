@@ -58,7 +58,7 @@ function checkPath(page: string): string {
   return root;
 }
 
-function formatDate(date: string): string {
+function formatDate(date: string | Date): string {
   const dateInit = new Date(date);
   const year = new Intl.DateTimeFormat("en", { year: "numeric" }).format(
     dateInit
@@ -70,6 +70,20 @@ function formatDate(date: string): string {
     dateInit
   );
   return `${day}/${month}/${year}`;
+}
+
+function formatDateWithoutSep(date: string | Date): string {
+  const dateInit = new Date(date);
+  const year = new Intl.DateTimeFormat("en", { year: "numeric" }).format(
+    dateInit
+  );
+  const month = new Intl.DateTimeFormat("en", { month: "2-digit" }).format(
+    dateInit
+  );
+  const day = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(
+    dateInit
+  );
+  return `${year}-${month}-${day}`;
 }
 
 function getUrl(): URLType {
@@ -90,4 +104,5 @@ export const funcs = {
   getAPI,
   getYear,
   formatDate,
+  formatDateWithoutSep,
 };
