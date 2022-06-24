@@ -45,11 +45,11 @@ export const tabsNavConfig: TTabs.ITabsObject[] = [
       },
       {
         title: "Airing Today",
-        to: routes.tvShow + routes.nowplaying,
+        to: routes.tvShow + routes.airingToday,
       },
       {
         title: "On TV",
-        to: routes.tvShow + routes.popular,
+        to: routes.tvShow + routes.onTV,
       },
       {
         title: "Top rated",

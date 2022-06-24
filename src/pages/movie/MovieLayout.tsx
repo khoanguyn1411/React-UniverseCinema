@@ -67,13 +67,13 @@ export const Movie: FunctionComponent = () => {
               routeAPI: "/discover/tv",
               root: configs.routes.all,
             };
-          case configs.routes.upcoming.replace("/", ""):
+          case configs.routes.airingToday.replace("/", ""):
             return {
               title: "Airing Today",
               routeAPI: "airing_today",
               root: configs.routes.airingToday,
             };
-          case configs.routes.popular.replace("/", ""):
+          case configs.routes.onTV.replace("/", ""):
             return {
               title: "On TV",
               routeAPI: "on_the_air",
@@ -234,15 +234,17 @@ export const Movie: FunctionComponent = () => {
       </div>
       <div className="grid grid-cols-4 mt-[2rem]">
         <div className="col-span-1 flex flex-col">
-          <ItemFilter title="Sort by">
-            <div className="p-[1rem]">
-              <Select
-                active={activeSort}
-                setActive={setActiveSort}
-                list={list}
-              />
-            </div>
-          </ItemFilter>
+          {filter === configs.routes.all.replace("/", "") && (
+            <ItemFilter title="Sort by">
+              <div className="p-[1rem]">
+                <Select
+                  active={activeSort}
+                  setActive={setActiveSort}
+                  list={list}
+                />
+              </div>
+            </ItemFilter>
+          )}
 
           <ItemFilter title="Filters">
             <div className="p-[1rem]">

@@ -97,8 +97,6 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
     }
   };
 
-  console.log(category);
-
   const result = useCallAPI(
     filterInfo.routeAPI === `/discover/${category}`
       ? funcs.getAPI(
@@ -110,6 +108,13 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
           `&${getGenres()}&language=en-US&sort_by=${getSortBy()}&page=${activePage}${getReleaseDateFrom()}${getReleaseDateTo()}&${getScore()}&${getRuntime()}`
         ),
     [filterInfo, activePage, filterCondition, sortBy, category]
+  );
+
+  console.log(
+    funcs.getAPI(
+      `/${category}/${filterInfo.routeAPI}?`,
+      `&${getGenres()}&language=en-US&sort_by=${getSortBy()}&page=${activePage}${getReleaseDateFrom()}${getReleaseDateTo()}&${getScore()}&${getRuntime()}`
+    )
   );
 
   useEffect(() => {
