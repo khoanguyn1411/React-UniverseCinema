@@ -2,7 +2,7 @@ import React from "react";
 import { Pagination } from "@mui/material";
 import styled from "styled-components";
 import { FunctionComponent } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { configs } from "@/configs";
 
@@ -39,12 +39,13 @@ export const AppPagination: FunctionComponent<TProps> = ({
   filterInfo,
 }) => {
   const navigate = useNavigate();
+  const { category } = useParams();
   const handleSwitchPage = (e: React.ChangeEvent<unknown>, page: number) => {
     setActivePage(page);
   };
   useEffect(() => {
     navigate(
-      `${configs.routes.movie}${filterInfo.root}${
+      `/${category}${filterInfo.root}${
         activePage !== 1 ? "/" + activePage : ""
       }`
     );

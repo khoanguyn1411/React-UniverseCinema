@@ -92,8 +92,12 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
         return "original_title.asc";
       case "Title (Z-A)":
         return "original_title.desc";
+      default:
+        return "popularity.desc";
     }
   };
+
+  console.log(category);
 
   const result = useCallAPI(
     filterInfo.routeAPI === `/discover/${category}`
@@ -105,13 +109,13 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
           `/${category}/${filterInfo.routeAPI}?`,
           `&${getGenres()}&language=en-US&sort_by=${getSortBy()}&page=${activePage}${getReleaseDateFrom()}${getReleaseDateTo()}&${getScore()}&${getRuntime()}`
         ),
-    [filterInfo, activePage, filterCondition, sortBy]
+    [filterInfo, activePage, filterCondition, sortBy, category]
   );
 
   useEffect(() => {
     setActivePage(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterCondition]);
+  }, [filterCondition, category]);
 
   useEffect(() => {
     if (result?.total_pages < 500) {
@@ -124,7 +128,7 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
   useEffect(() => {
     setActivePage(page ? Number.parseInt(page) : 1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filter]);
+  }, [filter, category]);
 
   const movies: IMovie[] = result?.results;
 

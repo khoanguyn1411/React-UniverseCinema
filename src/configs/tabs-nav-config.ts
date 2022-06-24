@@ -14,11 +14,11 @@ export const tabsNavConfig: TTabs.ITabsObject[] = [
     root: routes.movie,
     children: [
       {
-        title: "All movies",
+        title: "All Movies",
         to: routes.movie + routes.all,
       },
       {
-        title: "Now playing",
+        title: "Now Playing",
         to: routes.movie + routes.nowplaying,
       },
       {
@@ -30,8 +30,30 @@ export const tabsNavConfig: TTabs.ITabsObject[] = [
         to: routes.movie + routes.upcoming,
       },
       {
-        title: "Top rated",
+        title: "Top Rated",
         to: routes.movie + routes.toprated,
+      },
+    ],
+  },
+  {
+    title: "TV Shows",
+    root: routes.tvShow,
+    children: [
+      {
+        title: "All TV Shows",
+        to: routes.tvShow + routes.all,
+      },
+      {
+        title: "Airing Today",
+        to: routes.tvShow + routes.nowplaying,
+      },
+      {
+        title: "On TV",
+        to: routes.tvShow + routes.popular,
+      },
+      {
+        title: "Top rated",
+        to: routes.tvShow + routes.toprated,
       },
     ],
   },

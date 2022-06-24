@@ -14,10 +14,12 @@ export const routesPathConfig = {
   upcoming: "/upcoming",
 
   toprated: "/toprated",
-  movieDetailWithSuffix: "/movie-detail/:movie/*",
+
+  airingToday: "/airingtoday",
+  onTV: "/ontv",
+  movieDetailWithSuffix: "/detail/:movie/*",
   // movieDetailWithSuffix: "/:category/:movie/*",
-  movieDetail: "/movie-detail",
+  movieDetail: "/detail",
   tvShow: "/tv",
-  people: "/people",
   aboutUs: "/aboutus",
 };

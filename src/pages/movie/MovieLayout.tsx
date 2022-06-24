@@ -59,13 +59,48 @@ export const Movie: FunctionComponent = () => {
               root: configs.routes.all,
             };
         }
+      } else {
+        switch (filter) {
+          case configs.routes.all.replace("/", ""):
+            return {
+              title: "All TV Shows",
+              routeAPI: "/discover/tv",
+              root: configs.routes.all,
+            };
+          case configs.routes.upcoming.replace("/", ""):
+            return {
+              title: "Airing Today",
+              routeAPI: "airing_today",
+              root: configs.routes.airingToday,
+            };
+          case configs.routes.popular.replace("/", ""):
+            return {
+              title: "On TV",
+              routeAPI: "on_the_air",
+              root: configs.routes.onTV,
+            };
+          case configs.routes.toprated.replace("/", ""):
+            return {
+              title: "Top Rated TV Shows",
+              routeAPI: "top_rated",
+              root: configs.routes.toprated,
+            };
+
+          default:
+            return {
+              title: "All TV Shows",
+              routeAPI: "/discover/tv",
+              root: configs.routes.all,
+            };
+        }
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [filter]
+    [filter, category]
   );
   const genres: IGenres[] = useCallAPI(
-    funcs.getAPI(`/genre/${category}/list?`, "")
+    funcs.getAPI(`/genre/${category}/list?`, ""),
+    [category]
   )?.genres;
   const list = [
     "Popularity Descending",
