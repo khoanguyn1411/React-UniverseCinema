@@ -28,7 +28,7 @@ export const SearchBar = () => {
     setIsShowSearchFunction(!isShowSearchFunction);
   };
 
-  const dispacth = useAppDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const handleSwitchToDetailMovie = (film: IMovie) => {
     navigate(
@@ -39,7 +39,7 @@ export const SearchBar = () => {
     );
     setIsShowSearchFunction(false);
     setSearchValue("");
-    dispacth(updateActivePage());
+    dispatch(updateActivePage());
   };
 
   useEffect(() => {
@@ -50,18 +50,30 @@ export const SearchBar = () => {
         `/search/movie?`,
         `&language=en-US&query=${debounceValue}&page=1&include_adult=false`
       )
-    ).then((res) => res.json());
+    )
+      .then((res) => res.json())
+      .catch((error) => {
+        throw new Error("Something is wrong when search for movie: " + error);
+      });
 
     const getResultTV = fetch(
       funcs.getAPI(
         `/search/tv?`,
         `&language=en-US&query=${debounceValue}&page=1&include_adult=false`
       )
-    ).then((res) => res.json());
+    )
+      .then((res) => res.json())
+      .catch((error) => {
+        throw new Error("Something is wrong when search for tv: " + error);
+      });
 
-    Promise.all([getResultMovie, getResultTV]).then((result) =>
-      setResult({ movie: result[0].results, tv: result[1].results })
-    );
+    Promise.all([getResultMovie, getResultTV])
+      .then((result) =>
+        setResult({ movie: result[0].results, tv: result[1].results })
+      )
+      .catch((error) => {
+        throw new Error("Something is wrong in search API: " + error);
+      });
   }, [debounceValue]);
   useEffect(() => {
     if (!isShowSearchFunction) {
@@ -99,10 +111,10 @@ export const SearchBar = () => {
   }, [isShowSearchFunction]);
 
   return (
-    <div className="ml-[2rem] text-black">
+    <div className="ml-[2rem]">
       <Icon
         icon={iconSearch}
-        className="text-s18 cursor-pointer text-white w-[2rem] hover:text-orange transition-all"
+        className="text-s18 cursor-pointer w-[2rem] hover:text-orange transition-all"
         onClick={handleToggleSearch}
         forwardedRef={toggleRef}
       />
@@ -110,7 +122,7 @@ export const SearchBar = () => {
       {isShowSearchFunction && (
         <div
           ref={searchRef}
-          className="absolute bottom-0 translate-y-full left-0 right-0 bg-white border-black"
+          className="absolute bottom-0 text-black translate-y-full left-0 right-0 bg-white border-black"
         >
           <Separate marginTop="0" />
           <div className="wrapper py-[1.5rem] flex items-center">
@@ -127,6 +139,7 @@ export const SearchBar = () => {
             <h1
               onClick={() => {
                 setSearchValue("");
+                inputRef?.current.focus();
               }}
               className="cursor-pointer font-bold hover:text-orange transition-all"
             >
