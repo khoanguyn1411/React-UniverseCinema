@@ -46,7 +46,6 @@ export const Button: React.FC<TButton> = forwardRef(
       <button
         ref={ref}
         className={classes(
-          className,
           "min-w-max cursor-pointer border-[0.15rem] rounded-[0.6rem] transition-all font-semibold",
           {
             "px-[3rem] py-[1rem] w-[20%]": !rounded,
@@ -63,7 +62,8 @@ export const Button: React.FC<TButton> = forwardRef(
             "hover:bg-black hover:transition-all": orange && hover,
             "hover:bg-orange hover:transition-all hover:border-orange":
               black && hover,
-          }
+          },
+          className
         )}
         onClick={onClick}
       >

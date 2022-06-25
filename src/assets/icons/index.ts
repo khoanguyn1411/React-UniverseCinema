@@ -11,6 +11,9 @@ import {
   faHeart,
   faStar,
   faLink,
+  faClose,
+  faFilm,
+  faPhotoFilm,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faFacebookSquare,
@@ -36,3 +39,6 @@ export const icWatchlist = faBookmark;
 export const icStar = faStar;
 export const icTwitter = faTwitterSquare;
 export const icLink = faLink;
+export const icFilm = faFilm;
+export const icClose = faClose;
+export const icFilm2 = faPhotoFilm;

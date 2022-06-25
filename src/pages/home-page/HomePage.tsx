@@ -9,7 +9,7 @@ import { TopRate } from "./top-rate/TopRated";
 
 export const HomePage: React.FC = () => {
   return (
-    <div className="w-full">
+    <div className="w-full ">
       <TopBanner />
       <Popular />
       <TopRate />

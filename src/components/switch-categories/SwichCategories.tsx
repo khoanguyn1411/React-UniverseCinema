@@ -27,9 +27,9 @@ export const SwichCategories: React.FC<TProps> = ({
           {...getBackgroundButton(cate)}
           key={index}
           className={classNames(
-            "rounded-[0] flex-1 min-w-[14rem] py-[0.5rem] first:rounded-l-[0.4rem] last:rounded-r-[0.4rem]",
+            "rounded-[0] flex-1 w-[11rem] px-0 py-[0.1rem] first:rounded-l-[0.4rem] last:rounded-r-[0.4rem]",
             {
-              "text-orange": active === cate,
+              "text-orange rounded-[0.4rem]": active === cate,
             }
           )}
           onClick={() => setActive(cate)}
