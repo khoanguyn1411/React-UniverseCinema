@@ -1,15 +1,23 @@
-import { icClose, icFilm, Icon, icSearch } from "@/assets/icons";
+import { icClose, icFilm, icFilm2, Icon, icSearch } from "@/assets/icons";
 import { Separate } from "@/components";
+import { configs } from "@/configs";
 import { funcs } from "@/constants";
-import { useDebounce } from "@/hooks";
+import { updateActivePage } from "@/features";
+import { useAppDispatch, useDebounce } from "@/hooks";
 import { IMovie } from "@/types";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+interface IResult {
+  movie: IMovie[];
+  tv: IMovie[];
+}
 
 export const SearchBar = () => {
   const [searchValue, setSearchValue] = useState<string>("");
   const debounceValue = useDebounce(searchValue);
-  const [resultMovies, setResultMovies] = useState<IMovie[]>([]);
+  const [result, setResult] = useState<IResult>({ movie: [], tv: [] });
 
   const [isShowSearchFunction, setIsShowSearchFunction] =
     useState<Boolean>(false);
@@ -20,24 +28,41 @@ export const SearchBar = () => {
     setIsShowSearchFunction(!isShowSearchFunction);
   };
 
+  const dispacth = useAppDispatch();
+  const navigate = useNavigate();
+  const handleSwitchToDetailMovie = (film: IMovie) => {
+    navigate(
+      `${configs.routes.movieDetail}/${film.id}-${
+        (film.name && encodeURI(film.name)) ||
+        (film.original_title && encodeURI(film.original_title))
+      }`
+    );
+    setIsShowSearchFunction(false);
+    setSearchValue("");
+    dispacth(updateActivePage());
+  };
+
   useEffect(() => {
-    console.log(debounceValue);
-    if (debounceValue !== "") {
-      const getValuesAsync = async () => {
-        const res = await fetch(
-          funcs.getAPI(
-            `/search/movie?`,
-            `&language=en-US&query=${debounceValue}&page=1&include_adult=false`
-          )
-        );
+    if (debounceValue === "") return;
 
-        const resultMovies = await res.json();
-        setResultMovies(resultMovies.results);
-      };
-      getValuesAsync();
-    }
+    const getResultMovie = fetch(
+      funcs.getAPI(
+        `/search/movie?`,
+        `&language=en-US&query=${debounceValue}&page=1&include_adult=false`
+      )
+    ).then((res) => res.json());
+
+    const getResultTV = fetch(
+      funcs.getAPI(
+        `/search/tv?`,
+        `&language=en-US&query=${debounceValue}&page=1&include_adult=false`
+      )
+    ).then((res) => res.json());
+
+    Promise.all([getResultMovie, getResultTV]).then((result) =>
+      setResult({ movie: result[0].results, tv: result[1].results })
+    );
   }, [debounceValue]);
-
   useEffect(() => {
     if (!isShowSearchFunction) {
       setIconSearch(icSearch);
@@ -47,7 +72,12 @@ export const SearchBar = () => {
   }, [isShowSearchFunction]);
 
   const searchRef = useRef(null);
+  const inputRef = useRef(null);
   const toggleRef = useRef(null);
+
+  useEffect(() => {
+    inputRef?.current && inputRef.current.focus();
+  });
 
   useEffect(() => {
     const elementList = searchRef?.current;
@@ -69,10 +99,10 @@ export const SearchBar = () => {
   }, [isShowSearchFunction]);
 
   return (
-    <div className="ml-[2rem]">
+    <div className="ml-[2rem] text-black">
       <Icon
         icon={iconSearch}
-        className="text-s18 cursor-pointer w-[2rem] hover:text-orange transition-all"
+        className="text-s18 cursor-pointer text-white w-[2rem] hover:text-orange transition-all"
         onClick={handleToggleSearch}
         forwardedRef={toggleRef}
       />
@@ -89,21 +119,33 @@ export const SearchBar = () => {
               className="outline-none text-black ml-[1.5rem] flex-1"
               placeholder="Search for a movie or a tv show ..."
               value={searchValue}
+              ref={inputRef}
               onChange={(e) => {
                 setSearchValue(e.target.value);
               }}
             />
+            <h1
+              onClick={() => {
+                setSearchValue("");
+              }}
+              className="cursor-pointer font-bold hover:text-orange transition-all"
+            >
+              Clear
+            </h1>
           </div>
           <Separate marginTop="0" />
 
           <div className="max-h-[30rem] overflow-auto">
-            {resultMovies &&
+            {result?.movie &&
               searchValue &&
-              resultMovies.length > 0 &&
-              resultMovies.map((movie) => (
+              result.movie.length > 0 &&
+              result.movie.slice(0, 5).map((movie) => (
                 <div
                   key={`movie_${movie.id}`}
                   className="hover:bg-grey cursor-pointer transition-all"
+                  onClick={() => {
+                    handleSwitchToDetailMovie(movie);
+                  }}
                 >
                   <div className="wrapper flex items-center">
                     <Icon icon={icFilm} />
@@ -114,12 +156,33 @@ export const SearchBar = () => {
                 </div>
               ))}
 
-            {(!resultMovies || resultMovies.length === 0) && (
+            {result?.tv &&
+              searchValue &&
+              result.tv.length > 0 &&
+              result.tv.slice(0, 5).map((tv) => (
+                <div
+                  key={`tv_${tv.id}`}
+                  className="hover:bg-grey cursor-pointer transition-all"
+                  onClick={() => {
+                    handleSwitchToDetailMovie(tv);
+                  }}
+                >
+                  <div className="wrapper flex items-center">
+                    <Icon icon={icFilm2} />
+                    <h1 className="ml-[1rem] py-[1rem]">
+                      {tv.name || tv.original_title}
+                    </h1>
+                  </div>
+                </div>
+              ))}
+          </div>
+
+          {(!result || (result.movie.length === 0 && result.tv.length === 0)) &&
+            searchValue && (
               <div className="wrapper flex justify-center p-[1rem]">
                 <h1 className="text-s20 font-bold">NO RESULT</h1>
               </div>
             )}
-          </div>
           <Separate marginTop="0" />
         </div>
       )}

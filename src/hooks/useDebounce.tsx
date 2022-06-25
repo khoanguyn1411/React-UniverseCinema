@@ -5,7 +5,7 @@ export const useDebounce = (searchValue: string) => {
   useEffect(() => {
     const setTimeOut = setTimeout(() => {
       setDebounce(searchValue);
-    }, 1000);
+    }, 400);
 
     return () => {
       clearTimeout(setTimeOut);
