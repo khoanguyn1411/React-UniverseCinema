@@ -64,5 +64,5 @@
 
 
 .bgImg > img {
-    @apply opacity-0 min-w-full min-h-[100%]
+    @apply opacity-0 min-w-full 
 }

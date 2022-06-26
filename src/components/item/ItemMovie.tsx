@@ -29,8 +29,9 @@ export const ItemMovie: React.FC<TProps> = ({
   const handleSwitchToDetailMovie = () => {
     navigate(
       `${configs.routes.movieDetail}/${movie.id}-${
-        (movie.name && encodeURI(movie.name)) ||
-        (movie.original_title && encodeURI(movie.original_title))
+        (movie.name && encodeURI(movie.name.replaceAll("?", "4ch"))) ||
+        (movie.original_title &&
+          encodeURI(movie.original_title.replaceAll("?", "4ch")))
       }`
     );
     dispacth(updateActivePage());

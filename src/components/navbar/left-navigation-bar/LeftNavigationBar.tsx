@@ -1,4 +1,5 @@
 import { icArrowDown, icArrowRight, Icon } from "@/assets/icons";
+import { imgLogoDark, imgLogoLight } from "@/assets/images";
 import { WrapperDefault, WrapperModule } from "@/components";
 import { configs } from "@/configs";
 import { updateActivePage } from "@/features";
@@ -36,8 +37,19 @@ export const LeftNavigationBar: React.FC<TProps> = ({ isHomePage }) => {
     };
   });
 
+  const handleMoveToHome = () => {
+    navigate(configs.routes.homePage);
+    dispatch(updateActivePage());
+  };
+
   return (
-    <WrapperModule className="flex flex-row w-fit">
+    <WrapperModule className="flex flex-row w-fit items-center">
+      <div
+        className="h-[3rem] mt-[-1.3rem] mr-[2rem] cursor-pointer"
+        onClick={handleMoveToHome}
+      >
+        <img src={imgLogoLight} alt="logoApp" className="h-full" />
+      </div>
       {tabs.map((tab, index) => (
         <div
           key={index}

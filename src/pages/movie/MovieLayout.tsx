@@ -229,7 +229,7 @@ export const Movie: FunctionComponent = () => {
 
   return (
     <div className="wrapper flex flex-col">
-      <div className="mt-[2rem] text-center text-[3rem] uppercase">
+      <div className="mt-[4rem] text-center text-[3rem] uppercase">
         <h1 className="font-bold">{filterInfo.title}</h1>
       </div>
       <div className="grid grid-cols-4 mt-[2rem]">

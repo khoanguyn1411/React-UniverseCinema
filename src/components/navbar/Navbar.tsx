@@ -15,13 +15,13 @@ export const Navbar: React.FC = () => {
   return (
     <div
       className={classNames(
-        "w-full h-[6rem] flex justify-center select-none relative",
+        "w-full h-[7rem] flex justify-center select-none relative",
         {
           "text-white": isHomePage,
           "bg-gradient-to-t from from-transparent to-black":
             isHomePage && !isFixedNav,
           "bg-black": isFixedNav && isHomePage,
-          "text-black bg-white border-box shadow-default": !isHomePage,
+          "text-white bg-black border-box shadow-default": !isHomePage,
         }
       )}
     >
