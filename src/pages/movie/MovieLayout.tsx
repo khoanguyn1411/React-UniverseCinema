@@ -9,7 +9,7 @@ import { configs } from "@/configs";
 import { funcs, values } from "@/constants";
 import { useCallAPI } from "@/hooks";
 import { IGenres } from "@/types";
-import { FunctionComponent, useMemo, useState } from "react";
+import { FunctionComponent, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ItemContainer } from "./item-container/ItemContainer";
 import { ItemFilter } from "./item-filter/ItemFilter";
@@ -17,6 +17,12 @@ import { IFilterCondition } from "./type";
 
 export const Movie: FunctionComponent = () => {
   const { category, filter } = useParams();
+
+  useEffect(() => {
+    document.title = `${
+      category === values.MEDIA_TYPE.MOVIE ? "Movies" : "TV shows"
+    } | Universe Cinema`;
+  }, [category]);
 
   const filterInfo = useMemo(
     function () {

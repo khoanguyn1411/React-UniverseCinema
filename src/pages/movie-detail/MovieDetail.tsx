@@ -56,6 +56,8 @@ export const MovieDetail: FunctionComponent = () => {
           setType(values.MEDIA_TYPE.TVSHOWS);
         }
         setMovie(result);
+        document.title =
+          result.name || result.original_title + " | Universe Cinema";
       } catch (error) {
         throw new Error(error);
       }
@@ -71,7 +73,7 @@ export const MovieDetail: FunctionComponent = () => {
 
   return (
     movie && (
-      <div>
+      <div className="mb-[1.5rem]">
         <MovieInfo movie={movie} />
         <div className="wrapper flex">
           <div className="w-[75%] pr-[4rem] flex-1">

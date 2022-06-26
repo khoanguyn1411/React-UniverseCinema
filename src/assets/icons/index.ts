@@ -20,13 +20,15 @@ import {
   faYoutubeSquare,
   faInstagramSquare,
   faTwitterSquare,
+  faGithub,
+  faFacebook,
+  faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 
 export { Icon };
 
 export const icArrowDown = faAngleDown;
 export const icSearch = faSearch;
-export const icFacebook = faFacebookSquare;
 export const icYoutube = faYoutubeSquare;
 export const icInstagram = faInstagramSquare;
 export const icArrowLeft = faAngleLeft;
@@ -42,3 +44,6 @@ export const icLink = faLink;
 export const icFilm = faFilm;
 export const icClose = faClose;
 export const icFilm2 = faPhotoFilm;
+export const icGithub = faGithub;
+export const icFacebook = faFacebook;
+export const icLinkedIn = faLinkedin;

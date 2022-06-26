@@ -58,22 +58,26 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
           }}
         />
 
-        <div className="wrapper min-h-[100vh] py-[2rem] max-h-[90rem] w-full flex items-center relative z-20">
-          <ImageContainer
-            url={
-              configs.api.IMAGE_URL_LARGE +
-              (movie.poster_path || movie.backdrop_path)
-            }
-            className="h-[46rem] w-[32rem] bg-orange rounded-[1rem]"
-          >
-            <img
-              src={
+        <div className="wrapper min-h-[100vh] items-center pt-[6rem] py-[5rem] max-h-[90rem] w-full flex relative z-20">
+          <div className="relative h-fit">
+            <ImageContainer
+              url={
                 configs.api.IMAGE_URL_LARGE +
                 (movie.poster_path || movie.backdrop_path)
               }
-              alt={`${movie.name || movie.original_title}`}
-            />
-          </ImageContainer>
+              className="h-[46rem] w-[32rem] bg-orange rounded-[1rem]"
+            >
+              <img
+                src={
+                  configs.api.IMAGE_URL_LARGE +
+                  (movie.poster_path || movie.backdrop_path)
+                }
+                alt={`${movie.name || movie.original_title}`}
+                className="h-full"
+              />
+            </ImageContainer>
+          </div>
+
           <div className="flex-[2.5] text-white font-bold pl-[4rem] flex flex-col justify-center">
             {/* Main content */}
             <div className="flex justify-between">

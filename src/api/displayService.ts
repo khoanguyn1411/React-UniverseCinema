@@ -24,6 +24,11 @@ export const UPCOMMING_API = funcs.getAPI(
   "&language=en-US&page=1"
 );
 
+export const ON_AIR_API = funcs.getAPI(
+  "/tv/on_the_air?",
+  "&language=en-US&page=1"
+);
+
 export const TRENDING_WEEK_API = funcs.getAPI("/trending/all/week?", "");
 export const TRENDING_DAY_API = funcs.getAPI("/trending/all/day?", "");
 export const POPULAR_TV_API = funcs.getAPI(

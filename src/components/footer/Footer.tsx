@@ -1,53 +1,37 @@
+import { Icon } from "@/assets/icons";
+import { imgFooterBg, imgLogoLight } from "@/assets/images";
 import { configs } from "@/configs";
-import { updateActivePage } from "@/features";
-import { useAppDispatch } from "@/hooks";
-import { useNavigate } from "react-router-dom";
-
-type TContactInfo = {
-  title: string;
-  content: string;
-};
-
-type TTypePath = {
-  internal: string;
-  external: string;
-};
 
 export const Footer = () => {
-  const navigateLinks = configs.linksFooter;
-  const socialMedias = configs.socialMedia;
-
-  const typePath: TTypePath = {
-    internal: "internal",
-    external: "external",
+  const handleSwitchPage = (path: string) => {
+    window.open(path, "_blank");
   };
-
-  const contactInfo: TContactInfo[] = [
-    {
-      title: "Email",
-      content:
-        "Số 669 Quốc lộ 1, khu phố 3, phường Linh Xuân, quận Thủ Đức, Thành phố Hồ Chí Minh ",
-    },
-    {
-      title: "Email",
-      content: "support@universecinema.com",
-    },
-    {
-      title: "Hotline",
-      content: "0123456789",
-    },
-  ];
-
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-
-  const handleSwitchPage = (path: string, type: string) => {
-    if (type === typePath.internal) {
-      navigate(path);
-      dispatch(updateActivePage());
-    } else {
-      window.open(path, "_blank");
-    }
-  };
-  return <div></div>;
+  return (
+    <div
+      className="h-[30rem]"
+      style={{ backgroundImage: `url(${imgFooterBg})` }}
+    >
+      <div className="flex flex-col items-center justify-center h-full">
+        <img src={imgLogoLight} alt="imgLogoLight" />
+        <h1 className="text-white font-bold mt-[1rem] text-s20">
+          A movie review website
+        </h1>
+        <h1 className="text-white mt-[0.2rem]">Made by Khoa Nguyen</h1>
+        <div className="flex text-white mt-[1rem] ">
+          {configs.socialMedia.persoanl.map((item, index) => {
+            return (
+              <Icon
+                key={index}
+                className={`text-[2.5rem] cursor-pointer hover:text-orange transition-all ${
+                  index === 1 && "mx-5"
+                }`}
+                onClick={() => handleSwitchPage(item.to)}
+                icon={item.icon}
+              />
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
 };

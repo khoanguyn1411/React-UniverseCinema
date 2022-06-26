@@ -4,6 +4,8 @@ import {
   icYoutube,
   icLink,
   icTwitter,
+  icGithub,
+  icLinkedIn,
 } from "@/assets/icons";
 import { ISocialMedia } from "@/types";
 
@@ -14,14 +16,14 @@ const socialMediaPersonalConfig: ISocialMedia[] = [
     to: "https://www.facebook.com/khoa.nguynn1411/",
   },
   {
-    title: "Youtube",
-    icon: icYoutube,
-    to: "https://www.facebook.com/khoa.nguynn1411/",
+    title: "Github",
+    icon: icGithub,
+    to: "https://github.com/khoanguyn1411",
   },
   {
-    title: "Instagram",
-    icon: icInstagram,
-    to: "https://www.facebook.com/khoa.nguynn1411/",
+    title: "LinkedIn",
+    icon: icLinkedIn,
+    to: "https://www.linkedin.com/in/nguy%E1%BB%85n-khoa-12a406240/",
   },
 ];
 

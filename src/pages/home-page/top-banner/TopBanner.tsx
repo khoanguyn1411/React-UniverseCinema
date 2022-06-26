@@ -67,7 +67,7 @@ export const TopBanner: React.FC = () => {
                 />
               </ImageContainer>
 
-              <div className="absolute px-[20rem] py-[12rem] bottom-0 flex w-[100%] top-0 left-0 right-0 wrapper h-full">
+              <div className="absolute bottom-0 flex w-[65%] h-[60%] top-0 left-0 right-0 wrapper ">
                 <ImageContainer
                   url={configs.api.IMAGE_URL_SMALL + banner.poster_path}
                   className="h-full w-fit rounded-[1rem]"
