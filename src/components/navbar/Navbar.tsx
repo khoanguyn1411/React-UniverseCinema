@@ -20,9 +20,8 @@ export const Navbar: React.FC = () => {
           "text-white": isHomePage,
           "bg-gradient-to-t from from-transparent to-black":
             isHomePage && !isFixedNav,
-          "bg-black border-b-orange border-b-[1.5px]": isFixedNav && isHomePage,
-          "text-white bg-black border-box shadow-default border-b-orange border-b-[1.5px]":
-            !isHomePage,
+          "bg-black ": isFixedNav && isHomePage,
+          "text-white bg-black border-box shadow-default": !isHomePage,
         }
       )}
     >
