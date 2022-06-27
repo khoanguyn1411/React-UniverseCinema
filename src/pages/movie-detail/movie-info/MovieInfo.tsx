@@ -58,7 +58,7 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
           }}
         />
 
-        <div className="wrapper h-screen items-center pt-[6rem] py-[5rem] max-h-[90rem] w-full flex relative z-20">
+        <div className="wrapper min-h-[100vh] items-center pt-[6rem] py-[5rem] w-full flex relative z-20">
           <div className="relative h-fit">
             <ImageContainer
               url={
@@ -166,11 +166,13 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
 
             <div className="mt-[2rem]">
               <h1 className="text-s20 text-orange">Overview</h1>
-              {movie.overview ? (
-                <h1 className="font-normal mt-[0.5rem]">{movie.overview}</h1>
-              ) : (
-                <NoResult>There is no overview</NoResult>
-              )}
+              <div className="max-h-[15rem] overflow-auto mt-[0.8rem] pr-[2rem]">
+                {movie.overview ? (
+                  <h1 className="font-normal">{movie.overview}</h1>
+                ) : (
+                  <NoResult>There is no overview</NoResult>
+                )}
+              </div>
             </div>
           </div>
         </div>
