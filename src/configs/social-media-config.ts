@@ -23,7 +23,7 @@ const socialMediaPersonalConfig: ISocialMedia[] = [
   {
     title: "LinkedIn",
     icon: icLinkedIn,
-    to: "https://www.linkedin.com/in/nguy%E1%BB%85n-khoa-12a406240/",
+    to: "https://www.linkedin.com/in/khoanguyn1411/",
   },
 ];
 
