@@ -46,9 +46,8 @@ export const MovieDetail: FunctionComponent = () => {
         result = await res.json();
         if (
           result.success === false ||
-          (result.name?.toLowerCase().replaceAll("4ch", "?") !== name &&
-            result.original_title?.toLowerCase().replaceAll("4ch", "?") !==
-              name)
+          (result.name?.toLowerCase().replace("4ch", "?") !== name &&
+            result.original_title?.toLowerCase().replace("4ch", "?") !== name)
         ) {
           url = funcs.getAPI(`/tv/${id}?`, "&language=en-US");
           res = await fetch(url);
