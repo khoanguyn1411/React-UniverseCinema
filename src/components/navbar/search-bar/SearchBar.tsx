@@ -1,5 +1,5 @@
 import { icClose, icFilm, icFilm2, Icon, icSearch } from "@/assets/icons";
-import { Separate } from "@/components";
+import { Separate, Loading } from "@/components";
 import { configs } from "@/configs";
 import { funcs } from "@/constants";
 import { updateActivePage } from "@/features";
@@ -42,9 +42,12 @@ export const SearchBar = () => {
     dispatch(updateActivePage());
   };
 
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
+
   useEffect(() => {
     if (debounceValue === "") return;
 
+    setIsLoading(true);
     const getResultMovie = fetch(
       funcs.getAPI(
         `/search/movie?`,
@@ -68,9 +71,10 @@ export const SearchBar = () => {
       });
 
     Promise.all([getResultMovie, getResultTV])
-      .then((result) =>
-        setResult({ movie: result[0].results, tv: result[1].results })
-      )
+      .then((result) => {
+        setResult({ movie: result[0].results, tv: result[1].results });
+        setIsLoading(false);
+      })
       .catch((error) => {
         throw new Error("Something is wrong in search API: " + error);
       });
@@ -136,15 +140,22 @@ export const SearchBar = () => {
                 setSearchValue(e.target.value);
               }}
             />
-            <h1
-              onClick={() => {
-                setSearchValue("");
-                inputRef?.current.focus();
-              }}
-              className="cursor-pointer font-bold hover:text-orange transition-all"
-            >
-              Clear
-            </h1>
+            <div className="flex flex-row relative">
+              {isLoading && (
+                <div className="left-[-4rem] top-[-1.4rem] w-fit absolute">
+                  <Loading.Search />
+                </div>
+              )}
+              <h1
+                onClick={() => {
+                  setSearchValue("");
+                  inputRef?.current.focus();
+                }}
+                className="cursor-pointer font-bold hover:text-orange transition-all"
+              >
+                Clear
+              </h1>
+            </div>
           </div>
           <Separate marginTop="0" />
 

@@ -1,4 +1,4 @@
-import { AppPagination, ItemMovie, NoResult } from "@/components";
+import { AppPagination, ItemMovie, Loading, NoResult } from "@/components";
 import { funcs } from "@/constants";
 import { useCallAPI } from "@/hooks";
 import { IMovie } from "@/types";
@@ -97,7 +97,7 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
     }
   };
 
-  const result = useCallAPI(
+  const [result, isLoading] = useCallAPI(
     filterInfo.routeAPI === `/discover/${category}`
       ? funcs.getAPI(
           `/discover/${category}?`,
@@ -132,27 +132,35 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
 
   return (
     <div className="ml-[2rem]">
-      <div className="grid grid-cols-5 gap-4 gap-y-8 ">
-        {movies &&
-          movies.length > 0 &&
-          movies.map((item, index) => (
-            <ItemMovie key={index} noLineLimit movie={item} />
-          ))}
-      </div>
-
-      {result?.total_pages === 0 && (
-        <NoResult>We could not find any results</NoResult>
-      )}
-
-      {result?.total_pages > 1 && (
-        <div className="flex justify-center mt-[5rem]">
-          <AppPagination
-            pageNumber={totalPage}
-            activePage={activePage}
-            setActivePage={setActivePage}
-            filterInfo={filterInfo}
-          />
+      {isLoading && (
+        <div className="h-[40rem]">
+          <Loading />
         </div>
+      )}
+      {!isLoading && (
+        <>
+          <div className="grid grid-cols-5 gap-4 gap-y-8 ">
+            {movies &&
+              movies.length > 0 &&
+              movies.map((item, index) => (
+                <ItemMovie key={index} noLineLimit movie={item} />
+              ))}
+          </div>
+          {result?.total_pages === 0 && (
+            <NoResult>We could not find any results</NoResult>
+          )}
+
+          {result?.total_pages > 1 && (
+            <div className="flex justify-center mt-[5rem]">
+              <AppPagination
+                pageNumber={totalPage}
+                activePage={activePage}
+                setActivePage={setActivePage}
+                filterInfo={filterInfo}
+              />
+            </div>
+          )}
+        </>
       )}
     </div>
   );

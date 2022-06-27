@@ -1,3 +1,4 @@
+import { Loading } from "@/components";
 import { funcs, values } from "@/constants";
 import { IMovie } from "@/types";
 import { FunctionComponent, useEffect, useState } from "react";
@@ -34,16 +35,15 @@ export const MovieDetail: FunctionComponent = () => {
 
   const [movie, setMovie] = useState<IMovie>(null);
   const [type, setType] = useState<string>(values.MEDIA_TYPE.MOVIE);
-
+  const [isLoading, setIsLoading] = useState<Boolean>(true);
   useEffect(() => {
     const fetchAPI = async () => {
       try {
         let url = funcs.getAPI(`/movie/${id}?`, "&language=en-US");
+        setIsLoading(true);
         let result: any;
         let res = await fetch(url);
         result = await res.json();
-        // console.log(result.name);
-        // console.log(result.original_title);
         if (
           result.success === false ||
           (result.name?.toLowerCase().replaceAll("4ch", "?") !== name &&
@@ -56,8 +56,9 @@ export const MovieDetail: FunctionComponent = () => {
           setType(values.MEDIA_TYPE.TVSHOWS);
         }
         setMovie(result);
-        document.title =
-          result.name || result.original_title + " | Universe Cinema";
+        setIsLoading(false);
+        // document.title =
+        //   result.name || result.original_title + " | Universe Cinema";
       } catch (error) {
         throw new Error(error);
       }
@@ -72,21 +73,28 @@ export const MovieDetail: FunctionComponent = () => {
   };
 
   return (
-    movie && (
-      <div className="mb-[1.5rem]">
-        <MovieInfo movie={movie} />
-        <div className="wrapper flex">
-          <div className="w-[75%] pr-[4rem] flex-1">
-            <MovieCredit {...props} />
-            <MovieSeasons movie={movie} />
-            <MovieTrailers {...props} />
-            <MovieRecommendation {...props} />
-          </div>
-          <div className="w-[25%]">
-            <MovieOtherInfo {...props} />
+    <>
+      {isLoading && (
+        <div className="h-screen bg-black opacity-90">
+          <Loading />
+        </div>
+      )}
+      {movie && !isLoading && (
+        <div className="mb-[1.5rem]">
+          <MovieInfo movie={movie} />
+          <div className="wrapper flex">
+            <div className="w-[75%] pr-[4rem] flex-1">
+              <MovieCredit {...props} />
+              <MovieSeasons movie={movie} />
+              <MovieTrailers {...props} />
+              <MovieRecommendation {...props} />
+            </div>
+            <div className="w-[25%]">
+              <MovieOtherInfo {...props} />
+            </div>
           </div>
         </div>
-      </div>
-    )
+      )}
+    </>
   );
 };

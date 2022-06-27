@@ -2,6 +2,7 @@ import { icArrowLeft, icArrowRight } from "@/assets/icons";
 import {
   Button,
   ItemActor,
+  Loading,
   NoResult,
   Separate,
   SwiperApp,
@@ -24,7 +25,7 @@ export const MovieCredit: FunctionComponent<TProps.withType> = ({
 
   const [settingsSwiper, setSettingsSwiper] = useState<SwiperProps>(null);
 
-  const credits: any = useCallAPI(
+  const [result, isLoading] = useCallAPI(
     funcs.getAPI(`/${type}/${movie.id}/credits?`, "&language=en-US"),
     [movie]
   );
@@ -67,7 +68,7 @@ export const MovieCredit: FunctionComponent<TProps.withType> = ({
         draggable: true,
       },
     });
-  }, [credits]);
+  }, [result]);
 
   const handleSwiperApp = (swiper: SwiperCore) => {
     if (swiper.isBeginning) {
@@ -77,7 +78,7 @@ export const MovieCredit: FunctionComponent<TProps.withType> = ({
     }
   };
 
-  const casts: IActors[] = credits?.cast?.slice(0, 15);
+  const casts: IActors[] = result?.cast?.slice(0, 15);
   return (
     <>
       <div className="flex justify-between items-center mt-[2rem] ">
@@ -110,25 +111,35 @@ export const MovieCredit: FunctionComponent<TProps.withType> = ({
           </div>
         )}
       </div>
-      {casts && casts.length > 0 ? (
-        <div>
-          <div className="mt-[1.2rem]">
-            <SwiperApp
-              data={casts}
-              settings={settingsSwiper}
-              onAppSwiper={handleSwiperApp}
-            >
-              {casts.map((cast) => (
-                <SwiperSlide key={cast.id}>
-                  <ItemActor actor={cast} />
-                </SwiperSlide>
-              ))}
-            </SwiperApp>
-          </div>
+      {isLoading && (
+        <div className="h-[15rem] w-full">
+          <Loading />
         </div>
-      ) : (
-        <NoResult>We could not find any actors.</NoResult>
       )}
+      {!isLoading && (
+        <div>
+          {casts && casts.length > 0 ? (
+            <div>
+              <div className="mt-[1.2rem]">
+                <SwiperApp
+                  data={casts}
+                  settings={settingsSwiper}
+                  onAppSwiper={handleSwiperApp}
+                >
+                  {casts.map((cast) => (
+                    <SwiperSlide key={cast.id}>
+                      <ItemActor actor={cast} />
+                    </SwiperSlide>
+                  ))}
+                </SwiperApp>
+              </div>
+            </div>
+          ) : (
+            <NoResult>We could not find any actors.</NoResult>
+          )}
+        </div>
+      )}
+
       <Separate />
     </>
   );

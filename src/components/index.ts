@@ -16,3 +16,4 @@ export * from "./select/Select";
 export * from "./range-slider/RangeSlider";
 export * from "./pagination/AppPagination";
 export * from "./date-picker/AppDatePicker";
+export * from "./loading/Loading";

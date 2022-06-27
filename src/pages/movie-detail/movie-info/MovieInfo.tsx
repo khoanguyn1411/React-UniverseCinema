@@ -58,7 +58,7 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
           }}
         />
 
-        <div className="wrapper min-h-[100vh] items-center pt-[6rem] py-[5rem] max-h-[90rem] w-full flex relative z-20">
+        <div className="wrapper h-screen items-center pt-[6rem] py-[5rem] max-h-[90rem] w-full flex relative z-20">
           <div className="relative h-fit">
             <ImageContainer
               url={

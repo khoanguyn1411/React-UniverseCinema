@@ -1,4 +1,10 @@
-import { ItemMovie, ItemsSlider, SwichCategories, Title } from "@/components";
+import {
+  ItemMovie,
+  ItemsSlider,
+  SwichCategories,
+  Title,
+  Loading,
+} from "@/components";
 import { IMovie } from "@/types";
 import React, { useEffect, useState } from "react";
 import { Settings } from "react-slick";
@@ -79,16 +85,26 @@ export const ItemScroller: React.FC<TProps> = ({
             </div>
           )}
         </div>
-        <ItemsSlider slideDisplay={slideDisplay} settingConfig={settings}>
-          {movieList.map((movie, index) => (
-            <ItemMovie
-              className={getClassname(index)}
-              key={index}
-              movie={movie}
-              size={getSize()}
-            />
-          ))}
-        </ItemsSlider>
+
+        <div>
+          {!loading && (
+            <ItemsSlider slideDisplay={slideDisplay} settingConfig={settings}>
+              {movieList.map((movie, index) => (
+                <ItemMovie
+                  className={getClassname(index)}
+                  key={index}
+                  movie={movie}
+                  size={getSize()}
+                />
+              ))}
+            </ItemsSlider>
+          )}
+          {loading && (
+            <div className="flex justify-center items-center min-h-[23rem]">
+              <Loading />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

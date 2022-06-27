@@ -104,10 +104,12 @@ export const Movie: FunctionComponent = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [filter, category]
   );
-  const genres: IGenres[] = useCallAPI(
-    funcs.getAPI(`/genre/${category}/list?`, ""),
-    [category]
-  )?.genres;
+
+  const [result] = useCallAPI(funcs.getAPI(`/genre/${category}/list?`, ""), [
+    category,
+  ]);
+
+  const genres: IGenres[] = result?.genres;
   const list = [
     "Popularity Descending",
     "Popularity Ascending",

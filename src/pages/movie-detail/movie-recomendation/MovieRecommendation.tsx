@@ -1,4 +1,11 @@
-import { Button, ItemMovie, NoResult, SwiperApp, Title } from "@/components";
+import {
+  Button,
+  ItemMovie,
+  Loading,
+  NoResult,
+  SwiperApp,
+  Title,
+} from "@/components";
 import { funcs, values } from "@/constants";
 import { useCallAPI } from "@/hooks";
 import { IMovie } from "@/types";
@@ -16,7 +23,7 @@ export const MovieRecommendation: FunctionComponent<TProps.withType> = ({
   const refNext = useRef(null);
   const refPre = useRef(null);
 
-  const result = useCallAPI(
+  const [result, isLoading] = useCallAPI(
     funcs.getAPI(
       `/${type}/${movie.id}/recommendations?`,
       "&language=en-US&page=1"
@@ -66,7 +73,7 @@ export const MovieRecommendation: FunctionComponent<TProps.withType> = ({
     });
   }, [result]);
 
-  const recomendationList: IMovie[] = result?.results;
+  const recommendationList: IMovie[] = result?.results;
   const handleSwiperApp = (swiper: SwiperCore) => {
     if (swiper.isBeginning) {
       refPre.current.classList.add("opacity-30");
@@ -79,7 +86,7 @@ export const MovieRecommendation: FunctionComponent<TProps.withType> = ({
     <div className="mb-[2rem]">
       <div className="justify-between mt-[2rem] flex items-center">
         <Title>Recommendation</Title>
-        {recomendationList && recomendationList.length > 0 && (
+        {recommendationList && recommendationList.length > 0 && (
           <div>
             <Button
               iconOnly
@@ -98,32 +105,39 @@ export const MovieRecommendation: FunctionComponent<TProps.withType> = ({
           </div>
         )}
       </div>
-      <div className="relative mt-4">
-        {recomendationList && recomendationList.length > 0 ? (
-          <SwiperApp
-            data={recomendationList}
-            settings={settingsSwiper}
-            noViewmore
-            onAppSwiper={handleSwiperApp}
-          >
-            {recomendationList.map((item) => (
-              <SwiperSlide key={type + item.id}>
-                <ItemMovie
-                  size="small"
-                  isSwiper
-                  movie={item}
-                  className="mx-0"
-                />
-              </SwiperSlide>
-            ))}
-          </SwiperApp>
-        ) : (
-          <NoResult className="mt-[1rem]">
-            There is no recommendation for this{" "}
-            {type === values.MEDIA_TYPE.MOVIE ? "movie." : "TV show."}
-          </NoResult>
-        )}
-      </div>
+      {!isLoading && (
+        <div className="relative mt-4">
+          {recommendationList && recommendationList.length > 0 ? (
+            <SwiperApp
+              data={recommendationList}
+              settings={settingsSwiper}
+              noViewmore
+              onAppSwiper={handleSwiperApp}
+            >
+              {recommendationList.map((item) => (
+                <SwiperSlide key={type + item.id}>
+                  <ItemMovie
+                    size="small"
+                    isSwiper
+                    movie={item}
+                    className="mx-0"
+                  />
+                </SwiperSlide>
+              ))}
+            </SwiperApp>
+          ) : (
+            <NoResult className="mt-[1rem]">
+              There is no recommendation for this{" "}
+              {type === values.MEDIA_TYPE.MOVIE ? "movie." : "TV show."}
+            </NoResult>
+          )}
+        </div>
+      )}
+      {isLoading && (
+        <div className="mt-[2rem]">
+          <Loading />
+        </div>
+      )}
     </div>
   );
 };
