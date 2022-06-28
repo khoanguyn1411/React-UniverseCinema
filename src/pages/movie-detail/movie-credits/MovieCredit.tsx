@@ -120,7 +120,7 @@ export const MovieCredit: FunctionComponent<TProps.withType> = ({
         <div>
           {casts && casts.length > 0 ? (
             <div>
-              <div className="mt-[1.2rem]">
+              <div className="mt-[1.2rem] lg:mx-[-2rem]">
                 <SwiperApp
                   data={casts}
                   settings={settingsSwiper}

@@ -30,6 +30,19 @@ const WrapperModule = styled.div`
     padding-left: 3px;
     padding-right: 3px;
     width: 15.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:first-child {
+      @media screen and (max-width: 1023px) {
+        margin-left: 1.7rem;
+      }
+    }
+    &:last-child {
+      @media screen and (max-width: 1023px) {
+        margin-right: 2rem;
+      }
+    }
   }
   .swiper-scrollbar-horizontal {
     bottom: 0;
@@ -64,6 +77,7 @@ export const SwiperApp: FunctionComponent<TProps> = ({
         <Swiper
           spaceBetween={10}
           slidesPerGroup={2}
+          direction="horizontal"
           onSwiper={(swiper) => {
             setSwiper(swiper);
             onAppSwiper && onAppSwiper(swiper);

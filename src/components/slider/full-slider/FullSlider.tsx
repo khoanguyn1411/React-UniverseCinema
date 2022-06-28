@@ -27,7 +27,7 @@ export const FullSlider: React.FC<TProps> = ({
         {children}
       </Slider>
       <button
-        className="group absolute top-0 bottom-0 left-0 p-[1.5rem]"
+        className="group absolute top-0 bottom-0 left-0 p-[1.5rem] sm:hidden"
         onClick={() => slider?.current?.slickPrev()}
       >
         <span>
@@ -38,7 +38,7 @@ export const FullSlider: React.FC<TProps> = ({
         </span>
       </button>
       <button
-        className="group absolute top-0 bottom-0 right-0 p-[1.5rem]"
+        className="group absolute top-0 bottom-0 right-0 p-[1.5rem] sm:hidden"
         onClick={() => slider?.current?.slickNext()}
       >
         <span>

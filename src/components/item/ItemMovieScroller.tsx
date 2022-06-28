@@ -1,13 +1,15 @@
+import { icArrowLeft, icArrowRight, Icon } from "@/assets/icons";
 import {
   ItemMovie,
-  ItemsSlider,
-  SwichCategories,
-  Title,
   Loading,
+  SwichCategories,
+  SwiperApp,
+  Title,
 } from "@/components";
 import { IMovie } from "@/types";
-import React, { useEffect, useState } from "react";
-import { Settings } from "react-slick";
+import React, { useEffect, useRef, useState } from "react";
+import SwiperCore, { Navigation } from "swiper";
+import { SwiperProps, SwiperSlide } from "swiper/react";
 
 type TProps = {
   categories?: string[];
@@ -26,16 +28,9 @@ export const ItemScroller: React.FC<TProps> = ({
   largeItem,
   slideDisplay,
 }) => {
-  const settings: Settings = {
-    dots: false,
-    autoplaySpeed: 4000,
-    infinite: false,
-    slidesToShow: 7,
-    slidesToScroll: 7,
-    initialSlide: 0,
-    speed: 500,
-    adaptiveHeight: true,
-  };
+  const refNext = useRef(null);
+  const refPre = useRef(null);
+  const [settingsSwiper, setSettingsSwiper] = useState<SwiperProps>(null);
 
   const [loading, setLoading] = useState<Boolean>(true);
   const [movieList, setMovieList] = useState<IMovie[]>([]);
@@ -60,7 +55,7 @@ export const ItemScroller: React.FC<TProps> = ({
   }, [active, fetchAPI]);
 
   const getClassname = (index: number) => {
-    if (index === 0) return "ml-0";
+    if (index === 0) return "";
   };
   const getSize = () => {
     if (largeItem) {
@@ -69,14 +64,64 @@ export const ItemScroller: React.FC<TProps> = ({
       return "small";
     }
   };
+
+  useEffect(() => {
+    setSettingsSwiper({
+      modules: [Navigation],
+      navigation: {
+        prevEl: refPre?.current,
+        nextEl: refNext?.current,
+      },
+      onScrollbarDragMove(swiper) {
+        if (swiper.isBeginning) {
+          refPre.current.classList.add("opacity-30");
+        } else {
+          refPre.current.classList.remove("opacity-30");
+        }
+
+        if (swiper.isEnd) {
+          refNext.current.classList.add("opacity-30");
+        } else {
+          refNext.current.classList.remove("opacity-30");
+        }
+      },
+      onSlideChange(swiper) {
+        if (swiper.isBeginning) {
+          refPre.current.classList.add("opacity-30");
+        } else {
+          refPre.current.classList.remove("opacity-30");
+        }
+
+        if (swiper.isEnd) {
+          refNext.current.classList.add("opacity-30");
+        } else {
+          refNext.current.classList.remove("opacity-30");
+        }
+      },
+      slidesPerGroup: 2,
+      scrollbar: {
+        draggable: true,
+      },
+    });
+  }, [movieList]);
+
+  const handleSwiperApp = (swiper: SwiperCore) => {
+    if (swiper.isBeginning) {
+      refPre.current.classList.add("opacity-30");
+      refNext.current.classList.remove("opacity-30");
+    } else {
+      refPre.current.classList.remove("opacity-30");
+    }
+  };
+
   return (
-    <div>
+    <div className="relative">
       <div className="max-w-[200rem] w-full m-auto">
-        <div className="flex items-center wrapper justify-between mt-[1.5rem]">
+        <div className="flex items-center wrapper justify-between mt-[1.5rem] lg:flex-col">
           <Title className="flex-1">{title}</Title>
 
           {categories && categories.length > 0 && (
-            <div className="flex-1 flex justify-end">
+            <div className="flex-1 flex justify-end lg:mb-[2rem]">
               <SwichCategories
                 categories={categories}
                 active={active}
@@ -86,18 +131,24 @@ export const ItemScroller: React.FC<TProps> = ({
           )}
         </div>
 
-        <div>
-          {!loading && (
-            <ItemsSlider slideDisplay={slideDisplay} settingConfig={settings}>
+        <div className="wrapper lg:px-0 mt-[1rem] ">
+          {!loading && movieList && movieList.length > 0 && (
+            <SwiperApp
+              data={movieList}
+              settings={settingsSwiper}
+              onAppSwiper={handleSwiperApp}
+            >
               {movieList.map((movie, index) => (
-                <ItemMovie
-                  className={getClassname(index)}
-                  key={index}
-                  movie={movie}
-                  size={getSize()}
-                />
+                <SwiperSlide key={movie.id}>
+                  <ItemMovie
+                    className={getClassname(index)}
+                    movie={movie}
+                    isSwiper
+                    size={getSize()}
+                  />
+                </SwiperSlide>
               ))}
-            </ItemsSlider>
+            </SwiperApp>
           )}
           {loading && (
             <div className="flex justify-center items-center min-h-[23rem]">
@@ -106,6 +157,29 @@ export const ItemScroller: React.FC<TProps> = ({
           )}
         </div>
       </div>
+      <button
+        className="group absolute top-0 lg:hidden bottom-0 z-10 left-0 p-[1.5rem]"
+        ref={refPre}
+      >
+        <span>
+          <Icon
+            className="text-black text-[3rem] group-hover:opacity-100 group-hover:transition-all"
+            icon={icArrowLeft}
+          />
+        </span>
+      </button>
+
+      <button
+        className="group absolute top-0 bottom-0 right-0 z-10 p-[1.5rem] lg:hidden"
+        ref={refNext}
+      >
+        <span>
+          <Icon
+            className="text-black text-[3rem] group-hover:opacity-100 group-hover:transition-all"
+            icon={icArrowRight}
+          />
+        </span>
+      </button>
     </div>
   );
 };

@@ -58,7 +58,7 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
           }}
         />
 
-        <div className="wrapper min-h-[100vh] items-center pt-[6rem] py-[5rem] w-full flex relative z-20">
+        <div className="wrapper min-h-[100vh] items-center pt-[6rem] py-[5rem] w-full flex relative z-20 lg:flex-col lg:pt-[10rem]">
           <div className="relative h-fit">
             <ImageContainer
               url={
@@ -78,7 +78,7 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
             </ImageContainer>
           </div>
 
-          <div className="flex-[2.5] text-white font-bold pl-[4rem] flex flex-col justify-center">
+          <div className="flex-[2.5] text-white font-bold pl-[4rem] flex flex-col justify-center lg:px-0 lg:mt-[3rem]">
             {/* Main content */}
             <div className="flex justify-between">
               <div className="min-h-[25rem] flex-1">
@@ -149,7 +149,7 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
                 </div>
               </div>
 
-              <div className="flex flex-col justify-between">
+              <div className="flex flex-col justify-between lg:hidden">
                 {configs.actions.map((button, index) => (
                   <Button
                     key={index}
@@ -166,13 +166,28 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
 
             <div className="mt-[2rem]">
               <h1 className="text-s20 text-orange">Overview</h1>
-              <div className="max-h-[15rem] overflow-auto mt-[0.8rem] pr-[2rem]">
+              <div className="max-h-[15rem] overflow-auto mt-[0.8rem] pr-[2rem] lg:pr-0">
                 {movie.overview ? (
                   <h1 className="font-normal">{movie.overview}</h1>
                 ) : (
                   <NoResult>There is no overview</NoResult>
                 )}
               </div>
+            </div>
+
+            <div className="mt-[3rem] flex-row hidden lg:flex">
+              {configs.actions.map((button, index) => (
+                <Button
+                  key={index}
+                  icon={button.icon}
+                  hover
+                  iconOnly
+                  strokeWhite
+                  onClick={() => button.onClick(movie)}
+                  rounded
+                  className="w-[5rem] h-[5rem] mr-[2rem]"
+                />
+              ))}
             </div>
           </div>
         </div>

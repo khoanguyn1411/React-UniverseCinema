@@ -76,14 +76,14 @@ export const TopBanner: React.FC = () => {
                     <img
                       alt={`bannerHome${index}`}
                       src={configs.api.IMAGE_URL_LARGE + banner.backdrop_path}
-                      className="h-[100vh] min-h-[50rem] max-h-[80rem]"
+                      className="h-screen min-h-[50rem] max-h-[80rem]"
                     />
                   </ImageContainer>
 
-                  <div className="absolute bottom-0 flex w-[65%] h-[60%] top-0 left-0 right-0 wrapper ">
+                  <div className="absolute bottom-0 flex w-[65%] h-[60%] top-0 left-0 right-0 wrapper lg:w-full lg:p-[5rem] sm:px-[2rem]">
                     <ImageContainer
                       url={configs.api.IMAGE_URL_SMALL + banner.poster_path}
-                      className="h-full w-fit rounded-[1rem]"
+                      className="h-full w-fit rounded-[1rem] sm:hidden"
                     >
                       <img
                         className="h-full"
@@ -92,15 +92,15 @@ export const TopBanner: React.FC = () => {
                       />
                     </ImageContainer>
 
-                    <div className=" flex flex-col flex-1 justify-center pl-[3rem]">
-                      <h1 className="text-[2.5rem] font-bold text-white mb-[1rem]">
+                    <div className=" flex flex-col flex-1 justify-center pl-[3rem] sm:pl-0">
+                      <h1 className="text-[2.5rem] font-bold text-white mb-[1rem] sm:text-center">
                         {banner.name || banner.original_title}
                       </h1>
-                      <h1 className="text-s16 text-white line-9">
+                      <h1 className="text-s16 text-white line-9 sm:text-center">
                         {banner.overview}
                       </h1>
 
-                      <div className="mt-[2rem]">
+                      <div className="mt-[2rem] sm:flex sm:items-center sm:justify-center">
                         <Button
                           strokeWhite
                           hover

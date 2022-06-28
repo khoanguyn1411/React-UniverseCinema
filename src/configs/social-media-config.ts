@@ -1,11 +1,10 @@
 import {
   icFacebook,
-  icInstagram,
-  icYoutube,
-  icLink,
-  icTwitter,
   icGithub,
+  icInstagram,
+  icLink,
   icLinkedIn,
+  icTwitter,
 } from "@/assets/icons";
 import { ISocialMedia } from "@/types";
 

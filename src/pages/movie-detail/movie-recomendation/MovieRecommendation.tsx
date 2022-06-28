@@ -106,7 +106,7 @@ export const MovieRecommendation: FunctionComponent<TProps.withType> = ({
         )}
       </div>
       {!isLoading && (
-        <div className="relative mt-4">
+        <div className="relative mt-4 lg:mx-[-2rem]">
           {recommendationList && recommendationList.length > 0 ? (
             <SwiperApp
               data={recommendationList}

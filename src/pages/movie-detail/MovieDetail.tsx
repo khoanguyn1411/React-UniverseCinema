@@ -81,15 +81,15 @@ export const MovieDetail: FunctionComponent = () => {
       {movie && !isLoading && (
         <div className="mb-[1.5rem]">
           <MovieInfo movie={movie} />
-          <div className="wrapper flex">
-            <div className="w-[75%] pr-[4rem] flex-1">
+          <div className="flex flex-row-reverse lg:flex-col wrapper lg:px-[0rem]">
+            <div className="w-[25%] lg:w-full">
+              <MovieOtherInfo {...props} />
+            </div>
+            <div className="w-[75%] lg:w-full pr-[4rem] lg:px-[2rem] flex-1">
               <MovieCredit {...props} />
               <MovieSeasons movie={movie} />
               <MovieTrailers {...props} />
               <MovieRecommendation {...props} />
-            </div>
-            <div className="w-[25%]">
-              <MovieOtherInfo {...props} />
             </div>
           </div>
         </div>
