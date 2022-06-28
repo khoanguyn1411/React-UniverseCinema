@@ -38,9 +38,9 @@ export const ItemMovie: React.FC<TProps> = ({
   };
   const getHeight = () => {
     if (size === "small") {
-      return "h-[22rem]";
+      return "w-[18rem] h-[22rem]";
     } else if (size === "large") {
-      return "h-[22rem]";
+      return "h-[22rem] w-[18rem]";
     }
   };
   return (

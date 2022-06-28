@@ -57,7 +57,7 @@ export const MovieDetail: FunctionComponent = () => {
         setMovie(result);
         setIsLoading(false);
         document.title =
-          result.name || result.original_title + " | Universe Cinema";
+          (result.name || result.original_title) + " | Universe Cinema";
       } catch (error) {
         throw new Error(error);
       }
