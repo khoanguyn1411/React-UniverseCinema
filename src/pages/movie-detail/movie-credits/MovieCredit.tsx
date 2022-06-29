@@ -67,6 +67,8 @@ export const MovieCredit: FunctionComponent<TProps.withType> = ({
       scrollbar: {
         draggable: true,
       },
+      centeredSlides: true,
+      centeredSlidesBounds: true,
     });
   }, [result]);
 

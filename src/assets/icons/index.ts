@@ -1,29 +1,31 @@
-import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
+import {
+  faFacebook,
+  faGithub,
+  faInstagramSquare,
+  faLinkedin,
+  faTwitterSquare,
+  faYoutubeSquare,
+} from "@fortawesome/free-brands-svg-icons";
 import {
   faAngleDown,
-  faSearch,
-  faAngleRight,
+  faAngleUp,
   faAngleLeft,
-  faEye,
-  faThumbsUp,
-  faList,
+  faAngleRight,
   faBookmark,
-  faHeart,
-  faStar,
-  faLink,
   faClose,
+  faEye,
   faFilm,
+  faHeart,
+  faLink,
+  faList,
   faPhotoFilm,
+  faSearch,
+  faStar,
+  faThumbsUp,
+  faBars,
+  faRemove,
 } from "@fortawesome/free-solid-svg-icons";
-import {
-  faFacebookSquare,
-  faYoutubeSquare,
-  faInstagramSquare,
-  faTwitterSquare,
-  faGithub,
-  faFacebook,
-  faLinkedin,
-} from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 
 export { Icon };
 
@@ -33,6 +35,7 @@ export const icYoutube = faYoutubeSquare;
 export const icInstagram = faInstagramSquare;
 export const icArrowLeft = faAngleLeft;
 export const icArrowRight = faAngleRight;
+export const icArrowUp = faAngleUp;
 export const icEye = faEye;
 export const icLike = faThumbsUp;
 export const icList = faList;
@@ -47,3 +50,5 @@ export const icFilm2 = faPhotoFilm;
 export const icGithub = faGithub;
 export const icFacebook = faFacebook;
 export const icLinkedIn = faLinkedin;
+export const icMenu = faBars;
+export const icRemove = faRemove;

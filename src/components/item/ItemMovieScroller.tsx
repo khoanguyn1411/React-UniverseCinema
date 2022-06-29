@@ -102,6 +102,8 @@ export const ItemScroller: React.FC<TProps> = ({
       scrollbar: {
         draggable: true,
       },
+      centeredSlides: true,
+      centeredSlidesBounds: true,
     });
   }, [movieList]);
 

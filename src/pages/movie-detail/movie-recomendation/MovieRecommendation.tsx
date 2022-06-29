@@ -70,6 +70,8 @@ export const MovieRecommendation: FunctionComponent<TProps.withType> = ({
       scrollbar: {
         draggable: true,
       },
+      centeredSlides: true,
+      centeredSlidesBounds: true,
     });
   }, [result]);
 
@@ -126,7 +128,7 @@ export const MovieRecommendation: FunctionComponent<TProps.withType> = ({
               ))}
             </SwiperApp>
           ) : (
-            <NoResult className="mt-[1rem]">
+            <NoResult className="mt-[1rem] lg:mx-[2rem]">
               There is no recommendation for this{" "}
               {type === values.MEDIA_TYPE.MOVIE ? "movie." : "TV show."}
             </NoResult>

@@ -26,9 +26,9 @@ export const Navbar: React.FC = () => {
       )}
     >
       <div className="wrapper flex flex-row justify-between items-center">
-        <LeftNavigationBar isHomePage={isHomePage} />
+        <LeftNavigationBar />
         <div className="flex">
-          <UserBar isHomePage={isHomePage} />
+          <UserBar />
           <SearchBar />
         </div>
       </div>
