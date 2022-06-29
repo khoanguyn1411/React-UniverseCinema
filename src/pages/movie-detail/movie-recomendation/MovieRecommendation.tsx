@@ -70,8 +70,6 @@ export const MovieRecommendation: FunctionComponent<TProps.withType> = ({
       scrollbar: {
         draggable: true,
       },
-      centeredSlides: true,
-      centeredSlidesBounds: true,
     });
   }, [result]);
 

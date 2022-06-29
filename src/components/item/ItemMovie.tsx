@@ -38,15 +38,15 @@ export const ItemMovie: React.FC<TProps> = ({
   };
   const getHeight = () => {
     if (size === "small") {
-      return "w-[18rem] h-[22rem]";
+      return "w-[15.1rem] h-[22rem]";
     } else if (size === "large") {
-      return "h-[22rem] w-[18rem]";
+      return "h-[22rem] w-[15.1rem]";
     }
   };
   return (
     <div
       className={classNames(
-        `hover:transition-all transition-all hover:scale-[1.05]`,
+        `hover:transition-all transition-all hover:scale-[1.05] w-[15.1rem]`,
         className
       )}
     >

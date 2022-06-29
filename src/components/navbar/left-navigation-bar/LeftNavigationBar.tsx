@@ -183,7 +183,7 @@ const LeftNavigationBarInit: React.FC = () => {
     }, []);
 
     return (
-      <div className="overflow-auto">
+      <div className="">
         <div ref={toggleRef}>
           <Icon
             icon={icMenu}
@@ -195,7 +195,7 @@ const LeftNavigationBarInit: React.FC = () => {
         <div
           ref={mobileRef}
           className={classNames(
-            "w-[20rem] h-screen  bg-white border-r-[1px] text-black fixed top-0 transition-all",
+            "w-[20rem] h-screen  bg-white border-r-[1px] overflow-auto text-black fixed top-0 transition-all pb-[2rem]",
             isOpenNav ? "left-0" : " left-[-25rem]"
           )}
         >

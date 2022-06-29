@@ -29,7 +29,7 @@ const WrapperModule = styled.div`
     padding-top: 5px;
     padding-left: 3px;
     padding-right: 3px;
-    width: 15.8rem;
+    width: auto;
     display: flex;
     justify-content: center;
     align-items: center;

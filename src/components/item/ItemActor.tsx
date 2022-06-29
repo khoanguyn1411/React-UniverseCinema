@@ -16,7 +16,7 @@ export const ItemActor: FunctionComponent<TProps> = ({ actor }) => {
     urlImg = configs.api.IMAGE_URL_SMALL + actor.profile_path;
   }
   return (
-    <div className="shadow-default rounded-[1rem] h-full cursor-pointer">
+    <div className="shadow-default rounded-[1rem] h-full cursor-pointer w-[15.2rem]">
       <ImageContainer url={urlImg} className="rounded-t-[1rem] h-[15rem]">
         <img alt={actor.name} src={urlImg} />
       </ImageContainer>
