@@ -33,11 +33,17 @@ export const ItemMovie: React.FC<TProps> = ({
       `${configs.routes.movieDetail}/${movie.id}-${
         (movie.name &&
           encodeURI(
-            movie.name.replaceAll("?", "4ch").replaceAll("#", "rtf")
+            movie.name
+              .replaceAll("?", "4ch")
+              .replaceAll("#", "rtf")
+              .replaceAll("/", "43g")
           )) ||
         (movie.original_title &&
           encodeURI(
-            movie.original_title.replaceAll("?", "4ch").replaceAll("#", "rtf")
+            movie.original_title
+              .replaceAll("?", "4ch")
+              .replaceAll("#", "rtf")
+              .replaceAll("/", "43g")
           ))
       }`
     );
@@ -62,7 +68,9 @@ export const ItemMovie: React.FC<TProps> = ({
       <ImageContainer
         onclick={handleSwitchToDetailMovie}
         url={pathImg}
-        className={classNames(`rounded-[1rem] shadow-default cursor-pointer`)}
+        className={classNames(
+          `rounded-[1rem] shadow-default cursor-pointer min-h-[20rem]`
+        )}
       >
         <img
           src={pathImg}

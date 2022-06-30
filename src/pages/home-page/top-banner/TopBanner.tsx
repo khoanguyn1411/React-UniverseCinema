@@ -50,11 +50,17 @@ export const TopBanner: React.FC = () => {
       `${configs.routes.movieDetail}/${movie.id}-${
         (movie.name &&
           encodeURI(
-            movie.name.replaceAll("?", "4ch").replaceAll("#", "rtf")
+            movie.name
+              .replaceAll("?", "4ch")
+              .replaceAll("#", "rtf")
+              .replaceAll("/", "43g")
           )) ||
         (movie.original_title &&
           encodeURI(
-            movie.original_title.replaceAll("?", "4ch").replaceAll("#", "rtf")
+            movie.original_title
+              .replaceAll("?", "4ch")
+              .replaceAll("#", "rtf")
+              .replaceAll("/", "43g")
           ))
       }`
     );
@@ -85,10 +91,10 @@ export const TopBanner: React.FC = () => {
                     />
                   </ImageContainer>
 
-                  <div className="absolute bottom-0 flex w-[65%] h-[60%] lg:h-auto top-0 left-0 right-0 wrapper lg:w-full lg:p-[5rem] sm:px-[2rem]">
+                  <div className="absolute bottom-0 lg:items-center flex w-[65%] h-[60%] lg:h-auto top-0 left-0 right-0 wrapper lg:w-full lg:p-[5rem] sm:px-[2rem]">
                     <ImageContainer
                       url={configs.api.IMAGE_URL_SMALL + banner.poster_path}
-                      className="h-full w-fit rounded-[1rem] sm:hidden"
+                      className="h-full w-fit rounded-[1rem] sm:hidden lg:h-1/2"
                     >
                       <img
                         className="h-full"

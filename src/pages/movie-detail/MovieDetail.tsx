@@ -3,6 +3,7 @@ import { funcs, values } from "@/constants";
 import { IMovie } from "@/types";
 import { FunctionComponent, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { ErrorPage } from "../error-page/ErrorPage";
 import { MovieCredit } from "./movie-credits/MovieCredit";
 import { MovieInfo } from "./movie-info/MovieInfo";
 import { MovieOtherInfo } from "./movie-other-info/MovieOtherInfo";
@@ -28,17 +29,20 @@ export const MovieDetail: FunctionComponent = () => {
       .join("-")
       .toLowerCase()
       .replaceAll("4ch", "?")
-      .replaceAll("rtf", "#");
+      .replaceAll("rtf", "#")
+      .replaceAll("43g", "/");
   } else {
     name = decodeURI(funcs.splitMulti(arrChar[2], ["-"])[1])
       .toLowerCase()
       .replaceAll("4ch", "?")
-      .replaceAll("rtf", "#");
+      .replaceAll("rtf", "#")
+      .replaceAll("43g", "/");
   }
 
   const [movie, setMovie] = useState<IMovie>(null);
   const [type, setType] = useState<string>(values.MEDIA_TYPE.MOVIE);
   const [isLoading, setIsLoading] = useState<Boolean>(true);
+
   useEffect(() => {
     const fetchAPI = async () => {
       try {
@@ -47,14 +51,39 @@ export const MovieDetail: FunctionComponent = () => {
         let result: any;
         let res = await fetch(url);
         result = await res.json();
+
+        const nameFilm = result.name
+          ?.toLowerCase()
+          .replaceAll("4ch", "?")
+          .replaceAll("rtf", "#")
+          .replaceAll("43g", "/");
+        const originalTile = result.original_title
+          ?.toLowerCase()
+          .replaceAll("4ch", "?")
+          .replaceAll("rtf", "#")
+          .replaceAll("43g", "/");
         if (
           result.success === false ||
-          (result.name?.toLowerCase().replace("4ch", "?") !== name &&
-            result.original_title?.toLowerCase().replace("4ch", "?") !== name)
+          (nameFilm !== name && originalTile !== name)
         ) {
           url = funcs.getAPI(`/tv/${id}?`, "&language=en-US");
           res = await fetch(url);
           result = await res.json();
+          const nameFilm = result.name
+            ?.toLowerCase()
+            .replaceAll("4ch", "?")
+            .replaceAll("rtf", "#")
+            .replaceAll("43g", "/");
+          const originalTile = result.original_title
+            ?.toLowerCase()
+            .replaceAll("4ch", "?")
+            .replaceAll("rtf", "#")
+            .replaceAll("43g", "/");
+          if (
+            result.success === false ||
+            (nameFilm !== name && originalTile !== name)
+          )
+            return;
           setType(values.MEDIA_TYPE.TVSHOWS);
         }
         setMovie(result);
@@ -76,7 +105,7 @@ export const MovieDetail: FunctionComponent = () => {
 
   return (
     <>
-      {isLoading && (
+      {isLoading && movie && (
         <div className="h-screen bg-black opacity-90">
           <Loading />
         </div>
@@ -97,6 +126,7 @@ export const MovieDetail: FunctionComponent = () => {
           </div>
         </div>
       )}
+      {!movie && <ErrorPage />}
     </>
   );
 };

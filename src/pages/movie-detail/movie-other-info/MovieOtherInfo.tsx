@@ -24,19 +24,23 @@ export const MovieOtherInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
   };
   return (
     <div className="lg:px-[2rem]">
-      <div className="mt-[2.5rem] mb-[3rem] lg:grid lg:grid-cols-2 lg:mb-0 ">
-        <Status title="Status">
-          <h1>{movie.status}</h1>
-        </Status>
+      <div className="mt-[2.5rem] mb-[3rem] lg:grid lg:grid-cols-2 lg:mb-0 lg:gap-[2rem]">
+        {movie.status && (
+          <Status title="Status">
+            <h1>{movie.status}</h1>
+          </Status>
+        )}
 
-        <Status title="Spoken language">
-          {movie.spoken_languages?.map((item, index) => (
-            <span key={index} className="text-s18">
-              {item.english_name}
-              {index !== movie.spoken_languages.length - 1 && ", "}
-            </span>
-          ))}
-        </Status>
+        {!!movie.spoken_languages && movie.spoken_languages.length > 0 && (
+          <Status title="Spoken language">
+            {movie.spoken_languages.map((item, index) => (
+              <span key={index} className="text-s18">
+                {item.english_name}
+                {index !== movie.spoken_languages.length - 1 && ", "}
+              </span>
+            ))}
+          </Status>
+        )}
 
         {!!movie.budget && (
           <Status title="Budget">

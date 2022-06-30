@@ -55,13 +55,12 @@ export const Button: React.FC<TButton> = forwardRef(
             "bg-transparent text-black border-transparent": transparent,
             "bg-transparent text-white border-white": strokeWhite,
             "bg-transparent text-black border-black": strokeBlack,
-            "hover:bg-white hover:text-black hover:transition-all":
+            "min-lg:hover:bg-white min-lg:hover:text-black":
               strokeWhite && hover,
-            "hover:bg-orange hover:text-white hover:border-orange hover:transition-all":
+            "min-lg:hover:bg-orange min-lg:hover:text-white min-lg:hover:border-orange":
               strokeBlack && hover,
-            "hover:bg-black hover:transition-all": orange && hover,
-            "hover:bg-orange hover:transition-all hover:border-orange":
-              black && hover,
+            "min-lg:hover:bg-black": orange && hover,
+            "min-lg:hover:bg-orange min-lg:hover:border-orange": black && hover,
           },
           className
         )}

@@ -34,10 +34,18 @@ export const SearchBar = () => {
     navigate(
       `${configs.routes.movieDetail}/${film.id}-${
         (film.name &&
-          encodeURI(film.name.replaceAll("?", "4ch").replaceAll("#", "rtf"))) ||
+          encodeURI(
+            film.name
+              .replaceAll("?", "4ch")
+              .replaceAll("#", "rtf")
+              .replaceAll("/", "43g")
+          )) ||
         (film.original_title &&
           encodeURI(
-            film.original_title.replaceAll("?", "4ch").replaceAll("#", "rtf")
+            film.original_title
+              .replaceAll("?", "4ch")
+              .replaceAll("#", "rtf")
+              .replaceAll("/", "43g")
           ))
       }`
     );

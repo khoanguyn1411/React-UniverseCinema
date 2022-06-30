@@ -18,6 +18,7 @@ export const publicRoutes: TRoutes[] = [
     component: Movie,
   },
   { path: configs.routes.movieWithSuffixAndPage, component: Movie },
+  { path: "*", component: HomePage },
 ];
 
 // Khi nào đăng nhập mới xem được các trang này

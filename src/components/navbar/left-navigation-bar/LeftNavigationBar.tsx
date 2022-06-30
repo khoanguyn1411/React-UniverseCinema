@@ -6,7 +6,7 @@ import {
   Icon,
   icRemove,
 } from "@/assets/icons";
-import { imgLogoLight } from "@/assets/images";
+import { imgLogoDark, imgLogoLight } from "@/assets/images";
 import { WrapperDefault, WrapperModule } from "@/components";
 import { configs } from "@/configs";
 import { updateActivePage } from "@/features";
@@ -52,6 +52,7 @@ const LeftNavigationBarInit: React.FC = () => {
 
   const handleMoveToHome = () => {
     navigate(configs.routes.homePage);
+    setIsOpenNav(false);
     dispatch(updateActivePage());
   };
 
@@ -208,6 +209,9 @@ const LeftNavigationBarInit: React.FC = () => {
                 onClick={() => setIsOpenNav(!isOpenNav)}
               />
             </div>
+          </div>
+          <div className="px-[1.5rem] mb-[2rem]">
+            <img onClick={handleMoveToHome} src={imgLogoDark} alt="Logo Dark" />
           </div>
           {tabs.map((tab, index) => (
             <ItemTab key={index} tab={tab} />

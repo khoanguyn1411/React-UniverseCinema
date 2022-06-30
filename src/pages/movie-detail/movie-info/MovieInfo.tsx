@@ -78,7 +78,7 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
             </ImageContainer>
           </div>
 
-          <div className="flex-[2.5] text-white font-bold pl-[4rem] flex flex-col justify-center lg:px-0 lg:mt-[3rem]">
+          <div className="flex-[2.5] text-white font-bold pl-[4rem] flex flex-col justify-center lg:px-0 lg:mt-[3rem] lg:w-full">
             {/* Main content */}
             <div className="flex justify-between">
               <div className="min-h-[25rem] flex-1">

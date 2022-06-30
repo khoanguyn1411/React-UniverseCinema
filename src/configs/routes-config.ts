@@ -17,7 +17,7 @@ export const routesPathConfig = {
 
   airingToday: "/airingtoday",
   onTV: "/ontv",
-  movieDetailWithSuffix: "/detail/:movie/*",
+  movieDetailWithSuffix: "/detail/:movie",
   // movieDetailWithSuffix: "/:category/:movie/*",
   movieDetail: "/detail",
   tvShow: "/tv",

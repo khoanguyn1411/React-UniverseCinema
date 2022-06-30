@@ -12,7 +12,7 @@ import { funcs } from "@/constants";
 import { useCallAPI } from "@/hooks/useCallAPI";
 import { IActors } from "@/types";
 import { FunctionComponent, useEffect, useRef, useState } from "react";
-import SwiperCore, { Navigation } from "swiper";
+import SwiperCore from "swiper";
 import { SwiperProps, SwiperSlide } from "swiper/react";
 import { TProps } from "..";
 
