@@ -241,7 +241,7 @@ export const Movie: FunctionComponent = () => {
         <h1 className="font-bold">{filterInfo.title}</h1>
       </div>
       <div className="grid grid-cols-4 mt-[2rem]">
-        <div className="col-span-1 flex flex-col">
+        <div className="col-span-1 flex flex-col bg-white lg:col-span-4 ">
           {filter === configs.routes.all.replace("/", "") && (
             <ItemFilter title="Sort by">
               <div className="p-[1rem]">
@@ -351,7 +351,7 @@ export const Movie: FunctionComponent = () => {
             </div>
           </ItemFilter>
         </div>
-        <div className="col-span-3 mb-[5rem]">
+        <div className="col-span-3 mb-[5rem] lg:col-span-4">
           {
             <ItemContainer
               filterCondition={filterCondition}

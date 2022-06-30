@@ -166,7 +166,7 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
 
             <div className="mt-[2rem]">
               <h1 className="text-s20 text-orange">Overview</h1>
-              <div className="max-h-[15rem] overflow-auto mt-[0.8rem] pr-[2rem] lg:pr-0">
+              <div className="max-h-[15rem] lg:max-h-max overflow-auto mt-[0.8rem] pr-[2rem] lg:pr-0">
                 {movie.overview ? (
                   <h1 className="font-normal">{movie.overview}</h1>
                 ) : (

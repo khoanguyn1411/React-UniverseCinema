@@ -121,6 +121,7 @@ const LeftNavigationBarInit: React.FC = () => {
       if (tab.to) {
         navigate(tab.to);
         dispatch(updateActivePage());
+        setIsOpenNav(false);
       } else {
         return;
       }

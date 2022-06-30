@@ -98,10 +98,6 @@ export const ItemScroller: React.FC<TProps> = ({
           refNext.current.classList.remove("opacity-30");
         }
       },
-      slidesPerGroup: 2,
-      scrollbar: {
-        draggable: true,
-      },
       centeredSlides: true,
       centeredSlidesBounds: true,
     });
@@ -117,7 +113,7 @@ export const ItemScroller: React.FC<TProps> = ({
   };
 
   return (
-    <div className="relative">
+    <div className="relative mt-[-2rem]">
       <div className="max-w-[200rem] w-full m-auto">
         <div className="flex items-center wrapper justify-between mt-[1.5rem] lg:flex-col">
           <Title className="flex-1">{title}</Title>

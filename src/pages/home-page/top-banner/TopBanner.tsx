@@ -48,9 +48,14 @@ export const TopBanner: React.FC = () => {
   const handleOpenDetail = (movie: IMovie) => {
     navigate(
       `${configs.routes.movieDetail}/${movie.id}-${
-        (movie.name && encodeURI(movie.name.replaceAll("?", "4ch"))) ||
+        (movie.name &&
+          encodeURI(
+            movie.name.replaceAll("?", "4ch").replaceAll("#", "rtf")
+          )) ||
         (movie.original_title &&
-          encodeURI(movie.original_title.replaceAll("?", "4ch")))
+          encodeURI(
+            movie.original_title.replaceAll("?", "4ch").replaceAll("#", "rtf")
+          ))
       }`
     );
     dispatch(updateActivePage());

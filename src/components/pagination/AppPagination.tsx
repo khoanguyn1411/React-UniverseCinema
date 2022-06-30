@@ -30,6 +30,11 @@ const WrapperModule = styled.div`
       font-size: 2.5rem;
     }
   }
+  .MuiPagination-ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const AppPagination: FunctionComponent<TProps> = ({

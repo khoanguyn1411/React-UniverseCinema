@@ -33,9 +33,12 @@ export const SearchBar = () => {
   const handleSwitchToDetailMovie = (film: IMovie) => {
     navigate(
       `${configs.routes.movieDetail}/${film.id}-${
-        (film.name && encodeURI(film.name.replaceAll("?", "4ch"))) ||
+        (film.name &&
+          encodeURI(film.name.replaceAll("?", "4ch").replaceAll("#", "rtf"))) ||
         (film.original_title &&
-          encodeURI(film.original_title.replaceAll("?", "4ch")))
+          encodeURI(
+            film.original_title.replaceAll("?", "4ch").replaceAll("#", "rtf")
+          ))
       }`
     );
     setIsShowSearchFunction(false);

@@ -13,14 +13,12 @@ export const TopRate = () => {
   };
 
   return (
-    <div className="mt-[3rem]">
-      <ItemScroller
-        title="Top rated"
-        smallItem
-        categories={categories}
-        slideDisplay={7}
-        fetchAPI={fetchAPI}
-      />
-    </div>
+    <ItemScroller
+      title="Top rated"
+      smallItem
+      categories={categories}
+      slideDisplay={7}
+      fetchAPI={fetchAPI}
+    />
   );
 };

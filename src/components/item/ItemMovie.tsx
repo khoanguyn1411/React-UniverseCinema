@@ -14,6 +14,7 @@ type TProps = {
   size?: string;
   isSwiper?: Boolean;
   noLineLimit?: Boolean;
+  noFixedWidth?: Boolean;
 };
 
 export const ItemMovie: React.FC<TProps> = ({
@@ -22,6 +23,7 @@ export const ItemMovie: React.FC<TProps> = ({
   size,
   isSwiper = false,
   noLineLimit = false,
+  noFixedWidth = false,
 }) => {
   const pathImg = `${configs.api.IMAGE_URL_SMALL}${movie.poster_path}`;
   const dispacth = useAppDispatch();
@@ -29,9 +31,14 @@ export const ItemMovie: React.FC<TProps> = ({
   const handleSwitchToDetailMovie = () => {
     navigate(
       `${configs.routes.movieDetail}/${movie.id}-${
-        (movie.name && encodeURI(movie.name.replaceAll("?", "4ch"))) ||
+        (movie.name &&
+          encodeURI(
+            movie.name.replaceAll("?", "4ch").replaceAll("#", "rtf")
+          )) ||
         (movie.original_title &&
-          encodeURI(movie.original_title.replaceAll("?", "4ch")))
+          encodeURI(
+            movie.original_title.replaceAll("?", "4ch").replaceAll("#", "rtf")
+          ))
       }`
     );
     dispacth(updateActivePage());
@@ -46,7 +53,9 @@ export const ItemMovie: React.FC<TProps> = ({
   return (
     <div
       className={classNames(
-        `hover:transition-all transition-all hover:scale-[1.05] w-[15.1rem]`,
+        `hover:transition-all transition-all hover:scale-[1.05] ${
+          !noFixedWidth && "w-[15.1rem]"
+        }`,
         className
       )}
     >

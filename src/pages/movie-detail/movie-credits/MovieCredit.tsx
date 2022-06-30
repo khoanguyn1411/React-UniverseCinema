@@ -31,7 +31,9 @@ export const MovieCredit: FunctionComponent<TProps.withType> = ({
   );
   useEffect(() => {
     setSettingsSwiper({
-      modules: [Navigation],
+      scrollbar: {
+        draggable: true,
+      },
       navigation: {
         prevEl: refPre?.current,
         nextEl: refNext?.current,
@@ -61,11 +63,6 @@ export const MovieCredit: FunctionComponent<TProps.withType> = ({
         } else {
           refNext.current.classList.remove("opacity-30");
         }
-      },
-      slidesPerGroup: 2,
-      direction: "horizontal",
-      scrollbar: {
-        draggable: true,
       },
     });
   }, [result]);

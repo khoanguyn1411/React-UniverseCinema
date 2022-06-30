@@ -20,17 +20,20 @@ export const MovieDetail: FunctionComponent = () => {
   if (arrChar.length > 2) {
     const sliceArr = arrChar.slice(2, arrChar.length);
     name = decodeURI(sliceArr.join("/"));
+
     // name = decodeURI(funcs.splitMulti(name, ["-"])[1]).toLowerCase();
     name = funcs
       .splitMulti(name, ["-"])
       .slice(1, funcs.splitMulti(name, ["-"]).length)
       .join("-")
       .toLowerCase()
-      .replaceAll("4ch", "?");
+      .replaceAll("4ch", "?")
+      .replaceAll("rtf", "#");
   } else {
     name = decodeURI(funcs.splitMulti(arrChar[2], ["-"])[1])
       .toLowerCase()
-      .replaceAll("4ch", "?");
+      .replaceAll("4ch", "?")
+      .replaceAll("rtf", "#");
   }
 
   const [movie, setMovie] = useState<IMovie>(null);

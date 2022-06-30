@@ -131,7 +131,7 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
   const movies: IMovie[] = result?.results;
 
   return (
-    <div className="ml-[2rem]">
+    <div className="ml-[2rem] lg:ml-0">
       {isLoading && (
         <div className="h-[40rem]">
           <Loading />
@@ -139,11 +139,11 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
       )}
       {!isLoading && (
         <>
-          <div className="grid grid-cols-5 gap-4 gap-y-8 ">
+          <div className="grid grid-cols-5 gap-4 gap-y-8 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
             {movies &&
               movies.length > 0 &&
               movies.map((item, index) => (
-                <ItemMovie key={index} noLineLimit movie={item} />
+                <ItemMovie key={index} noLineLimit movie={item} noFixedWidth />
               ))}
           </div>
           {result?.total_pages === 0 && (

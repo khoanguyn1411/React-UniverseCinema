@@ -23,6 +23,7 @@ import {
   faStar,
   faThumbsUp,
   faBars,
+  faFilter,
   faRemove,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
@@ -52,3 +53,4 @@ export const icFacebook = faFacebook;
 export const icLinkedIn = faLinkedin;
 export const icMenu = faBars;
 export const icRemove = faRemove;
+export const icFilter = faFilter;

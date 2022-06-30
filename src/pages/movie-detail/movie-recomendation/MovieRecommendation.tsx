@@ -35,7 +35,6 @@ export const MovieRecommendation: FunctionComponent<TProps.withType> = ({
 
   useEffect(() => {
     setSettingsSwiper({
-      modules: [Navigation],
       navigation: {
         prevEl: refPre?.current,
         nextEl: refNext?.current,
@@ -66,7 +65,6 @@ export const MovieRecommendation: FunctionComponent<TProps.withType> = ({
           refNext.current.classList.remove("opacity-30");
         }
       },
-      direction: "horizontal",
       scrollbar: {
         draggable: true,
       },

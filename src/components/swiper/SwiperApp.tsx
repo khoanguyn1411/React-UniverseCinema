@@ -71,6 +71,10 @@ export const SwiperApp: FunctionComponent<TProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
+  const settingInit: SwiperProps = {
+    modules: [Navigation],
+  };
+
   return (
     <WrapperModule>
       <div className="relative">
@@ -83,6 +87,7 @@ export const SwiperApp: FunctionComponent<TProps> = ({
             onAppSwiper && onAppSwiper(swiper);
           }}
           slidesPerView={"auto"}
+          {...settingInit}
           {...settings}
         >
           {children}

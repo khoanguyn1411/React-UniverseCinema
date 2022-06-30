@@ -8,7 +8,9 @@ type TProps = {
 };
 
 export const ItemFilter: FunctionComponent<TProps> = ({ children, title }) => {
-  const [isShowContent, setIsShowContent] = useState<Boolean>(true);
+  const [isShowContent, setIsShowContent] = useState<Boolean>(() => {
+    return window.innerWidth > 1023;
+  });
   return (
     <div className="rounded-[0.5rem] shadow-default w-full mb-[1.5rem]">
       <div
