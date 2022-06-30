@@ -82,8 +82,10 @@ export const MovieDetail: FunctionComponent = () => {
           if (
             result.success === false ||
             (nameFilm !== name && originalTile !== name)
-          )
+          ) {
+            setIsLoading(false);
             return;
+          }
           setType(values.MEDIA_TYPE.TVSHOWS);
         }
         setMovie(result);
@@ -105,7 +107,7 @@ export const MovieDetail: FunctionComponent = () => {
 
   return (
     <>
-      {isLoading && movie && (
+      {isLoading && (
         <div className="h-screen bg-black opacity-90">
           <Loading />
         </div>
@@ -126,7 +128,11 @@ export const MovieDetail: FunctionComponent = () => {
           </div>
         </div>
       )}
-      {!movie && <ErrorPage />}
+      {!movie && !isLoading && (
+        <div className="mt-[10rem]">
+          <ErrorPage />
+        </div>
+      )}
     </>
   );
 };

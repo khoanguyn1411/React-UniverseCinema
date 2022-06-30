@@ -71,13 +71,6 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
     return `&release_date.lte=${funcs.formatDateWithoutSep(date)}`;
   };
 
-  // "Popularity Descending",
-  // "Popularity Ascending",
-  // "Rating Descending",
-  // "Rating Ascending",
-  // "Title (A-Z)",
-  // "Title (Z-A)",
-
   const getSortBy = () => {
     switch (sortBy) {
       case "Popularity Descending":
@@ -113,7 +106,7 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
   useEffect(() => {
     setActivePage(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterCondition, category]);
+  }, [filterCondition]);
 
   useEffect(() => {
     if (result?.total_pages < 500) {
@@ -146,11 +139,11 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
                 <ItemMovie key={index} noLineLimit movie={item} noFixedWidth />
               ))}
           </div>
-          {result?.total_pages === 0 && (
+          {(result?.total_pages === 0 || !movies || movies.length === 0) && (
             <NoResult>We could not find any results</NoResult>
           )}
 
-          {result?.total_pages > 1 && (
+          {result?.total_pages > 1 && movies.length > 0 && (
             <div className="flex justify-center mt-[5rem]">
               <AppPagination
                 pageNumber={totalPage}

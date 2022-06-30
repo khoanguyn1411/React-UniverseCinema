@@ -9,9 +9,11 @@ import { UserBar } from "./user-bar/UserBar";
 export const Navbar: React.FC = () => {
   const activePage = useAppSelector((state) => state.activePage.value);
   const isFixedNav = useAppSelector((state) => state.isFixedNav.value);
+
   const isHomePage: Boolean =
     activePage === configs.routes.homePage ||
     activePage === configs.routes.movieDetail;
+
   return (
     <div
       className={classNames(
@@ -20,7 +22,7 @@ export const Navbar: React.FC = () => {
           "text-white": isHomePage,
           "bg-gradient-to-t from from-transparent to-black":
             isHomePage && !isFixedNav,
-          "bg-black ": isFixedNav && isHomePage,
+          "bg-black ": isFixedNav,
           "text-white bg-black border-box shadow-default": !isHomePage,
         }
       )}

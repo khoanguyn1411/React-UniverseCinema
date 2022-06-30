@@ -30,19 +30,21 @@ export const DefaultLayout: React.FC<Props> = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <div>
-      <div className="fixed top-0 w-full z-50">
-        <Navbar />
-      </div>
-      <div
-        className={`min-h-[78vh] ${
-          activePage === configs.routes.homePage ||
-          activePage === configs.routes.movieDetail
-            ? ""
-            : "mt-20"
-        }`}
-      >
-        {children}
+    <div className={`flex flex-col justify-between min-h-h100`}>
+      <div>
+        <div className={`fixed top-0 w-full z-50 `}>
+          <Navbar />
+        </div>
+        <div
+          className={`${
+            activePage === configs.routes.homePage ||
+            activePage === configs.routes.movieDetail
+              ? ""
+              : "mt-[10rem]"
+          }`}
+        >
+          {children}
+        </div>
       </div>
       <Footer />
     </div>

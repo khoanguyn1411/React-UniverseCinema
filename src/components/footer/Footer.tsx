@@ -7,7 +7,7 @@ export const Footer = () => {
     window.open(path, "_blank");
   };
   return (
-    <>
+    <div>
       <div className="h-[0.5rem] w-full bg-orange"></div>
       <div
         className="h-[30rem]"
@@ -35,6 +35,6 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };

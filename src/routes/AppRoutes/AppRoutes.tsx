@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Location, Route, Routes, useLocation } from "react-router-dom";
+import React, { Fragment, useEffect, useState } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 import TopBarProgress from "react-topbar-progress-indicator";
 
 import { DefaultLayout } from "@/layouts";
@@ -17,14 +17,13 @@ export const AppRoutes: React.FC = () => {
   const location = useLocation();
 
   const [progress, setProgress] = useState<Boolean>(false);
-  const [prevLoc, setPrevLoc] = useState<Location>(location);
-
+  const [prevLoc, setPrevLoc] = useState<string>(location.pathname);
   useEffect(() => {
-    setPrevLoc(location);
+    setPrevLoc(location.pathname);
     setProgress(true);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location]);
+  }, [location.pathname]);
 
   useEffect(() => {
     setProgress(false);
@@ -34,7 +33,8 @@ export const AppRoutes: React.FC = () => {
     <Routes>
       {publicRoutes.map((route, index) => {
         const Page = route.component;
-        const Layout: any = route.layout || DefaultLayout;
+        const Layout: any =
+          route.layout !== null ? route.layout || DefaultLayout : Fragment;
         return (
           <Route
             key={index}

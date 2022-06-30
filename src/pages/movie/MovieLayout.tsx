@@ -11,6 +11,7 @@ import { useCallAPI } from "@/hooks";
 import { IGenres } from "@/types";
 import { FunctionComponent, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
+import { ErrorPage } from "../error-page/ErrorPage";
 import { ItemContainer } from "./item-container/ItemContainer";
 import { ItemFilter } from "./item-filter/ItemFilter";
 import { IFilterCondition } from "./type";
@@ -23,6 +24,10 @@ export const Movie: FunctionComponent = () => {
       category === values.MEDIA_TYPE.MOVIE ? "Movies" : "TV shows"
     } | Universe Cinema`;
   }, [category]);
+
+  const isRightCategory =
+    category === values.MEDIA_TYPE.MOVIE ||
+    category === values.MEDIA_TYPE.TVSHOWS;
 
   const filterInfo = useMemo(
     function () {
@@ -59,11 +64,7 @@ export const Movie: FunctionComponent = () => {
               root: configs.routes.nowplaying,
             };
           default:
-            return {
-              title: "All movies",
-              routeAPI: "/discover/movie?",
-              root: configs.routes.all,
-            };
+            return null;
         }
       } else {
         switch (filter) {
@@ -93,11 +94,7 @@ export const Movie: FunctionComponent = () => {
             };
 
           default:
-            return {
-              title: "All TV Shows",
-              routeAPI: "/discover/tv",
-              root: configs.routes.all,
-            };
+            return null;
         }
       }
     },
@@ -235,9 +232,9 @@ export const Movie: FunctionComponent = () => {
     });
   };
 
-  return (
+  return filterInfo && isRightCategory ? (
     <div className="wrapper flex flex-col">
-      <div className="mt-[4rem] text-center text-[3rem] uppercase">
+      <div className="text-center text-[3rem] uppercase">
         <h1 className="font-bold">{filterInfo.title}</h1>
       </div>
       <div className="grid grid-cols-4 mt-[2rem]">
@@ -362,5 +359,7 @@ export const Movie: FunctionComponent = () => {
         </div>
       </div>
     </div>
+  ) : (
+    <ErrorPage />
   );
 };

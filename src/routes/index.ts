@@ -1,5 +1,5 @@
 import { configs } from "@/configs";
-import { HomePage, Movie, MovieDetail } from "@/pages";
+import { ErrorPage, HomePage, Movie, MovieDetail } from "@/pages";
 import React from "react";
 
 type TRoutes = {
@@ -18,7 +18,7 @@ export const publicRoutes: TRoutes[] = [
     component: Movie,
   },
   { path: configs.routes.movieWithSuffixAndPage, component: Movie },
-  { path: "*", component: HomePage },
+  { path: "*", component: ErrorPage },
 ];
 
 // Khi nào đăng nhập mới xem được các trang này

@@ -1,10 +1,7 @@
-import React from "react";
 import { Pagination } from "@mui/material";
-import styled from "styled-components";
-import { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect } from "react";
-import { configs } from "@/configs";
+import styled from "styled-components";
 
 interface IFilterInfo {
   title: string;
@@ -47,6 +44,7 @@ export const AppPagination: FunctionComponent<TProps> = ({
   const { category } = useParams();
   const handleSwitchPage = (e: React.ChangeEvent<unknown>, page: number) => {
     setActivePage(page);
+    window.scrollTo(0, 0);
   };
   useEffect(() => {
     navigate(
