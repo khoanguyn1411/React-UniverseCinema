@@ -118,6 +118,8 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
   ]);
 
   useEffect(() => {
+    // Chuyển cái này qua đầy vì để trong active page nó bị lỗi, khi filter bi quay
+    // ngược về trang đầu
     if (activePage !== 1) {
       searchParams.set("page", `${activePage}`);
     } else {
