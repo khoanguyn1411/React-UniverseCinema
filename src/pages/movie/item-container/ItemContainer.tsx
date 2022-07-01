@@ -2,10 +2,9 @@ import { AppPagination, ItemMovie, Loading, NoResult } from "@/components";
 import { funcs } from "@/constants";
 import { useCallAPI } from "@/hooks";
 import { IMovie } from "@/types";
-import { FunctionComponent, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { FunctionComponent, memo, useEffect, useState } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
 import { IFilterCondition } from "../type";
-import { memo } from "react";
 
 interface IFilterInfo {
   title: string;
@@ -24,9 +23,10 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
   filterCondition,
   sortBy,
 }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const { category, filter, page } = useParams();
   const [activePage, setActivePage] = useState<number>(
-    page ? Number.parseInt(page) : 1
+    searchParams.get("page") ? Number.parseInt(searchParams.get("page")) : 1
   );
   const [totalPage, setTotalPage] = useState<number>(500);
 

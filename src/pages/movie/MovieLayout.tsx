@@ -10,7 +10,7 @@ import { funcs, values } from "@/constants";
 import { useCallAPI } from "@/hooks";
 import { IGenres } from "@/types";
 import { FunctionComponent, useEffect, useMemo, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { ErrorPage } from "../error-page/ErrorPage";
 import { ItemContainer } from "./item-container/ItemContainer";
 import { ItemFilter } from "./item-filter/ItemFilter";
@@ -208,6 +208,8 @@ export const Movie: FunctionComponent = () => {
     fromDate,
     toDate,
   });
+  const [searchParams, setSearchParam] = useSearchParams();
+
   const handleSetFilterCondition = () => {
     setFilterCondition({
       rangeScore,
@@ -217,6 +219,7 @@ export const Movie: FunctionComponent = () => {
       toDate,
     });
   };
+
   const handleClearFilter = () => {
     setRangeScore([0, 10]);
     setRangeTime([0, 360]);
@@ -231,6 +234,10 @@ export const Movie: FunctionComponent = () => {
       toDate: null,
     });
   };
+
+  // var searchParams = new URLSearchParams();
+  // searchParams.append("stat", "a");
+  // searchParams.append("stat", "b");
 
   return filterInfo && isRightCategory ? (
     <div className="wrapper flex flex-col">
@@ -355,6 +362,11 @@ export const Movie: FunctionComponent = () => {
               filterInfo={filterInfo}
               sortBy={activeSort}
             />
+            // <ItemTest
+            //   filterCondition={filterCondition}
+            //   filterInfo={filterInfo}
+            //   sortBy={activeSort}
+            // />
           }
         </div>
       </div>
