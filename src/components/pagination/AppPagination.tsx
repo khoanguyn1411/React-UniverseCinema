@@ -1,6 +1,5 @@
 import { Pagination } from "@mui/material";
-import React, { FunctionComponent, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
 interface IFilterInfo {
@@ -40,21 +39,10 @@ export const AppPagination: FunctionComponent<TProps> = ({
   setActivePage,
   filterInfo,
 }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
   const handleSwitchPage = (e: React.ChangeEvent<unknown>, page: number) => {
     setActivePage(page);
     window.scrollTo(0, 0);
   };
-
-  useEffect(() => {
-    if (activePage !== 1) {
-      searchParams.set("page", `${activePage}`);
-    } else {
-      searchParams.delete("page");
-    }
-    setSearchParams(searchParams);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activePage]);
 
   return (
     <WrapperModule>

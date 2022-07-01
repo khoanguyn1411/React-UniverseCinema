@@ -17,7 +17,6 @@ export const publicRoutes: TRoutes[] = [
     path: configs.routes.movieWithSuffix,
     component: Movie,
   },
-  { path: configs.routes.movieWithSuffixAndPage, component: Movie },
   { path: "*", component: ErrorPage },
 ];
 

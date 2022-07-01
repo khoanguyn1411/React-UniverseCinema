@@ -81,7 +81,7 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
           <div className="flex-[2.5] text-white font-bold pl-[4rem] flex flex-col justify-center lg:px-0 lg:mt-[3rem] lg:w-full">
             {/* Main content */}
             <div className="flex justify-between">
-              <div className="min-h-[25rem] flex-1">
+              <div className="min-h-[25rem] flex-1 pr-[2rem]">
                 <h1 className="text-[3rem] text-orange">
                   {movie.name || movie.original_title}
                   <span className="text-[3rem] font-normal">
@@ -149,7 +149,7 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
                 </div>
               </div>
 
-              <div className="flex flex-col justify-between lg:hidden">
+              <div className="flex flex-col justify-around lg:hidden">
                 {configs.actions.map((button, index) => (
                   <Button
                     key={index}

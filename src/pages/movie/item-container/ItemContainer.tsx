@@ -1,5 +1,5 @@
 import { AppPagination, ItemMovie, Loading, NoResult } from "@/components";
-import { funcs } from "@/constants";
+import { funcs, values } from "@/constants";
 import { useCallAPI } from "@/hooks";
 import { IMovie } from "@/types";
 import { FunctionComponent, memo, useEffect, useState } from "react";
@@ -24,18 +24,17 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
   sortBy,
 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { category, filter, page } = useParams();
+  const { category, filter } = useParams();
   const [activePage, setActivePage] = useState<number>(
     searchParams.get("page") ? Number.parseInt(searchParams.get("page")) : 1
   );
-  console.log(activePage);
   const [totalPage, setTotalPage] = useState<number>(500);
 
   const getGenres = () => {
     const listGenres = filterCondition.filterGenresList;
     if (listGenres.length === 0) return "";
     if (listGenres.length === 1) {
-      return `with_genres=${listGenres[0]}`;
+      return `&with_genres=${listGenres[0]}`;
     } else {
       const arrConditions = listGenres
         .map((item, index) => {
@@ -44,7 +43,7 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
         })
         .join("");
 
-      return `with_genres=${arrConditions}`;
+      return `&with_genres=${arrConditions}`;
     }
   };
 
@@ -63,13 +62,17 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
   const getReleaseDateFrom = () => {
     const date = filterCondition.fromDate;
     if (!date) return "";
-    return `&release_date.gte=${funcs.formatDateWithoutSep(date)}`;
+    if (category === values.MEDIA_TYPE.TVSHOWS)
+      return `&first_air_date.gte=${funcs.formatDateWithoutSep(date)}`;
+    return `&primary_release_date.gte=${funcs.formatDateWithoutSep(date)}`;
   };
 
   const getReleaseDateTo = () => {
     const date = filterCondition.toDate;
     if (!date) return "";
-    return `&release_date.lte=${funcs.formatDateWithoutSep(date)}`;
+    if (category === values.MEDIA_TYPE.TVSHOWS)
+      return `&first_air_date.lte=${funcs.formatDateWithoutSep(date)}`;
+    return `&primary_release_date.lte=${funcs.formatDateWithoutSep(date)}`;
   };
 
   const getSortBy = () => {
@@ -91,21 +94,43 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
     }
   };
 
-  const [result, isLoading] = useCallAPI(
-    filterInfo.routeAPI === `/discover/${category}`
-      ? funcs.getAPI(
-          `/discover/${category}?`,
-          `&${getGenres()}&language=en-US&sort_by=${getSortBy()}&page=${activePage}${getReleaseDateFrom()}${getReleaseDateTo()}&${getScore()}&${getRuntime()}`
-        )
-      : funcs.getAPI(
-          `/${category}/${filterInfo.routeAPI}?`,
-          `&${getGenres()}&language=en-US&sort_by=${getSortBy()}&page=${activePage}${getReleaseDateFrom()}${getReleaseDateTo()}&${getScore()}&${getRuntime()}`
-        ),
-    [filterInfo, activePage, filterCondition, sortBy, category]
-  );
+  const getURL = () => {
+    if (filterInfo.routeAPI === `/discover/${category}`) {
+      return funcs.getAPI(
+        `/discover/${category}?`,
+        `${getGenres()}&language=en-US&sort_by=${getSortBy()}&page=${activePage}${getReleaseDateFrom()}${getReleaseDateTo()}&${getScore()}&${getRuntime()}`
+      );
+    } else {
+      return funcs.getAPI(
+        `/${category}/${filterInfo.routeAPI}?`,
+        `${getGenres()}&language=en-US&sort_by=${getSortBy()}&page=${activePage}${getReleaseDateFrom()}${getReleaseDateTo()}&${getScore()}&${getRuntime()}`
+      );
+    }
+  };
+
+  const [result, isLoading] = useCallAPI(getURL(), [
+    filterInfo,
+    activePage,
+    filterCondition,
+    sortBy,
+    category,
+    filter,
+  ]);
 
   useEffect(() => {
-    setActivePage(1);
+    if (activePage !== 1) {
+      searchParams.set("page", `${activePage}`);
+    } else {
+      searchParams.delete("page");
+    }
+    setSearchParams(searchParams);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activePage]);
+
+  useEffect(() => {
+    setActivePage(
+      searchParams.get("page") ? Number.parseInt(searchParams.get("page")) : 1
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterCondition]);
 

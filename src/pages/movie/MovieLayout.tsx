@@ -19,12 +19,6 @@ import { IFilterCondition } from "./type";
 export const Movie: FunctionComponent = () => {
   const { category, filter } = useParams();
 
-  useEffect(() => {
-    document.title = `${
-      category === values.MEDIA_TYPE.MOVIE ? "Movies" : "TV shows"
-    } | Universe Cinema`;
-  }, [category]);
-
   const isRightCategory =
     category === values.MEDIA_TYPE.MOVIE ||
     category === values.MEDIA_TYPE.TVSHOWS;
@@ -115,7 +109,7 @@ export const Movie: FunctionComponent = () => {
     "Title (A-Z)",
     "Title (Z-A)",
   ];
-
+  const [searchParams, setSearchParam] = useSearchParams();
   const [activeSort, setActiveSort] = useState<number | string>(list[0]);
   const [rangeScore, setRangeScore] = useState<number[]>([0, 10]);
   const [rangeTime, setRangeTime] = useState<number[]>([0, 360]);
@@ -186,7 +180,6 @@ export const Movie: FunctionComponent = () => {
       label: "360",
     },
   ];
-
   const [filterGenresList, setFilterGenresList] = useState<number[]>([]);
   const [fromDate, setFromDate] = useState<Date | null>(null);
   const [toDate, setToDate] = useState<Date | null>(null);
@@ -208,9 +201,11 @@ export const Movie: FunctionComponent = () => {
     fromDate,
     toDate,
   });
-  const [searchParams, setSearchParam] = useSearchParams();
 
   const handleSetFilterCondition = () => {
+    // searchParams.set("from", fromDate.toDateString());
+    // setSearchParam(searchParams);
+
     setFilterCondition({
       rangeScore,
       rangeTime,
@@ -235,9 +230,15 @@ export const Movie: FunctionComponent = () => {
     });
   };
 
-  // var searchParams = new URLSearchParams();
-  // searchParams.append("stat", "a");
-  // searchParams.append("stat", "b");
+  useEffect(() => {
+    document.title = `${
+      category === values.MEDIA_TYPE.MOVIE ? "Movies" : "TV shows"
+    } | Universe Cinema`;
+  }, [category]);
+
+  useEffect(() => {
+    handleClearFilter();
+  }, [filter, category]);
 
   return filterInfo && isRightCategory ? (
     <div className="wrapper flex flex-col">
@@ -362,11 +363,6 @@ export const Movie: FunctionComponent = () => {
               filterInfo={filterInfo}
               sortBy={activeSort}
             />
-            // <ItemTest
-            //   filterCondition={filterCondition}
-            //   filterInfo={filterInfo}
-            //   sortBy={activeSort}
-            // />
           }
         </div>
       </div>
