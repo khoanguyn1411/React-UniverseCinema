@@ -23,7 +23,7 @@ export const MovieOtherInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
     window.open(movie.homepage, "_blank");
   };
   return (
-    <div className="lg:px-[2rem]">
+    <div className="lg:px-[2rem] mb-[3rem]">
       <div className="mt-[2.5rem] mb-[3rem] lg:grid lg:grid-cols-2 lg:mb-0 lg:gap-[2rem]">
         {movie.status && (
           <Status title="Status">

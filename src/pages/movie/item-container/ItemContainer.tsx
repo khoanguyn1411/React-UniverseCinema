@@ -28,6 +28,7 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
   const [activePage, setActivePage] = useState<number>(
     searchParams.get("page") ? Number.parseInt(searchParams.get("page")) : 1
   );
+  console.log(activePage);
   const [totalPage, setTotalPage] = useState<number>(500);
 
   const getGenres = () => {
@@ -117,7 +118,9 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
   }, [result?.total_pages]);
 
   useEffect(() => {
-    setActivePage(page ? Number.parseInt(page) : 1);
+    setActivePage(
+      searchParams.get("page") ? Number.parseInt(searchParams.get("page")) : 1
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter, category]);
 

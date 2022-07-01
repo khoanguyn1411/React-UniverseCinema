@@ -31,20 +31,8 @@ export const ItemMovie: React.FC<TProps> = ({
   const handleSwitchToDetailMovie = () => {
     navigate(
       `${configs.routes.movieDetail}/${movie.id}-${
-        (movie.name &&
-          encodeURI(
-            movie.name
-              .replaceAll("?", "4ch")
-              .replaceAll("#", "rtf")
-              .replaceAll("/", "43g")
-          )) ||
-        (movie.original_title &&
-          encodeURI(
-            movie.original_title
-              .replaceAll("?", "4ch")
-              .replaceAll("#", "rtf")
-              .replaceAll("/", "43g")
-          ))
+        (movie.name && funcs.removeAccent(movie.name)) ||
+        (movie.original_title && funcs.removeAccent(movie.original_title))
       }`
     );
     dispacth(updateActivePage());

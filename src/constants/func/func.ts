@@ -6,11 +6,16 @@ type URLType = {
 };
 
 function removeAccent(str: string): string {
-  str = str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-  str = str.replace(/\s/g, "-");
-  str = str.replace("/", "-");
-  str = str.toLowerCase();
-  str = encodeURIComponent(str);
+  let initStr = str;
+  str = str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[&\/\\#@^,+()$~%-.!'":*?<>{}]/g, "")
+    .trim()
+    .replace(/\s+/g, "-")
+    .toLowerCase();
+  if (str === "") str = encodeURIComponent(initStr);
+  else str = encodeURIComponent(str);
   return str;
 }
 

@@ -16,28 +16,8 @@ export const MovieDetail: FunctionComponent = () => {
   const arrChar = funcs.splitMulti(location.pathname, ["/"]);
 
   const id = funcs.splitMulti(arrChar[2], ["-"])[0];
-
   let name: string;
-  if (arrChar.length > 2) {
-    const sliceArr = arrChar.slice(2, arrChar.length);
-    name = decodeURI(sliceArr.join("/"));
-
-    // name = decodeURI(funcs.splitMulti(name, ["-"])[1]).toLowerCase();
-    name = funcs
-      .splitMulti(name, ["-"])
-      .slice(1, funcs.splitMulti(name, ["-"]).length)
-      .join("-")
-      .toLowerCase()
-      .replaceAll("4ch", "?")
-      .replaceAll("rtf", "#")
-      .replaceAll("43g", "/");
-  } else {
-    name = decodeURI(funcs.splitMulti(arrChar[2], ["-"])[1])
-      .toLowerCase()
-      .replaceAll("4ch", "?")
-      .replaceAll("rtf", "#")
-      .replaceAll("43g", "/");
-  }
+  name = funcs.splitMulti(arrChar[2], ["-"]).splice(1).join("-");
 
   const [movie, setMovie] = useState<IMovie>(null);
   const [type, setType] = useState<string>(values.MEDIA_TYPE.MOVIE);
@@ -51,37 +31,24 @@ export const MovieDetail: FunctionComponent = () => {
         let result: any;
         let res = await fetch(url);
         result = await res.json();
-
-        const nameFilm = result.name
-          ?.toLowerCase()
-          .replaceAll("4ch", "?")
-          .replaceAll("rtf", "#")
-          .replaceAll("43g", "/");
-        const originalTile = result.original_title
-          ?.toLowerCase()
-          .replaceAll("4ch", "?")
-          .replaceAll("rtf", "#")
-          .replaceAll("43g", "/");
+        // console.log(funcs.removeAccent(result.original_title));
         if (
           result.success === false ||
-          (nameFilm !== name && originalTile !== name)
+          (funcs.removeAccent(
+            result.original_title ? result.original_title : ""
+          ) !== name &&
+            funcs.removeAccent(result.name ? result.name : "") !== name)
         ) {
           url = funcs.getAPI(`/tv/${id}?`, "&language=en-US");
           res = await fetch(url);
           result = await res.json();
-          const nameFilm = result.name
-            ?.toLowerCase()
-            .replaceAll("4ch", "?")
-            .replaceAll("rtf", "#")
-            .replaceAll("43g", "/");
-          const originalTile = result.original_title
-            ?.toLowerCase()
-            .replaceAll("4ch", "?")
-            .replaceAll("rtf", "#")
-            .replaceAll("43g", "/");
+
           if (
             result.success === false ||
-            (nameFilm !== name && originalTile !== name)
+            (funcs.removeAccent(
+              result.original_title ? result.original_title : ""
+            ) !== name &&
+              funcs.removeAccent(result.name ? result.name : "") !== name)
           ) {
             setIsLoading(false);
             return;
