@@ -5,6 +5,7 @@ import {
   Select,
   Separate,
 } from "@/components";
+import { SelectWithURL } from "@/components/select/SelectWithURL";
 import { configs } from "@/configs";
 import { funcs, values } from "@/constants";
 import { useCallAPI } from "@/hooks";
@@ -16,12 +17,13 @@ import { ItemContainer } from "./item-container/ItemContainer";
 import { ItemFilter } from "./item-filter/ItemFilter";
 import { IFilterCondition } from "./type";
 
+interface ISortBy {
+  title: string;
+  param: string;
+}
+
 export const Movie: FunctionComponent = () => {
   const { category, filter } = useParams();
-
-  const isRightCategory =
-    category === values.MEDIA_TYPE.MOVIE ||
-    category === values.MEDIA_TYPE.TVSHOWS;
 
   const filterInfo = useMemo(
     function () {
@@ -101,14 +103,7 @@ export const Movie: FunctionComponent = () => {
   ]);
 
   const genres: IGenres[] = result?.genres;
-  const list = [
-    "Popularity Descending",
-    "Popularity Ascending",
-    "Rating Descending",
-    "Rating Ascending",
-    "Title (A-Z)",
-    "Title (Z-A)",
-  ];
+
   const [searchParams, setSearchParam] = useSearchParams();
 
   const marksScore = [
@@ -193,7 +188,41 @@ export const Movie: FunctionComponent = () => {
       ? Number.parseInt(searchParams.get("to_time"))
       : 360,
   ]);
-  const [activeSort, setActiveSort] = useState<number | string>(list[0]);
+
+  const listSortBy: ISortBy[] = [
+    {
+      title: "Popularity Descending",
+      param: "popularity_des",
+    },
+    {
+      title: "Popularity Ascending",
+      param: "popularity_asc",
+    },
+    {
+      title: "Rating Descending",
+      param: "rating_des",
+    },
+    {
+      title: "Rating Ascending",
+      param: "rating_asc",
+    },
+    {
+      title: "Title (A-Z)",
+      param: "title_asc",
+    },
+    {
+      title: "Title (Z-A)",
+      param: "title_des",
+    },
+  ];
+
+  const [activeSort, setActiveSort] = useState<ISortBy>(
+    searchParams.get("sort_by")
+      ? listSortBy.filter(
+          (item) => item.param === searchParams.get("sort_by")
+        )[0]
+      : listSortBy[0]
+  );
 
   const [filterGenresList, setFilterGenresList] = useState<number[]>(
     searchParams.get("with_genres")
@@ -243,6 +272,14 @@ export const Movie: FunctionComponent = () => {
       searchParams.set("to_score", rangeScore[1].toString());
     }
 
+    if (rangeTime[0] !== 0) {
+      searchParams.set("from_time", rangeTime[0].toString());
+    }
+
+    if (rangeTime[1] !== 360) {
+      searchParams.set("to_time", rangeTime[1].toString());
+    }
+
     if (filterGenresList.length !== 0) {
       searchParams.set("with_genres", filterGenresList.join(","));
     }
@@ -288,6 +325,7 @@ export const Movie: FunctionComponent = () => {
       category === values.MEDIA_TYPE.MOVIE ? "Movies" : "TV shows"
     } | Universe Cinema`;
   }, [category]);
+
   useEffect(() => {
     setFilterGenresList(
       searchParams.get("with_genres")
@@ -329,20 +367,31 @@ export const Movie: FunctionComponent = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter, category]);
 
+  const handleSetSearchSortby = () => {
+    searchParams.set("sort_by", activeSort.param);
+    setSearchParam(searchParams);
+  };
+
+  const isRightCategory =
+    (category === values.MEDIA_TYPE.MOVIE ||
+      category === values.MEDIA_TYPE.TVSHOWS) &&
+    activeSort;
+
   return filterInfo && isRightCategory ? (
     <div className="wrapper flex flex-col">
       <div className="text-center text-[3rem] uppercase">
         <h1 className="font-bold">{filterInfo.title}</h1>
       </div>
       <div className="grid grid-cols-4 mt-[2rem]">
-        <div className="col-span-1 flex flex-col bg-white lg:col-span-4 ">
+        <div className="col-span-1 flex flex-col bg-white lg:col-span-4 min-lg:mb-[3rem] ">
           {filter === configs.routes.all.replace("/", "") && (
             <ItemFilter title="Sort by">
               <div className="p-[1rem]">
-                <Select
+                <SelectWithURL
                   active={activeSort}
                   setActive={setActiveSort}
-                  list={list}
+                  list={listSortBy}
+                  onChange={handleSetSearchSortby}
                 />
               </div>
             </ItemFilter>
@@ -452,7 +501,7 @@ export const Movie: FunctionComponent = () => {
               // setActivePage={setActivePage}
               filterCondition={filterCondition}
               filterInfo={filterInfo}
-              sortBy={activeSort}
+              sortBy={activeSort.title}
             />
           }
         </div>

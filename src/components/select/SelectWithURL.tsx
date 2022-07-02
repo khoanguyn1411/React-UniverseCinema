@@ -2,14 +2,19 @@ import { icArrowDown, Icon } from "@/assets/icons";
 import React, { FunctionComponent, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 
+interface IActive {
+  title: string;
+  param: string;
+}
+
 type TProps = {
-  list: number[] | string[];
-  active: number | string;
-  setActive: React.Dispatch<React.SetStateAction<string | number>>;
+  list: IActive[];
+  active: IActive;
+  setActive: React.Dispatch<React.SetStateAction<IActive>>;
   onChange?: () => void;
 };
 
-export const Select: FunctionComponent<TProps> = ({
+export const SelectWithURL: FunctionComponent<TProps> = ({
   list,
   active,
   setActive,
@@ -38,7 +43,7 @@ export const Select: FunctionComponent<TProps> = ({
     }
   }, [isShowContent]);
 
-  const handleSetSelectedItem = (item: number | string) => {
+  const handleSetSelectedItem = (item: IActive) => {
     setActive(item);
     setIsShowContent(false);
   };
@@ -54,8 +59,8 @@ export const Select: FunctionComponent<TProps> = ({
   return (
     <div>
       <select className="hidden">
-        {list.map((item: number | string, index: number) => (
-          <option key={index}>{item}</option>
+        {list.map((item, index: number) => (
+          <option key={index}>{item.title}</option>
         ))}
       </select>
 
@@ -66,7 +71,7 @@ export const Select: FunctionComponent<TProps> = ({
           onClick={handleToggleContent}
           className="w-full flex cursor-pointer bg-grey justify-between items-center p-[1rem] rounded-[0.5rem]"
         >
-          <h1>{active}</h1>
+          <h1>{active.title}</h1>
           <Icon icon={icArrowDown} />
         </div>
         {/* List */}
@@ -75,20 +80,20 @@ export const Select: FunctionComponent<TProps> = ({
             ref={listRef}
             className="absolute z-10 max-h-[20rem] overflow-auto bg-white border-[0.15rem] border-black w-full mt-[0.5rem] rounded-[0.5rem]"
           >
-            {list.map((item: number | string, index: number) => (
+            {list.map((item: IActive, index: number) => (
               <div
                 key={index}
                 onClick={() => handleSetSelectedItem(item)}
                 className={classNames(
                   "p-[1rem] cursor-pointer hover:bg-grey transition-all hover:transition-all",
                   {
-                    "font-bold": item === active,
+                    "font-bold": item.title === active.title,
                     "rounded-t-[0.3rem]": index === 0,
                     "rounded-b-[0.3rem]": index === list.length - 1,
                   }
                 )}
               >
-                <h1>{item}</h1>
+                <h1>{item.title}</h1>
               </div>
             ))}
           </div>
