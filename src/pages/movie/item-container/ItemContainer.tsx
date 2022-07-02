@@ -16,20 +16,24 @@ type TProps = {
   filterInfo: IFilterInfo;
   filterCondition: IFilterCondition;
   sortBy: string | number;
+  // activePage: number;
+  // setActivePage: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const ItemContainerInit: FunctionComponent<TProps> = ({
   filterInfo,
   filterCondition,
   sortBy,
+  // activePage,
+  // setActivePage,
 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { category, filter } = useParams();
+
+  const [totalPage, setTotalPage] = useState<number>(500);
   const [activePage, setActivePage] = useState<number>(
     searchParams.get("page") ? Number.parseInt(searchParams.get("page")) : 1
   );
-  const [totalPage, setTotalPage] = useState<number>(500);
-
   const getGenres = () => {
     const listGenres = filterCondition.filterGenresList;
     if (listGenres.length === 0) return "";
@@ -109,32 +113,12 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
   };
 
   const [result, isLoading] = useCallAPI(getURL(), [
-    filterInfo,
     activePage,
     filterCondition,
     sortBy,
-    category,
-    filter,
   ]);
 
-  useEffect(() => {
-    // Chuyển cái này qua đầy vì để trong active page nó bị lỗi, khi filter bi quay
-    // ngược về trang đầu
-    if (activePage !== 1) {
-      searchParams.set("page", `${activePage}`);
-    } else {
-      searchParams.delete("page");
-    }
-    setSearchParams(searchParams);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activePage]);
-
-  useEffect(() => {
-    setActivePage(
-      searchParams.get("page") ? Number.parseInt(searchParams.get("page")) : 1
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterCondition]);
+  console.log(getGenres());
 
   useEffect(() => {
     if (result?.total_pages < 500) {
@@ -149,7 +133,17 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
       searchParams.get("page") ? Number.parseInt(searchParams.get("page")) : 1
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filter, category]);
+  }, [filter, category, filterCondition]);
+
+  useEffect(() => {
+    if (activePage !== 1) {
+      searchParams.set("page", `${activePage}`);
+    } else {
+      searchParams.delete("page");
+    }
+    setSearchParams(searchParams);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activePage]);
 
   const movies: IMovie[] = result?.results;
 

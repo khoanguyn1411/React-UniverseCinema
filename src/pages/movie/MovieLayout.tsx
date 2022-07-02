@@ -110,9 +110,6 @@ export const Movie: FunctionComponent = () => {
     "Title (Z-A)",
   ];
   const [searchParams, setSearchParam] = useSearchParams();
-  const [activeSort, setActiveSort] = useState<number | string>(list[0]);
-  const [rangeScore, setRangeScore] = useState<number[]>([0, 10]);
-  const [rangeTime, setRangeTime] = useState<number[]>([0, 360]);
 
   const marksScore = [
     {
@@ -180,9 +177,37 @@ export const Movie: FunctionComponent = () => {
       label: "360",
     },
   ];
-  const [filterGenresList, setFilterGenresList] = useState<number[]>([]);
-  const [fromDate, setFromDate] = useState<Date | null>(null);
-  const [toDate, setToDate] = useState<Date | null>(null);
+  const [rangeScore, setRangeScore] = useState<number[]>([
+    searchParams.get("from_score")
+      ? Number.parseInt(searchParams.get("from_score"))
+      : 0,
+    searchParams.get("to_score")
+      ? Number.parseInt(searchParams.get("to_score"))
+      : 10,
+  ]);
+  const [rangeTime, setRangeTime] = useState<number[]>([
+    searchParams.get("from_time")
+      ? Number.parseInt(searchParams.get("from_time"))
+      : 0,
+    searchParams.get("to_time")
+      ? Number.parseInt(searchParams.get("to_time"))
+      : 360,
+  ]);
+  const [activeSort, setActiveSort] = useState<number | string>(list[0]);
+
+  const [filterGenresList, setFilterGenresList] = useState<number[]>(
+    searchParams.get("with_genres")
+      ? searchParams.get("with_genres").split(",").map(Number)
+      : []
+  );
+  const [fromDate, setFromDate] = useState<Date | null>(
+    searchParams.get("from_date")
+      ? new Date(searchParams.get("from_date"))
+      : null
+  );
+  const [toDate, setToDate] = useState<Date | null>(
+    searchParams.get("to_date") ? new Date(searchParams.get("to_date")) : null
+  );
 
   const handleSetFilterGenresList = (item: number) => {
     setFilterGenresList((prev) => {
@@ -203,8 +228,26 @@ export const Movie: FunctionComponent = () => {
   });
 
   const handleSetFilterCondition = () => {
-    // searchParams.set("from", fromDate.toDateString());
-    // setSearchParam(searchParams);
+    if (fromDate !== null) {
+      searchParams.set("from_date", funcs.formatDateWithoutSep(fromDate));
+    }
+    if (toDate !== null) {
+      searchParams.set("to_date", funcs.formatDateWithoutSep(toDate));
+    }
+
+    if (rangeScore[0] !== 0) {
+      searchParams.set("from_score", rangeScore[0].toString());
+    }
+
+    if (rangeScore[1] !== 10) {
+      searchParams.set("to_score", rangeScore[1].toString());
+    }
+
+    if (filterGenresList.length !== 0) {
+      searchParams.set("with_genres", filterGenresList.join(","));
+    }
+    searchParams.delete("page");
+    setSearchParam(searchParams);
 
     setFilterCondition({
       rangeScore,
@@ -216,6 +259,16 @@ export const Movie: FunctionComponent = () => {
   };
 
   const handleClearFilter = () => {
+    searchParams.delete("page");
+    searchParams.delete("with_genres");
+    searchParams.delete("from_date");
+    searchParams.delete("to_date");
+    searchParams.delete("from_score");
+    searchParams.delete("to_score");
+    searchParams.delete("from_time");
+    searchParams.delete("to_time");
+    searchParams.delete("page");
+    setSearchParam(searchParams);
     setRangeScore([0, 10]);
     setRangeTime([0, 360]);
     setFilterGenresList([]);
@@ -235,9 +288,45 @@ export const Movie: FunctionComponent = () => {
       category === values.MEDIA_TYPE.MOVIE ? "Movies" : "TV shows"
     } | Universe Cinema`;
   }, [category]);
-
   useEffect(() => {
-    handleClearFilter();
+    setFilterGenresList(
+      searchParams.get("with_genres")
+        ? searchParams.get("with_genres").split(",").map(Number)
+        : []
+    );
+    setFromDate(
+      searchParams.get("from_date")
+        ? new Date(searchParams.get("from_date"))
+        : null
+    );
+
+    setToDate(
+      searchParams.get("to_date") ? new Date(searchParams.get("to_date")) : null
+    );
+    setRangeScore([
+      searchParams.get("from_score")
+        ? Number.parseInt(searchParams.get("from_score"))
+        : 0,
+      searchParams.get("to_score")
+        ? Number.parseInt(searchParams.get("to_score"))
+        : 10,
+    ]);
+    setRangeTime([
+      searchParams.get("from_time")
+        ? Number.parseInt(searchParams.get("from_time"))
+        : 0,
+      searchParams.get("to_time")
+        ? Number.parseInt(searchParams.get("to_time"))
+        : 360,
+    ]);
+    setFilterCondition({
+      rangeScore: [0, 10],
+      rangeTime: [0, 360],
+      filterGenresList: [],
+      fromDate: null,
+      toDate: null,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter, category]);
 
   return filterInfo && isRightCategory ? (
@@ -359,6 +448,8 @@ export const Movie: FunctionComponent = () => {
         <div className="col-span-3 mb-[5rem] lg:col-span-4">
           {
             <ItemContainer
+              // activePage={activePage}
+              // setActivePage={setActivePage}
               filterCondition={filterCondition}
               filterInfo={filterInfo}
               sortBy={activeSort}
