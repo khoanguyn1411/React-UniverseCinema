@@ -118,8 +118,6 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
     sortBy,
   ]);
 
-  console.log(getGenres());
-
   useEffect(() => {
     if (result?.total_pages < 500) {
       setTotalPage(result?.total_pages);

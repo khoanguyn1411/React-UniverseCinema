@@ -29,7 +29,7 @@ export const Navbar: React.FC = () => {
     >
       <div className="wrapper flex flex-row justify-between items-center">
         <LeftNavigationBar />
-        <div className="flex">
+        <div className="flex items-center justify-center">
           <UserBar />
           <SearchBar />
         </div>

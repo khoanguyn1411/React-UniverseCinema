@@ -1,12 +1,17 @@
-import { AppDatePicker, Button, RangeSlider, Separate } from "@/components";
-import { SelectWithURL } from "@/components/select/SelectWithURL";
+import {
+  AppDatePicker,
+  Button,
+  RangeSlider,
+  Separate,
+  SelectWithURL,
+} from "@/components";
 import { configs } from "@/configs";
 import { funcs, values } from "@/constants";
 import { useCallAPI } from "@/hooks";
 import { IGenres } from "@/types";
 import { FunctionComponent, useEffect, useMemo, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-import { ErrorPage } from "../error-page/ErrorPage";
+import { ErrorPage } from "@/pages";
 import { ItemContainer } from "./item-container/ItemContainer";
 import { ItemFilter } from "./item-filter/ItemFilter";
 import { IFilterCondition } from "./type";
@@ -352,11 +357,31 @@ export const Movie: FunctionComponent = () => {
         : 360,
     ]);
     setFilterCondition({
-      rangeScore,
-      rangeTime,
-      filterGenresList,
-      fromDate,
-      toDate,
+      rangeScore: [
+        searchParams.get("from_score")
+          ? Number.parseInt(searchParams.get("from_score"))
+          : 0,
+        searchParams.get("to_score")
+          ? Number.parseInt(searchParams.get("to_score"))
+          : 10,
+      ],
+      rangeTime: [
+        searchParams.get("from_time")
+          ? Number.parseInt(searchParams.get("from_time"))
+          : 0,
+        searchParams.get("to_time")
+          ? Number.parseInt(searchParams.get("to_time"))
+          : 360,
+      ],
+      filterGenresList: searchParams.get("with_genres")
+        ? searchParams.get("with_genres").split(",").map(Number)
+        : [],
+      fromDate: searchParams.get("from_date")
+        ? new Date(searchParams.get("from_date"))
+        : null,
+      toDate: searchParams.get("to_date")
+        ? new Date(searchParams.get("to_date"))
+        : null,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter, category]);

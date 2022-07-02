@@ -1,10 +1,19 @@
 import { Button, ImageContainer, NoResult, UserScore } from "@/components";
 import { configs } from "@/configs";
 import { funcs } from "@/constants";
+import { updateActivePage } from "@/features";
+import { useAppDispatch } from "@/hooks";
+import { IGenres } from "@/types";
 import { FunctionComponent } from "react";
+import { useNavigate } from "react-router-dom";
 import { TProps } from "..";
 
-export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
+export const MovieInfo: FunctionComponent<TProps.withType> = ({
+  movie,
+  type,
+}) => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const formatRunTime = (minuteVar: number | number[]): string => {
     let initMinute: number;
     if (Array.isArray(minuteVar)) {
@@ -28,6 +37,11 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
         return `${hour}h${minute % 60}m`;
       }
     }
+  };
+
+  const handleMoveToFilterGenre = (item: IGenres) => {
+    navigate(`/${type}/all?with_genres=${item.id}`);
+    dispatch(updateActivePage());
   };
 
   return (
@@ -99,6 +113,7 @@ export const MovieInfo: FunctionComponent<TProps.noType> = ({ movie }) => {
                       strokeWhite
                       key={index}
                       hover
+                      onClick={() => handleMoveToFilterGenre(item)}
                       className={`py-[0.5rem] px-[1rem] mt-[0.8rem] w-fit rounded-[10rem] ${
                         index !== movie.genres.length && "mr-[1rem]"
                       }`}
