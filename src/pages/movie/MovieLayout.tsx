@@ -320,11 +320,11 @@ export const Movie: FunctionComponent = () => {
         : 360,
     ]);
     setFilterCondition({
-      rangeScore: [0, 10],
-      rangeTime: [0, 360],
-      filterGenresList: [],
-      fromDate: null,
-      toDate: null,
+      rangeScore,
+      rangeTime,
+      filterGenresList,
+      fromDate,
+      toDate,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter, category]);
