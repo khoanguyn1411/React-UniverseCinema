@@ -1,10 +1,4 @@
-import {
-  AppDatePicker,
-  Button,
-  RangeSlider,
-  Select,
-  Separate,
-} from "@/components";
+import { AppDatePicker, Button, RangeSlider, Separate } from "@/components";
 import { SelectWithURL } from "@/components/select/SelectWithURL";
 import { configs } from "@/configs";
 import { funcs, values } from "@/constants";
