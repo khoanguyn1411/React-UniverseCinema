@@ -2,10 +2,10 @@ import { Button } from "@/components";
 import { configs } from "@/configs";
 import { setErrorActivePage, updateActivePage } from "@/features";
 import { useAppDispatch } from "@/hooks";
-import { useEffect } from "react";
+import { FunctionComponent, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const ErrorPage = () => {
+export const ErrorPage: FunctionComponent = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   useEffect(() => {

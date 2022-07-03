@@ -16,24 +16,22 @@ type TProps = {
   filterInfo: IFilterInfo;
   filterCondition: IFilterCondition;
   sortBy: string | number;
-  // activePage: number;
-  // setActivePage: React.Dispatch<React.SetStateAction<number>>;
+  activePage: number;
+  setActivePage: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const ItemContainerInit: FunctionComponent<TProps> = ({
   filterInfo,
   filterCondition,
   sortBy,
-  // activePage,
-  // setActivePage,
+  activePage,
+  setActivePage,
 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { category, filter } = useParams();
 
   const [totalPage, setTotalPage] = useState<number>(500);
-  const [activePage, setActivePage] = useState<number>(
-    searchParams.get("page") ? Number.parseInt(searchParams.get("page")) : 1
-  );
+
   const getGenres = () => {
     const listGenres = filterCondition.filterGenresList;
     if (listGenres.length === 0) return "";
@@ -115,7 +113,6 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
   const [result, isLoading] = useCallAPI(getURL(), [
     activePage,
     filterCondition,
-    sortBy,
   ]);
 
   useEffect(() => {

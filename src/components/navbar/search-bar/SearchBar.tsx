@@ -6,7 +6,7 @@ import { updateActivePage } from "@/features";
 import { useAppDispatch, useDebounce } from "@/hooks";
 import { IMovie } from "@/types";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
-import { useEffect, useRef, useState } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface IResult {
@@ -14,7 +14,7 @@ interface IResult {
   tv: IMovie[];
 }
 
-export const SearchBar = () => {
+export const SearchBar: FunctionComponent = () => {
   const [searchValue, setSearchValue] = useState<string>("");
   const debounceValue = useDebounce(searchValue);
   const [result, setResult] = useState<IResult>({ movie: [], tv: [] });

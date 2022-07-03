@@ -2,16 +2,16 @@ import {
   AppDatePicker,
   Button,
   RangeSlider,
-  Separate,
   SelectWithURL,
+  Separate,
 } from "@/components";
 import { configs } from "@/configs";
 import { funcs, values } from "@/constants";
 import { useCallAPI } from "@/hooks";
+import { ErrorPage } from "@/pages";
 import { IGenres } from "@/types";
 import { FunctionComponent, useEffect, useMemo, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
-import { ErrorPage } from "@/pages";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import { ItemContainer } from "./item-container/ItemContainer";
 import { ItemFilter } from "./item-filter/ItemFilter";
 import { IFilterCondition } from "./type";
@@ -23,6 +23,7 @@ interface ISortBy {
 
 export const Movie: FunctionComponent = () => {
   const { category, filter } = useParams();
+  const location = useLocation();
 
   const filterInfo = useMemo(
     function () {
@@ -237,6 +238,10 @@ export const Movie: FunctionComponent = () => {
     searchParams.get("to_date") ? new Date(searchParams.get("to_date")) : null
   );
 
+  const [activePage, setActivePage] = useState<number>(
+    searchParams.get("page") ? Number.parseInt(searchParams.get("page")) : 1
+  );
+
   const handleSetFilterGenresList = (item: number) => {
     setFilterGenresList((prev) => {
       if (prev.includes(item)) {
@@ -384,11 +389,12 @@ export const Movie: FunctionComponent = () => {
         : null,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filter, category]);
+  }, [filter, category, location.search]);
 
   const handleSetSearchSortby = () => {
     searchParams.set("sort_by", activeSort.param);
     setSearchParam(searchParams);
+    setActivePage(1);
   };
 
   const isRightCategory =
@@ -516,8 +522,8 @@ export const Movie: FunctionComponent = () => {
         <div className="col-span-3 mb-[5rem] lg:col-span-4">
           {
             <ItemContainer
-              // activePage={activePage}
-              // setActivePage={setActivePage}
+              activePage={activePage}
+              setActivePage={setActivePage}
               filterCondition={filterCondition}
               filterInfo={filterInfo}
               sortBy={activeSort.title}

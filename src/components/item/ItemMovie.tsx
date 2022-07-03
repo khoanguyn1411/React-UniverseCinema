@@ -26,7 +26,7 @@ export const ItemMovie: React.FC<TProps> = ({
   noFixedWidth = false,
 }) => {
   const pathImg = `${configs.api.IMAGE_URL_SMALL}${movie.poster_path}`;
-  const dispacth = useAppDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const handleSwitchToDetailMovie = () => {
     navigate(
@@ -35,7 +35,7 @@ export const ItemMovie: React.FC<TProps> = ({
         (movie.original_title && funcs.removeAccent(movie.original_title))
       }`
     );
-    dispacth(updateActivePage());
+    dispatch(updateActivePage());
   };
   const getHeight = () => {
     if (size === "small") {
