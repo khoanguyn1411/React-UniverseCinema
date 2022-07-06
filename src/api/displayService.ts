@@ -37,4 +37,4 @@ export const POPULAR_TV_API = funcs.getAPI(
 );
 
 export const BANNERS_API =
-  "https://api.themoviedb.org/3/discover/movie?api_key=ad594c18ac8497b51d812bbbd1bbefe1&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate";
+  "https://api.themoviedb.org/3/trending/all/week?api_key=ad594c18ac8497b51d812bbbd1bbefe1&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate";

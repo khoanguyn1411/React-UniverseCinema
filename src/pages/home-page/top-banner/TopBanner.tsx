@@ -37,7 +37,11 @@ export const TopBanner: React.FC = () => {
 
   const handleWatchTrailer = async (id: number) => {
     const res = await fetch(funcs.getAPI(`/movie/${id}/videos?`, ""));
-    const result = await res.json();
+    let result = await res.json();
+    if (result.success === false) {
+      const res = await fetch(funcs.getAPI(`/tv/${id}/videos?`, ""));
+      result = await res.json();
+    }
     setTrailer(result.results);
     setIsOpenModal(true);
   };
