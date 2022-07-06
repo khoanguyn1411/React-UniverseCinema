@@ -1,6 +1,7 @@
 export const routesPathConfig = {
   homePage: "/",
   loginPage: "/login",
+  signUpPage: "/signup",
   movieWithSuffix: "/:category/:filter",
 
   movie: "/movie",

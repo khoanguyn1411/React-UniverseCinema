@@ -4,22 +4,24 @@ type TProps = {
   type?: string;
   value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
-  placeholder?: string;
+  label?: string;
 };
 
 export const Input: FunctionComponent<TProps> = ({
   type,
   value = "",
   onChange,
-  placeholder,
+  label,
 }) => {
   return (
-    <input
-      type={type}
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-      className="border-[1px] border-black rounded-[0.3rem] w-full px-[1rem] py-[0.5rem] "
-    />
+    <div className="mt-[1.5rem]">
+      <h1>{label}</h1>
+      <input
+        type={type}
+        value={value}
+        onChange={onChange}
+        className="border-[1px] mt-[0.5rem] border-black rounded-[0.3rem] w-full px-[1rem] py-[0.5rem] "
+      />
+    </div>
   );
 };

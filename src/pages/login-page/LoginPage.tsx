@@ -1,10 +1,9 @@
-import { FormItem, Input } from "@/components";
+import { Button, FormItem, Input, TextHover } from "@/components";
 import { IFormLoginValue } from "@/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FunctionComponent } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { loginSchema } from "./shema";
+import { loginSchema } from "./loginSchema";
 
 export const LoginPage: FunctionComponent = () => {
   const {
@@ -12,12 +11,11 @@ export const LoginPage: FunctionComponent = () => {
     formState: { errors },
     handleSubmit,
   } = useForm<IFormLoginValue>({ resolver: yupResolver(loginSchema) });
-  const navigate = useNavigate();
   const onSubmit = async (data: IFormLoginValue) => {
     console.log("Do something!");
   };
   return (
-    <div className="wrapper">
+    <div className="wrapper mb-[5rem]">
       <div>
         <h1 className="font-bold text-s20">Login to your account</h1>
         <p className="mt-[1rem]">
@@ -29,15 +27,36 @@ export const LoginPage: FunctionComponent = () => {
         </p>
       </div>
       <form className="mt-[1rem]" onSubmit={handleSubmit(onSubmit)}>
-        <FormItem>
+        <FormItem error={errors.email?.message}>
           <Controller
             control={control}
             name="email"
             render={({ field: { value, onChange } }) => (
-              <Input value={value} onChange={onChange} placeholder="Email" />
+              <Input value={value} onChange={onChange} label="Email" />
             )}
           />
         </FormItem>
+
+        <FormItem error={errors.password?.message}>
+          <Controller
+            control={control}
+            name="password"
+            render={({ field: { value, onChange } }) => (
+              <Input value={value} onChange={onChange} label="Password" />
+            )}
+          />
+        </FormItem>
+        <div className="flex mt-[3rem] items-center">
+          <Button
+            hover
+            orange
+            className="w-[12rem]"
+            onClick={handleSubmit(onSubmit)}
+          >
+            Login
+          </Button>
+          <TextHover className="font-bold ml-[2rem]">Reset password</TextHover>
+        </div>
       </form>
     </div>
   );

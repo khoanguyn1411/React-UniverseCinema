@@ -13,6 +13,11 @@ export const UserBar: FunctionComponent = () => {
     navigate(configs.routes.loginPage);
     dispatch(updateActivePage());
   };
+
+  const handleMoveToSignUpPage = () => {
+    navigate(configs.routes.signUpPage);
+    dispatch(updateActivePage());
+  };
   return (
     <>
       {isAuth && (
@@ -34,7 +39,7 @@ export const UserBar: FunctionComponent = () => {
           </div>
 
           <div
-            onClick={handleMoveToLoginPage}
+            onClick={handleMoveToSignUpPage}
             className="font-bold cursor-pointer transition-all hover:text-orange hover:transition-all"
           >
             Sign up

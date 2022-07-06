@@ -20,3 +20,4 @@ export * from "./date-picker/AppDatePicker";
 export * from "./loading/Loading";
 export * from "./input/Input";
 export * from "./form-item/FormItem";
+export * from "./text-hover/TextHover";

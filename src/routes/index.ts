@@ -1,5 +1,12 @@
 import { configs } from "@/configs";
-import { ErrorPage, HomePage, LoginPage, Movie, MovieDetail } from "@/pages";
+import {
+  ErrorPage,
+  HomePage,
+  LoginPage,
+  Movie,
+  MovieDetail,
+  SignUpPage,
+} from "@/pages";
 import React from "react";
 
 type TRoutes = {
@@ -20,6 +27,10 @@ export const publicRoutes: TRoutes[] = [
   {
     path: configs.routes.loginPage,
     component: LoginPage,
+  },
+  {
+    path: configs.routes.signUpPage,
+    component: SignUpPage,
   },
   { path: "*", component: ErrorPage },
 ];

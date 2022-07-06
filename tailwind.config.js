@@ -40,6 +40,7 @@ module.exports = {
       black: "#090909",
       orange: "#FF9900",
       grey: "#D9D9D9",
+      error: "#FF0000",
     },
     borderRadius: {
       default: "0.2rem",

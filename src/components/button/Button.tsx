@@ -59,7 +59,7 @@ export const Button: React.FC<TButton> = forwardRef(
               strokeWhite && hover,
             "min-lg:hover:bg-orange min-lg:hover:text-white min-lg:hover:border-orange":
               strokeBlack && hover,
-            "min-lg:hover:bg-black": orange && hover,
+            "min-lg:hover:bg-black min-lg:hover:border-black": orange && hover,
             "min-lg:hover:bg-orange min-lg:hover:border-orange": black && hover,
           },
           className
