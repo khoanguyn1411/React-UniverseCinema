@@ -31,7 +31,6 @@ export const MovieDetail: FunctionComponent = () => {
         let result: any;
         let res = await fetch(url);
         result = await res.json();
-        // console.log(funcs.removeAccent(result.original_title));
         if (
           result.success === false ||
           (funcs.removeAccent(

@@ -1,5 +1,6 @@
 export const routesPathConfig = {
   homePage: "/",
+  loginPage: "/login",
   movieWithSuffix: "/:category/:filter",
 
   movie: "/movie",
@@ -16,7 +17,7 @@ export const routesPathConfig = {
   airingToday: "/airingtoday",
   onTV: "/ontv",
   movieDetailWithSuffix: "/detail/:movie",
-  // movieDetailWithSuffix: "/:category/:movie/*",
+
   movieDetail: "/detail",
   tvShow: "/tv",
   aboutUs: "/aboutus",

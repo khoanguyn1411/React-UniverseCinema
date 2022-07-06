@@ -51,7 +51,9 @@ export const SearchBar: FunctionComponent = () => {
     const getResultMovie = fetch(
       funcs.getAPI(
         `/search/movie?`,
-        `&language=en-US&query=${debounceValue}&page=1&include_adult=false`
+        `&language=en-US&query=${encodeURIComponent(
+          debounceValue
+        )}&page=1&include_adult=false`
       )
     )
       .then((res) => res.json())
@@ -62,7 +64,9 @@ export const SearchBar: FunctionComponent = () => {
     const getResultTV = fetch(
       funcs.getAPI(
         `/search/tv?`,
-        `&language=en-US&query=${debounceValue}&page=1&include_adult=false`
+        `&language=en-US&query=${encodeURIComponent(
+          debounceValue
+        )}&page=1&include_adult=false`
       )
     )
       .then((res) => res.json())
@@ -79,6 +83,7 @@ export const SearchBar: FunctionComponent = () => {
         throw new Error("Something is wrong in search API: " + error);
       });
   }, [debounceValue]);
+
   useEffect(() => {
     if (!isShowSearchFunction) {
       setIconSearch(icSearch);
@@ -118,7 +123,7 @@ export const SearchBar: FunctionComponent = () => {
     <div className="ml-[2rem]">
       <Icon
         icon={iconSearch}
-        className="text-s18 cursor-pointer w-[2rem] hover:text-orange transition-all"
+        className="text-[2rem] cursor-pointer w-[2rem] hover:text-orange transition-all"
         onClick={handleToggleSearch}
         forwardedRef={toggleRef}
       />
