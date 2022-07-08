@@ -1,4 +1,4 @@
-import { ItemSeason, Separate, Title } from "@/components";
+import { ItemSeason, Separate, TextHover, Title } from "@/components";
 import { FunctionComponent, useState } from "react";
 import { TProps } from "..";
 
@@ -23,12 +23,12 @@ export const MovieSeasons: FunctionComponent<TProps.noType> = ({ movie }) => {
           <ItemSeason key={season.id} movieName={movie.name} season={season} />
         ))}
         {seasons.length > 2 && (
-          <h1
+          <TextHover
             onClick={handleExpand}
-            className="self-center italic underline font-bold hover:text-orange hover:transition-all transition-all cursor-pointer"
+            className="self-center italic underline font-bold cursor-pointer"
           >
             {!isExpanded ? "View all seasons" : "Collapse"}
-          </h1>
+          </TextHover>
         )}
         <Separate />
       </div>

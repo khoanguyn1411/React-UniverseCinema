@@ -1,12 +1,14 @@
 import { imgLogoTab } from "@/assets/images";
+import { TextHover } from "@/components/text-hover/TextHover";
 import { configs } from "@/configs";
 import { updateActivePage } from "@/features";
-import { useAppDispatch } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import { FunctionComponent } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const UserBar: FunctionComponent = () => {
   const dispatch = useAppDispatch();
+  const activePage = useAppSelector((state) => state.activePage.value);
   const isAuth = false;
   const navigate = useNavigate();
   const handleMoveToLoginPage = () => {
@@ -31,19 +33,23 @@ export const UserBar: FunctionComponent = () => {
 
       {!isAuth && (
         <div className="flex gap-8">
-          <div
+          <TextHover
             onClick={handleMoveToLoginPage}
-            className="font-bold cursor-pointer transition-all hover:text-orange hover:transition-all"
+            className={`font-bold ${
+              activePage === configs.routes.loginPage ? "text-orange" : ""
+            }`}
           >
             Login
-          </div>
+          </TextHover>
 
-          <div
+          <TextHover
             onClick={handleMoveToSignUpPage}
-            className="font-bold cursor-pointer transition-all hover:text-orange hover:transition-all"
+            className={`font-bold ${
+              activePage === configs.routes.signUpPage ? "text-orange" : ""
+            }`}
           >
             Sign up
-          </div>
+          </TextHover>
         </div>
       )}
     </>

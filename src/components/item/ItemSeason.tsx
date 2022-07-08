@@ -1,4 +1,4 @@
-import { ImageContainer, Modal } from "@/components";
+import { ImageContainer, Modal, TextHover } from "@/components";
 import { configs } from "@/configs";
 import { funcs } from "@/constants";
 import { ISeason } from "@/types";
@@ -68,14 +68,14 @@ export const ItemSeason: FunctionComponent<TProps> = ({
             </span>
           </h1>
           {isShowButton && (
-            <h1
+            <TextHover
               onClick={() => {
                 setIsOpenModal(true);
               }}
-              className="w-fit py-0 self-center cursor-pointer underline hover:text-orange hover:transition-all transition-all italic mt-[0.5rem]"
+              className="w-fit py-0 self-center cursor-pointer underline italic mt-[0.5rem]"
             >
               View more
-            </h1>
+            </TextHover>
           )}
 
           {isOpenModal && (

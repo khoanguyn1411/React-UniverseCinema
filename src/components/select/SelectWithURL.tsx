@@ -85,7 +85,7 @@ export const SelectWithURL: FunctionComponent<TProps> = ({
                 key={index}
                 onClick={() => handleSetSelectedItem(item)}
                 className={classNames(
-                  "p-[1rem] cursor-pointer hover:bg-grey transition-all hover:transition-all",
+                  "p-[1rem] cursor-pointer min-lg:hover:bg-grey transition-all",
                   {
                     "font-bold": item.title === active.title,
                     "rounded-t-[0.3rem]": index === 0,

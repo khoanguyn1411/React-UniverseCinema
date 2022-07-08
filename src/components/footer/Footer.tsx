@@ -24,7 +24,7 @@ export const Footer = () => {
               return (
                 <Icon
                   key={index}
-                  className={`text-[2.5rem] cursor-pointer hover:text-orange transition-all ${
+                  className={`text-[2.5rem] cursor-pointer min-lg:hover:text-orange transition-all ${
                     index === 1 && "mx-5"
                   }`}
                   onClick={() => handleSwitchPage(item.to)}

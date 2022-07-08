@@ -1,11 +1,21 @@
 import { Button, FormItem, Input, TextHover } from "@/components";
+import { configs } from "@/configs";
+import { updateActivePage } from "@/features";
+import { useAppDispatch } from "@/hooks";
 import { IFormLoginValue } from "@/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FunctionComponent } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { loginSchema } from "./loginSchema";
 
 export const LoginPage: FunctionComponent = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const handleMoveToSignUpPage = () => {
+    navigate(configs.routes.signUpPage);
+    dispatch(updateActivePage());
+  };
   const {
     control,
     formState: { errors },
@@ -21,7 +31,10 @@ export const LoginPage: FunctionComponent = () => {
         <p className="mt-[1rem]">
           Login to rate and add movies and tv shows to your wishlist. If you do
           not have an account, feel free to{" "}
-          <span className="font-bold text-orange cursor-pointer">
+          <span
+            className="font-bold text-orange cursor-pointer"
+            onClick={handleMoveToSignUpPage}
+          >
             Register here.
           </span>
         </p>

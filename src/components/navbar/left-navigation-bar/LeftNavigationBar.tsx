@@ -71,7 +71,7 @@ const LeftNavigationBarInit: React.FC = () => {
           {tabs.map((tab, index) => (
             <div
               key={index}
-              className="group cursor-pointer flex h-[5rem] items-center relative underlineNav transition-[0.3s ease-in] hover:text-orange  hover:transition-[0.3s ease-in]"
+              className="group cursor-pointer flex h-[5rem] items-center relative underlineNav transition-[0.3s ease-in] min-lg:hover:text-orange"
               onClick={() => {
                 handleChangePage(tab);
               }}

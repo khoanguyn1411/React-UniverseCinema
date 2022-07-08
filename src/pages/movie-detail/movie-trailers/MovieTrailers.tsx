@@ -1,4 +1,11 @@
-import { Loading, Modal, NoResult, Separate, Title } from "@/components";
+import {
+  Loading,
+  Modal,
+  NoResult,
+  Separate,
+  TextHover,
+  Title,
+} from "@/components";
 import { funcs } from "@/constants";
 import { useCallAPI } from "@/hooks";
 import { ITrailer } from "@/types";
@@ -43,12 +50,12 @@ export const MovieTrailers: FunctionComponent<TProps.withType> = ({
                 </div>
               ))}
               {trailerList.length > 2 && (
-                <h1
+                <TextHover
                   onClick={() => setIsOpenModal(true)}
-                  className="self-center italic underline font-bold hover:text-orange hover:transition-all transition-all cursor-pointer"
+                  className="self-center italic underline font-bold cursor-pointer"
                 >
                   View all trailers
-                </h1>
+                </TextHover>
               )}
             </div>
           ) : (

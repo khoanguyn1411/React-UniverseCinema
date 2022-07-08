@@ -1,6 +1,16 @@
+import { configs } from "@/configs";
+import { updateActivePage } from "@/features";
+import { useAppDispatch } from "@/hooks";
 import { FunctionComponent } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const SignUpPage: FunctionComponent = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const handleMoveToLoginPage = () => {
+    navigate(configs.routes.loginPage);
+    dispatch(updateActivePage());
+  };
   return (
     <div className="wrapper mb-[5rem]">
       <div>
@@ -18,6 +28,16 @@ export const SignUpPage: FunctionComponent = () => {
           >
             The Movie Database
           </a>
+        </p>
+
+        <p className="mt-[1rem]">
+          If you have already got an account, please{" "}
+          <span
+            className="font-bold text-orange cursor-pointer"
+            onClick={handleMoveToLoginPage}
+          >
+            Login here.
+          </span>
         </p>
       </div>
     </div>

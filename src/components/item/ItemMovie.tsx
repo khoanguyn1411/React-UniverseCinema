@@ -1,4 +1,4 @@
-import { ImageContainer } from "@/components";
+import { ImageContainer, TextHover } from "@/components";
 import { configs } from "@/configs";
 import { funcs } from "@/constants";
 import { updateActivePage } from "@/features";
@@ -47,7 +47,7 @@ export const ItemMovie: React.FC<TProps> = ({
   return (
     <div
       className={classNames(
-        `hover:transition-all transition-all hover:scale-[1.05] ${
+        `min-lg:hover:transition-all transition-all hover:scale-[1.05] ${
           !noFixedWidth && "w-[15.1rem]"
         }`,
         className
@@ -67,14 +67,14 @@ export const ItemMovie: React.FC<TProps> = ({
         />
       </ImageContainer>
       <div className="mt-[1rem] px-[0.3rem]">
-        <h1
+        <TextHover
           onClick={handleSwitchToDetailMovie}
           className={`font-bold ${
             !noLineLimit && (isSwiper ? "line-1-wrap" : "line-1")
           } cursor-pointer hover:text-orange transition-all hover:transition-all`}
         >
           {movie.name || movie.original_title}
-        </h1>
+        </TextHover>
         {(movie.first_air_date || movie.release_date) && (
           <h1 className={`text-s14 ${isSwiper ? "line-1-wrap" : "line-1"}`}>
             {funcs.formatDate(movie.first_air_date || movie.release_date)}

@@ -1,5 +1,5 @@
 import { icClose, icFilm, icFilm2, Icon, icSearch } from "@/assets/icons";
-import { Separate, Loading } from "@/components";
+import { Separate, Loading, TextHover } from "@/components";
 import { configs } from "@/configs";
 import { funcs } from "@/constants";
 import { updateActivePage } from "@/features";
@@ -151,7 +151,7 @@ export const SearchBar: FunctionComponent = () => {
                   <Loading.Search />
                 </div>
               )}
-              <h1
+              <TextHover
                 onClick={() => {
                   setSearchValue("");
                   inputRef?.current.focus();
@@ -159,7 +159,7 @@ export const SearchBar: FunctionComponent = () => {
                 className="cursor-pointer font-bold hover:text-orange transition-all"
               >
                 Clear
-              </h1>
+              </TextHover>
             </div>
           </div>
           <Separate marginTop="0" />
@@ -171,7 +171,7 @@ export const SearchBar: FunctionComponent = () => {
               result.movie.slice(0, 5).map((movie) => (
                 <div
                   key={`movie_${movie.id}`}
-                  className="hover:bg-grey cursor-pointer transition-all"
+                  className="min-lg:hover:bg-grey cursor-pointer transition-all"
                   onClick={() => {
                     handleSwitchToDetailMovie(movie);
                   }}
@@ -191,7 +191,7 @@ export const SearchBar: FunctionComponent = () => {
               result.tv.slice(0, 5).map((tv) => (
                 <div
                   key={`tv_${tv.id}`}
-                  className="hover:bg-grey cursor-pointer transition-all"
+                  className="min-lg:hover:bg-grey cursor-pointer transition-all"
                   onClick={() => {
                     handleSwitchToDetailMovie(tv);
                   }}
