@@ -7,8 +7,8 @@ export const Popular = () => {
   const categories = [TV_SHOWS, MOVIES];
 
   const getUrl = (type: string) => {
-    if (type === MOVIES) return apiURL.displayService.POPULAR_TV_API;
-    else return apiURL.displayService.POPULAR_MOVIE_API;
+    if (type === MOVIES) return apiURL.displayService.POPULAR_MOVIE_API;
+    else return apiURL.displayService.POPULAR_TV_API;
   };
 
   return (
