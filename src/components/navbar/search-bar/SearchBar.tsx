@@ -99,7 +99,6 @@ export const SearchBar: FunctionComponent = () => {
   useEffect(() => {
     inputRef?.current && inputRef.current.focus();
   });
-  console.log(result);
 
   useEffect(() => {
     const elementList = searchRef?.current;

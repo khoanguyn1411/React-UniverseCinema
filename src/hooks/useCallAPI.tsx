@@ -1,7 +1,5 @@
 import { appAxios } from "@/axios";
-import { funcs } from "@/constants";
 import { useEffect, useState } from "react";
-
 export const useCallAPI = (api: string, params: any, dependency?: any) => {
   const [result, setResult] = useState(null);
   const [isLoading, setIsLoading] = useState<Boolean>(true);
