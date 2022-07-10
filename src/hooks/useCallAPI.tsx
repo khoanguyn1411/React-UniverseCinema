@@ -17,7 +17,7 @@ export const useCallAPI = (api: string, params: any, dependency?: any) => {
           setResult(result);
           setIsLoading(false);
         } catch (error) {
-          return error;
+          throw new Error("Something wrong" + error);
         }
       };
       fetchAPI();
