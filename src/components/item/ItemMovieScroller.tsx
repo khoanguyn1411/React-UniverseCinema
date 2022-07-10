@@ -46,12 +46,10 @@ export const ItemScroller: React.FC<TProps> = ({
       const result = await appAxios.get(getURL(active));
       setMovieList(result.results);
       setLoading(false);
-      console.log(result);
     };
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active]);
-
   const getClassname = (index: number) => {
     if (index === 0) return "";
   };

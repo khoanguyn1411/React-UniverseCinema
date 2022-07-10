@@ -36,7 +36,7 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
     const listGenres = filterCondition.filterGenresList;
     if (listGenres.length === 0) return "";
     if (listGenres.length === 1) {
-      return `&with_genres=${listGenres[0]}`;
+      return listGenres[0];
     } else {
       const arrConditions = listGenres
         .map((item, index) => {
@@ -45,36 +45,52 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
         })
         .join("");
 
-      return `&with_genres=${arrConditions}`;
+      return arrConditions;
     }
   };
 
   const getScore = () => {
     const minScore = filterCondition.rangeScore[0];
     const maxScore = filterCondition.rangeScore[1];
-    return `vote_average.gte=${minScore}&vote_average.lte=${maxScore}`;
+    return {
+      "vote_average.gte": minScore,
+      "vote_average.lte": maxScore,
+    };
   };
 
   const getRuntime = () => {
     const minTime = filterCondition.rangeTime[0];
     const maxTime = filterCondition.rangeTime[1];
-    return `with_runtime.gte=${minTime}&with_runtime.lte=${maxTime}`;
+    return {
+      "with_runtime.gte": minTime,
+      "with_runtime.lte": maxTime,
+    };
   };
 
   const getReleaseDateFrom = () => {
     const date = filterCondition.fromDate;
     if (!date) return "";
     if (category === values.MEDIA_TYPE.TVSHOWS)
-      return `&first_air_date.gte=${funcs.formatDateWithoutSep(date)}`;
-    return `&primary_release_date.gte=${funcs.formatDateWithoutSep(date)}`;
+      return {
+        "first_air_date.gte": funcs.formatDateWithoutSep(date),
+      };
+
+    return {
+      "primary_release_date.gte": funcs.formatDateWithoutSep(date),
+    };
   };
 
   const getReleaseDateTo = () => {
     const date = filterCondition.toDate;
     if (!date) return "";
     if (category === values.MEDIA_TYPE.TVSHOWS)
-      return `&first_air_date.lte=${funcs.formatDateWithoutSep(date)}`;
-    return `&primary_release_date.lte=${funcs.formatDateWithoutSep(date)}`;
+      return {
+        "first_air_date.lte": funcs.formatDateWithoutSep(date),
+      };
+
+    return {
+      "primary_release_date.lte": funcs.formatDateWithoutSep(date),
+    };
   };
 
   const getSortBy = () => {
@@ -98,22 +114,25 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
 
   const getURL = () => {
     if (filterInfo.routeAPI === `/discover/${category}`) {
-      return funcs.getAPI(
-        `/discover/${category}?`,
-        `${getGenres()}&language=en-US&sort_by=${getSortBy()}&page=${activePage}${getReleaseDateFrom()}${getReleaseDateTo()}&${getScore()}&${getRuntime()}`
-      );
+      return `/discover/${category}?`;
     } else {
-      return funcs.getAPI(
-        `/${category}/${filterInfo.routeAPI}?`,
-        `${getGenres()}&language=en-US&sort_by=${getSortBy()}&page=${activePage}${getReleaseDateFrom()}${getReleaseDateTo()}&${getScore()}&${getRuntime()}`
-      );
+      return `/${category}/${filterInfo.routeAPI}?`;
     }
   };
 
-  const [result, isLoading] = useCallAPI(getURL(), [
-    activePage,
-    filterCondition,
-  ]);
+  const [result, isLoading] = useCallAPI(
+    getURL(),
+    {
+      with_genres: getGenres(),
+      sort_by: getSortBy(),
+      page: activePage,
+      ...getReleaseDateFrom(),
+      ...getReleaseDateTo(),
+      ...getScore(),
+      ...getRuntime(),
+    },
+    [activePage, filterCondition]
+  );
 
   useEffect(() => {
     if (result?.total_pages < 500) {

@@ -1,4 +1,5 @@
 import { apiURL } from "@/api";
+import { appAxios } from "@/axios";
 import {
   Button,
   FullSlider,
@@ -36,11 +37,18 @@ export const TopBanner: React.FC = () => {
   const [trailer, setTrailer] = useState<ITrailer[]>(null);
 
   const handleWatchTrailer = async (id: number) => {
-    const res = await fetch(funcs.getAPI(`/movie/${id}/videos?`, ""));
-    let result = await res.json();
-    if (result.success === false) {
-      const res = await fetch(funcs.getAPI(`/tv/${id}/videos?`, ""));
-      result = await res.json();
+    let result: any;
+    try {
+      result = await appAxios.get(`/movie/${id}/videos`);
+    } catch (error) {
+      result = error as Error;
+    }
+    if (result instanceof Error) {
+      try {
+        result = await appAxios.get(`/tv/${id}/videos`);
+      } catch (error: unknown) {
+        throw new Error("Error" + error);
+      }
     }
     setTrailer(result.results);
     setIsOpenModal(true);

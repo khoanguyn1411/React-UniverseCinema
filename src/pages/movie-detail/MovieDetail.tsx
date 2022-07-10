@@ -1,3 +1,4 @@
+import { appAxios } from "@/axios";
 import { Loading } from "@/components";
 import { funcs, values } from "@/constants";
 import { IMovie } from "@/types";
@@ -24,45 +25,44 @@ export const MovieDetail: FunctionComponent = () => {
   const [isLoading, setIsLoading] = useState<Boolean>(true);
 
   useEffect(() => {
-    const fetchAPI = async () => {
+    const getData = async () => {
+      let result: any;
       try {
-        let url = funcs.getAPI(`/movie/${id}?`, "&language=en-US");
         setIsLoading(true);
-        let result: any;
-        let res = await fetch(url);
-        result = await res.json();
+        result = await appAxios.get(`/movie/${id}`);
+      } catch (error: unknown) {
+        result = error as Error;
+      }
+      if (
+        result instanceof Error ||
+        (funcs.removeAccent(
+          result.original_title ? result.original_title : ""
+        ) !== name &&
+          funcs.removeAccent(result.name ? result.name : "") !== name)
+      ) {
+        try {
+          result = await appAxios.get(`/tv/${id}`);
+        } catch (error: unknown) {
+          result = error as Error;
+        }
         if (
-          result.success === false ||
+          result instanceof Error ||
           (funcs.removeAccent(
             result.original_title ? result.original_title : ""
           ) !== name &&
             funcs.removeAccent(result.name ? result.name : "") !== name)
         ) {
-          url = funcs.getAPI(`/tv/${id}?`, "&language=en-US");
-          res = await fetch(url);
-          result = await res.json();
-
-          if (
-            result.success === false ||
-            (funcs.removeAccent(
-              result.original_title ? result.original_title : ""
-            ) !== name &&
-              funcs.removeAccent(result.name ? result.name : "") !== name)
-          ) {
-            setIsLoading(false);
-            return;
-          }
-          setType(values.MEDIA_TYPE.TVSHOWS);
+          setIsLoading(false);
+          return;
         }
-        setMovie(result);
-        setIsLoading(false);
-        document.title =
-          (result.name || result.original_title) + " | Universe Cinema";
-      } catch (error) {
-        throw new Error(error);
+        setType(values.MEDIA_TYPE.TVSHOWS);
       }
+      setMovie(result);
+      setIsLoading(false);
+      document.title =
+        (result.name || result.original_title) + " | Universe Cinema";
     };
-    fetchAPI();
+    getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 

@@ -25,10 +25,9 @@ export const MovieCredit: FunctionComponent<TProps.withType> = ({
 
   const [settingsSwiper, setSettingsSwiper] = useState<SwiperProps>(null);
 
-  const [result, isLoading] = useCallAPI(
-    funcs.getAPI(`/${type}/${movie.id}/credits?`, "&language=en-US"),
-    [movie]
-  );
+  const [result, isLoading] = useCallAPI(`/${type}/${movie.id}/credits`, [
+    movie,
+  ]);
   useEffect(() => {
     setSettingsSwiper({
       scrollbar: {
