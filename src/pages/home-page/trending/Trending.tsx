@@ -6,9 +6,9 @@ export const Trending = () => {
   const THIS_WEEK = "This week";
   const categories = [TODAY, THIS_WEEK];
 
-  const fetchAPI = (type: string): Promise<Response> => {
-    if (type === TODAY) return fetch(apiURL.displayService.TRENDING_DAY_API);
-    else return fetch(apiURL.displayService.TRENDING_WEEK_API);
+  const getUrl = (type: string) => {
+    if (type === TODAY) return apiURL.displayService.TRENDING_DAY_API;
+    else return apiURL.displayService.TRENDING_WEEK_API;
   };
 
   return (
@@ -16,7 +16,7 @@ export const Trending = () => {
       <ItemScroller
         title="Trending"
         categories={categories}
-        fetchAPI={fetchAPI}
+        getURL={getUrl}
         slideDisplay={7}
         smallItem
       />

@@ -1,3 +1,4 @@
+import { appAxios } from "@/axios";
 import { useEffect, useState } from "react";
 
 export const useCallAPI = (api: string, dependency?: any) => {
@@ -8,8 +9,7 @@ export const useCallAPI = (api: string, dependency?: any) => {
       const fetchAPI = async () => {
         try {
           setIsLoading(true);
-          const res = await fetch(api);
-          const result = await res.json();
+          const result = await appAxios.get(api);
           setResult(result);
           setIsLoading(false);
         } catch (error) {

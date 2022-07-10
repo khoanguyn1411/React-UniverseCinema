@@ -1,4 +1,5 @@
 import { icArrowLeft, icArrowRight, Icon } from "@/assets/icons";
+import { appAxios } from "@/axios";
 import {
   ItemMovie,
   Loading,
@@ -13,7 +14,7 @@ import { SwiperProps, SwiperSlide } from "swiper/react";
 
 type TProps = {
   categories?: string[];
-  fetchAPI: (type: string | null) => Promise<Response>;
+  getURL: (type?: string) => string;
   title: string;
   smallItem?: Boolean;
   largeItem?: Boolean;
@@ -22,8 +23,8 @@ type TProps = {
 
 export const ItemScroller: React.FC<TProps> = ({
   categories,
-  fetchAPI,
   title,
+  getURL,
   smallItem,
   largeItem,
   slideDisplay,
@@ -40,19 +41,16 @@ export const ItemScroller: React.FC<TProps> = ({
   );
 
   useEffect(() => {
-    fetchAPI(active)
-      .then((res) => {
-        setLoading(true);
-        return res.json();
-      })
-      .then((data) => {
-        setLoading(false);
-        setMovieList(data.results);
-      })
-      .catch((error) => {
-        throw new Error("Invalid API:" + error);
-      });
-  }, [active, fetchAPI]);
+    const getData = async () => {
+      setLoading(true);
+      const result = await appAxios.get(getURL(active));
+      setMovieList(result.results);
+      setLoading(false);
+      console.log(result);
+    };
+    getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active]);
 
   const getClassname = (index: number) => {
     if (index === 0) return "";

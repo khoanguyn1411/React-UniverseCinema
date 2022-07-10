@@ -6,9 +6,9 @@ export const Popular = () => {
   const MOVIES = "Movies";
   const categories = [TV_SHOWS, MOVIES];
 
-  const fetchAPI = (type: string): Promise<Response> => {
-    if (type === MOVIES) return fetch(apiURL.displayService.POPULAR_MOVIE_API);
-    else return fetch(apiURL.displayService.POPULAR_TV_API);
+  const getUrl = (type: string) => {
+    if (type === MOVIES) return apiURL.displayService.POPULAR_TV_API;
+    else return apiURL.displayService.POPULAR_MOVIE_API;
   };
 
   return (
@@ -18,7 +18,7 @@ export const Popular = () => {
         smallItem
         categories={categories}
         slideDisplay={7}
-        fetchAPI={fetchAPI}
+        getURL={getUrl}
       />
     </div>
   );

@@ -6,10 +6,9 @@ export const TopRate = () => {
   const MOVIES = "Movies";
   const categories = [TV_SHOWS, MOVIES];
 
-  const fetchAPI = (type: string): Promise<Response> => {
-    if (type === MOVIES)
-      return fetch(apiURL.displayService.TOP_RATED_MOVIE_API);
-    else return fetch(apiURL.displayService.TOP_RATED_TV_API);
+  const getUrl = (type: string) => {
+    if (type === MOVIES) return apiURL.displayService.TOP_RATED_MOVIE_API;
+    else return apiURL.displayService.TOP_RATED_TV_API;
   };
 
   return (
@@ -18,7 +17,7 @@ export const TopRate = () => {
       smallItem
       categories={categories}
       slideDisplay={7}
-      fetchAPI={fetchAPI}
+      getURL={getUrl}
     />
   );
 };

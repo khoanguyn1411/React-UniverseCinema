@@ -1,19 +1,15 @@
 import { apiURL } from "@/api";
+import { UPCOMMING_API } from "@/api/displayService";
 import { ItemScroller } from "@/components";
 
 export const UpcommingMovies = () => {
-  const fetchAPI = (): Promise<Response> => {
-    return fetch(apiURL.displayService.UPCOMMING_API);
+  const getUrl = () => {
+    return apiURL.displayService.UPCOMMING_API;
   };
 
   return (
     <div>
-      <ItemScroller
-        title="Upcomming movies"
-        fetchAPI={fetchAPI}
-        slideDisplay={5}
-        largeItem
-      />
+      <ItemScroller title="Upcomming movies" getURL={getUrl} slideDisplay={5} />
     </div>
   );
 };
