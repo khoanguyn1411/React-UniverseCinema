@@ -114,9 +114,9 @@ const ItemContainerInit: FunctionComponent<TProps> = ({
 
   const getURL = () => {
     if (filterInfo.routeAPI === `/discover/${category}`) {
-      return `/discover/${category}?`;
+      return `/discover/${category}`;
     } else {
-      return `/${category}/${filterInfo.routeAPI}?`;
+      return `/${category}/${filterInfo.routeAPI}`;
     }
   };
 

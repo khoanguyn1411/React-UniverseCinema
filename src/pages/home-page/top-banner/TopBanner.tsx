@@ -17,7 +17,10 @@ import { useNavigate } from "react-router-dom";
 import { Settings } from "react-slick";
 
 export const TopBanner: React.FC = () => {
-  const [result, isLoading] = useCallAPI(apiURL.displayService.BANNERS_API);
+  const [result, isLoading] = useCallAPI(
+    apiURL.displayService.BANNERS_API,
+    null
+  );
   const banners: IMovie[] = result?.results.slice(0, 5);
 
   const settings: Settings = {

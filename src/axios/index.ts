@@ -7,9 +7,16 @@ export const instance = axios.create({
 
 export const appAxios = {
   get: async (url: string, param?: any) => {
-    const result = await instance.get(url, {
-      params: { api_key: configs.api.API_KEY, ...param },
-    });
+    const result = await instance.get(
+      url,
+      param
+        ? {
+            params: { api_key: configs.api.API_KEY, ...param },
+          }
+        : {
+            params: { api_key: configs.api.API_KEY },
+          }
+    );
     return result.data;
   },
 };

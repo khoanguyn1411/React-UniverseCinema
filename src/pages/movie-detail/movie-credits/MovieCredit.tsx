@@ -8,7 +8,6 @@ import {
   SwiperApp,
   Title,
 } from "@/components";
-import { funcs } from "@/constants";
 import { useCallAPI } from "@/hooks/useCallAPI";
 import { IActors } from "@/types";
 import { FunctionComponent, useEffect, useRef, useState } from "react";
@@ -25,7 +24,7 @@ export const MovieCredit: FunctionComponent<TProps.withType> = ({
 
   const [settingsSwiper, setSettingsSwiper] = useState<SwiperProps>(null);
 
-  const [result, isLoading] = useCallAPI(`/${type}/${movie.id}/credits`, [
+  const [result, isLoading] = useCallAPI(`/${type}/${movie.id}/credits`, null, [
     movie,
   ]);
   useEffect(() => {

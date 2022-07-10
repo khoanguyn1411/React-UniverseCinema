@@ -24,10 +24,8 @@ export const MovieRecommendation: FunctionComponent<TProps.withType> = ({
   const refPre = useRef(null);
 
   const [result, isLoading] = useCallAPI(
-    funcs.getAPI(
-      `/${type}/${movie.id}/recommendations?`,
-      "&language=en-US&page=1"
-    ),
+    `/${type}/${movie.id}/recommendations`,
+    null,
     [movie]
   );
 

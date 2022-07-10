@@ -87,6 +87,7 @@ export const SwiperApp: FunctionComponent<TProps> = ({
             onAppSwiper && onAppSwiper(swiper);
           }}
           slidesPerView={"auto"}
+          lazy={true}
           {...settingInit}
           {...settings}
         >

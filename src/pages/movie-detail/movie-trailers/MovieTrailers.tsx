@@ -6,20 +6,18 @@ import {
   TextHover,
   Title,
 } from "@/components";
-import { funcs } from "@/constants";
 import { useCallAPI } from "@/hooks";
 import { ITrailer } from "@/types";
-import React, { FunctionComponent, useState } from "react";
+import { FunctionComponent, useState } from "react";
 import { TProps } from "..";
 
 export const MovieTrailers: FunctionComponent<TProps.withType> = ({
   movie,
   type,
 }) => {
-  const [result, isLoading] = useCallAPI(
-    funcs.getAPI(`/${type}/${movie.id}/videos?`, ""),
-    [movie]
-  );
+  const [result, isLoading] = useCallAPI(`/${type}/${movie.id}/videos`, null, [
+    movie,
+  ]);
   const pathYoutube = "https://www.youtube.com/embed/";
   const trailerList: ITrailer[] = result?.results;
   const [isOpenModal, setIsOpenModal] = useState<Boolean>(false);

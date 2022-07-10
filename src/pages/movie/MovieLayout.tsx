@@ -98,7 +98,7 @@ export const Movie: FunctionComponent = () => {
     [filter, category]
   );
 
-  const [result] = useCallAPI(`/genre/${category}/list`, [category]);
+  const [result] = useCallAPI(`/genre/${category}/list`, null, [category]);
 
   const genres: IGenres[] = result?.genres;
 
