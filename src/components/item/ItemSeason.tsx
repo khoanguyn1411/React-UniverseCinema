@@ -27,7 +27,6 @@ export const ItemSeason: FunctionComponent<TProps> = ({
       setIsShowButton(true);
     }
   }, []);
-
   return (
     <>
       <div
@@ -42,12 +41,14 @@ export const ItemSeason: FunctionComponent<TProps> = ({
         </ImageContainer>
         <div className="flex-1 p-[1.2rem] flex flex-col">
           <h1 className="font-bold text-s20">{season.name}</h1>
-          <h1 className="font-semibold mt-[0.5rem]">
-            On air date:{" "}
-            <span className="font-normal">
-              {funcs.formatDate(season.air_date)}
-            </span>
-          </h1>
+          {season.air_date && (
+            <h1 className="font-semibold mt-[0.5rem]">
+              On air date:{" "}
+              <span className="font-normal">
+                {funcs.formatDate(season.air_date)}
+              </span>
+            </h1>
+          )}
           <h1 className="font-semibold">
             Total episodes:{" "}
             <span className="font-normal">{season.episode_count}</span>
