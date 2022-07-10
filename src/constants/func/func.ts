@@ -45,7 +45,9 @@ function splitMulti(str: string, tokens: string[]): string[] {
 }
 
 function getAPI(ROOT_API: string, SUFFIX: string): string {
-  return configs.api.BASE_URL + ROOT_API + configs.api.API_KEY + SUFFIX;
+  return (
+    configs.api.BASE_URL + ROOT_API + "api_key=" + configs.api.API_KEY + SUFFIX
+  );
 }
 function checkPath(page: string): string {
   const tabs = configs.tabs;

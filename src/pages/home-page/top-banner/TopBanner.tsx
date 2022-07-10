@@ -150,7 +150,7 @@ export const TopBanner: React.FC = () => {
               )}
             </Modal>
           )}
-          <div className="h-[0.4rem] w-full bg-orange"></div>
+          {/* <div className="h-[0.4rem] w-full bg-orange"></div> */}
         </div>
       )}
     </>
