@@ -13,8 +13,8 @@ export const UPCOMMING_API = "/movie/upcoming";
 
 export const ON_AIR_API = "/tv/on_the_air";
 
-export const TRENDING_WEEK_API = "/trending/all/week?";
-export const TRENDING_DAY_API = "/trending/all/day?";
+export const TRENDING_WEEK_API = "/trending/all/week";
+export const TRENDING_DAY_API = "/trending/all/day";
 export const POPULAR_TV_API = "/tv/popular";
 
 export const BANNERS_API = "/trending/all/week";

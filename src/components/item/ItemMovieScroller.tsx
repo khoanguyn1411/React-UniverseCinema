@@ -7,6 +7,7 @@ import {
   SwiperApp,
   Title,
 } from "@/components";
+import { funcs } from "@/constants";
 import { IMovie } from "@/types";
 import React, { useEffect, useRef, useState } from "react";
 import SwiperCore, { Navigation } from "swiper";
@@ -44,6 +45,8 @@ export const ItemScroller: React.FC<TProps> = ({
     const getData = async () => {
       setLoading(true);
       const result = await appAxios.get(getURL(active));
+      // const res = await fetch(funcs.getAPI(getURL(active), ""));
+      // const result = await res.json();
       setMovieList(result.results);
       setLoading(false);
     };
