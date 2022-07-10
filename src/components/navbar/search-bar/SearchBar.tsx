@@ -50,7 +50,7 @@ export const SearchBar: FunctionComponent = () => {
     setIsLoading(true);
     const getResultMovie = fetch(
       funcs.getAPI(
-        `/search/movie?`,
+        `/search/movie`,
         `&language=en-US&query=${encodeURIComponent(
           debounceValue
         )}&page=1&include_adult=false`
@@ -63,7 +63,7 @@ export const SearchBar: FunctionComponent = () => {
 
     const getResultTV = fetch(
       funcs.getAPI(
-        `/search/tv?`,
+        `/search/tv`,
         `&language=en-US&query=${encodeURIComponent(
           debounceValue
         )}&page=1&include_adult=false`
@@ -99,6 +99,7 @@ export const SearchBar: FunctionComponent = () => {
   useEffect(() => {
     inputRef?.current && inputRef.current.focus();
   });
+  console.log(result);
 
   useEffect(() => {
     const elementList = searchRef?.current;
@@ -165,7 +166,7 @@ export const SearchBar: FunctionComponent = () => {
           <Separate marginTop="0" />
 
           <div className="max-h-[30rem] overflow-auto">
-            {result?.movie &&
+            {result.movie &&
               searchValue &&
               result.movie.length > 0 &&
               result.movie.slice(0, 5).map((movie) => (
