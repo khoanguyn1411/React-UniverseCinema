@@ -6,7 +6,7 @@ import {
   SwiperApp,
   Title,
 } from "@/components";
-import { funcs, values } from "@/constants";
+import { values } from "@/constants";
 import { useCallAPI } from "@/hooks";
 import { IMovie } from "@/types";
 import { FunctionComponent, useEffect, useRef, useState } from "react";

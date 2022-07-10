@@ -2,7 +2,7 @@ import { ImageContainer, Modal, TextHover } from "@/components";
 import { configs } from "@/configs";
 import { funcs } from "@/constants";
 import { ISeason } from "@/types";
-import { FunctionComponent, useEffect, useRef, useState } from "react";
+import { FunctionComponent, useEffect, useMemo, useRef, useState } from "react";
 
 type TProps = {
   season: ISeason;
@@ -13,7 +13,10 @@ export const ItemSeason: FunctionComponent<TProps> = ({
   season,
   movieName,
 }) => {
-  const pathImg = configs.api.IMAGE_URL_SMALL + season.poster_path;
+  const pathImg = useMemo(() => {
+    return configs.api.IMAGE_URL_SMALL + season.poster_path;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const overviewRef = useRef(null);
   const [isShowButton, setIsShowButton] = useState<Boolean>(false);
   const [isShowFullOverview, setIsShowFullOverview] = useState<Boolean>(false);

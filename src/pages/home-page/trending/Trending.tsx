@@ -1,7 +1,8 @@
 import { apiURL } from "@/api";
 import { ItemScroller } from "@/components";
+import { FunctionComponent } from "react";
 
-export const Trending = () => {
+export const Trending: FunctionComponent = () => {
   const TODAY = "Today";
   const THIS_WEEK = "This week";
   const categories = [TODAY, THIS_WEEK];

@@ -5,7 +5,7 @@ import { updateActivePage } from "@/features";
 import { useAppDispatch } from "@/hooks";
 import { IMovie } from "@/types";
 import classNames from "classnames";
-import React from "react";
+import React, { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
 type TProps = {
@@ -25,7 +25,10 @@ export const ItemMovie: React.FC<TProps> = ({
   noLineLimit = false,
   noFixedWidth = false,
 }) => {
-  const pathImg = `${configs.api.IMAGE_URL_SMALL}${movie.poster_path}`;
+  const pathImg = useMemo(() => {
+    return `${configs.api.IMAGE_URL_SMALL}${movie.poster_path}`;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const handleSwitchToDetailMovie = () => {

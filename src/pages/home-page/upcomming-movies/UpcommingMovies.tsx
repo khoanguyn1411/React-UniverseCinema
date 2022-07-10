@@ -1,15 +1,20 @@
 import { apiURL } from "@/api";
-import { UPCOMMING_API } from "@/api/displayService";
 import { ItemScroller } from "@/components";
+import { FunctionComponent } from "react";
 
-export const UpcommingMovies = () => {
+export const UpcommingMovies: FunctionComponent = () => {
   const getUrl = () => {
     return apiURL.displayService.UPCOMMING_API;
   };
 
   return (
     <div>
-      <ItemScroller title="Upcomming movies" getURL={getUrl} slideDisplay={5} />
+      <ItemScroller
+        title="Upcomming movies"
+        largeItem
+        getURL={getUrl}
+        slideDisplay={5}
+      />
     </div>
   );
 };
