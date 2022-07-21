@@ -1,6 +1,6 @@
 import { Button, FormItem, Input, TextHover } from "@/components";
 import { configs } from "@/configs";
-import { login, updateActivePage } from "@/features";
+import { updateActivePage } from "@/features";
 import { useAppDispatch } from "@/hooks";
 import { IFormLoginValue } from "@/types";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -21,9 +21,7 @@ export const LoginPage: FunctionComponent = () => {
     formState: { errors },
     handleSubmit,
   } = useForm<IFormLoginValue>({ resolver: yupResolver(loginSchema) });
-  const onSubmit = async (data: IFormLoginValue) => {
-    dispatch(login(data));
-  };
+  const onSubmit = async (data: IFormLoginValue) => {};
   return (
     <div className="wrapper mb-[5rem]">
       <div>
@@ -40,12 +38,12 @@ export const LoginPage: FunctionComponent = () => {
         </p>
       </div>
       <form className="mt-[1rem]" onSubmit={handleSubmit(onSubmit)}>
-        <FormItem error={errors.username?.message}>
+        <FormItem error={errors.email?.message}>
           <Controller
             control={control}
-            name="username"
+            name="email"
             render={({ field: { value, onChange } }) => (
-              <Input value={value} onChange={onChange} label="Username" />
+              <Input value={value} onChange={onChange} label="Email" />
             )}
           />
         </FormItem>

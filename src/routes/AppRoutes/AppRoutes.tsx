@@ -3,7 +3,8 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import TopBarProgress from "react-topbar-progress-indicator";
 
 import { DefaultLayout } from "@/layouts";
-import { publicRoutes } from "@/routes";
+import { privateRoutes, publicRoutes } from "@/routes";
+import { RequireAuth } from "@/container";
 
 TopBarProgress.config({
   barColors: {
@@ -44,6 +45,26 @@ export const AppRoutes: React.FC = () => {
                 {progress && <TopBarProgress />}
                 <Page />
               </Layout>
+            }
+          />
+        );
+      })}
+
+      {privateRoutes.map((route, index) => {
+        const Page = route.component;
+        const Layout: any =
+          route.layout !== null ? route.layout || DefaultLayout : Fragment;
+        return (
+          <Route
+            key={index}
+            path={route.path}
+            element={
+              <RequireAuth>
+                <Layout>
+                  {progress && <TopBarProgress />}
+                  <Page />
+                </Layout>
+              </RequireAuth>
             }
           />
         );
