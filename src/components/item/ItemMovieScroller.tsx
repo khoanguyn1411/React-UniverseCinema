@@ -7,7 +7,6 @@ import {
   SwiperApp,
   Title,
 } from "@/components";
-import { funcs } from "@/constants";
 import { IMovie } from "@/types";
 import React, { useEffect, useRef, useState } from "react";
 import SwiperCore, { Navigation } from "swiper";

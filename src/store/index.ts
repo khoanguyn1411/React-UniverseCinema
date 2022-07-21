@@ -1,10 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { activePageReducer, isFixedNavReducer } from "@/features";
+import { activePageReducer, isFixedNavReducer, authReducer } from "@/features";
 
 export const store = configureStore({
   reducer: {
     activePage: activePageReducer,
     isFixedNav: isFixedNavReducer,
+    auth: authReducer,
   },
 });
 
