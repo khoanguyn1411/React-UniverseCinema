@@ -21,7 +21,7 @@
 
 ## FUTURE DEVELOPMENT:
 
-- Authorization.
+- Authentication.
 - Rate, mark as favorite and add movie to watch list.
 
 ## LINK HOSTING WEBSITE:
