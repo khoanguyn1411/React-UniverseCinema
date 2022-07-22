@@ -8,11 +8,16 @@
 - **State management**: Redux toolkit, Context api.
 - **API**: Axios.
 
+## DATABASE:
+
+- Using database from [The Movie Database](https://www.themoviedb.org/)
+
 ## FEATURES:
 
 - Display movie and TV shows.
 - Display detail movie.
 - Filter movie by type, date, score, ...
+- Full responsive.
 
 ## FUTURE DEVELOPMENT:
 
